@@ -1,0 +1,58 @@
+CHANGELOG
+=========
+v1.0.01
+-------
+Added comptability with Gibbon core v6.
+Added Related Concepts field to master and working units
+
+v1.0.00
+-------
+Improved integration with core's Planner, leveraging the new unified units of Gibbon v6
+
+v0.3.01
+-------
+Updated module to use new Gibbon v5 icons
+Improved performance and behaviour of draggable blocks in master and working units.
+
+v0.3.00
+-------
+Made compatible with Gibbon v4.0.00
+Remove Outcomes from Essential Elements, in favour of using Gibbon's system-wide outcomes. 
+
+v0.3.00
+-------
+Made compatible with Gibbon v4.0.00
+Remove Outcomes from Essential Elements, in favour of using Gibbon's system-wide outcomes. 
+
+v0.2.00
+-------
+Working units:
+	Delete
+	Edit
+	Copy back working unit over master
+	Hook into Core
+
+v0.1.02
+-------
+Made unit blocks sortable
+Completed adding and editing of Master Units
+Added outcomes and actions to master units
+Added ability to deploy master units to working units
+
+
+v0.1.01
+-------
+Improved Master units
+Changed "Curriculum Glossary" to "Essential Elements"
+
+
+v0.1.00
+-------
+Ability to specify Staff
+Ability to register students into the IB PYP module, specifying academic year for starting and ending the programme.
+Incomplete ability to manage units
+Curriculum glossary
+Manifest + Publish
+
+	
+
