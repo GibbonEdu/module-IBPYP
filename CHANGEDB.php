@@ -92,4 +92,9 @@ ALTER TABLE `ibPYPUnitMaster` ADD `relatedConcepts` TEXT NULL AFTER `summativeAs
 ALTER TABLE `ibPYPUnitWorking` ADD `relatedConcepts` TEXT NULL AFTER `summativeAssessment` ;end
 " ;
 
+//v1.0.02
+$count++ ;
+$sql[$count][0]="1.0.02" ;
+$sql[$count][1]="
+" ;
 ?>

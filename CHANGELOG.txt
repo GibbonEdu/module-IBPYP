@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+v1.0.02
+-------
+Fixed outcome filtering issue, where first item in filtered list cannot be selected.
+
 v1.0.01
 -------
 Added comptability with Gibbon core v6.
