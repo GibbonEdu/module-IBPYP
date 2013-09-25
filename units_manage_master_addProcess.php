@@ -77,7 +77,6 @@ else {
 			$provocation=$_POST["provocation"] ;
 			$preAssessment=$_POST["preAssessment"] ;
 			$formativeAssessment=$_POST["formativeAssessment"] ;
-			$learningExperiences=$_POST["learningExperiences"] ;
 			$resources=$_POST["resources"] ;
 			$action=$_POST["action"] ;
 			$environments=$_POST["environments"] ;
@@ -243,8 +242,8 @@ else {
 				
 					//Write to database
 					try {
-						$data=array("gibbonPersonIDCreator"=>$gibbonPersonIDCreator, "timestamp"=>$timestamp, "name"=>$name, "active"=>$active, "gibbonCourseID"=>$gibbonCourseID, "theme"=>$theme, "centralIdea"=>$centralIdea, "summativeAssessment"=>$summativeAssessment, "relatedConcepts"=>$relatedConcepts, "linesOfInquiry"=>$linesOfInquiry, "teacherQuestions"=>$teacherQuestions, "provocation"=>$provocation, "preAssessment"=>$preAssessment, "formativeAssessment"=>$formativeAssessment, "learningExperiences"=>$learningExperiences, "resources"=>$resources, "action"=>$action, "environments"=>$environments );  
-						$sql="INSERT INTO ibPYPUnitMaster SET gibbonPersonIDCreator=:gibbonPersonIDCreator, timestamp=:timestamp, name=:name, active=:active, gibbonCourseID=:gibbonCourseID, theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, learningExperiences=:learningExperiences, resources=:resources, action=:action, environments=:environments" ;
+						$data=array("gibbonPersonIDCreator"=>$gibbonPersonIDCreator, "timestamp"=>$timestamp, "name"=>$name, "active"=>$active, "gibbonCourseID"=>$gibbonCourseID, "theme"=>$theme, "centralIdea"=>$centralIdea, "summativeAssessment"=>$summativeAssessment, "relatedConcepts"=>$relatedConcepts, "linesOfInquiry"=>$linesOfInquiry, "teacherQuestions"=>$teacherQuestions, "provocation"=>$provocation, "preAssessment"=>$preAssessment, "formativeAssessment"=>$formativeAssessment, "resources"=>$resources, "action"=>$action, "environments"=>$environments );  
+						$sql="INSERT INTO ibPYPUnitMaster SET gibbonPersonIDCreator=:gibbonPersonIDCreator, timestamp=:timestamp, name=:name, active=:active, gibbonCourseID=:gibbonCourseID, theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, resources=:resources, action=:action, environments=:environments" ;
 						$result=$connection2->prepare($sql);
 						$result->execute($data);  
 					}

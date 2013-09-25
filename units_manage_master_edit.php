@@ -162,7 +162,6 @@ else {
 								<a href='#3'>3. How might we know what we have learned?</a><br/>
 								<a href='#4'>4. How best might we learn?</a><br/>
 								<a href='#5'>5. What resources need to be gathered?</a><br/>
-								<a href='#6'>6. Smart Content Blocks</a><br/>
 							<td class="right">
 								
 							</td>
@@ -400,7 +399,7 @@ else {
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Summative Assessment</div>
 								<p>What are the possible ways of assessing students’ understanding of the central idea? What evidence, including student initiated actions will we look for?</p>
-								<? print getEditor($guid,  $connection2, "summativeAssessment", $row["summativeAssessment"], 30 ) ?>
+								<? print getEditor($guid,  $connection2, "summativeAssessment", $row["summativeAssessment"], 30, TRUE ) ?>
 							</td>
 						</tr>
 						
@@ -607,10 +606,71 @@ else {
 							<td style='background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Learning Experiences</div> 
-								<p>What are the learning experiences suggested by the teacher and / or students to encourage the students to engage with the inquiries and address the driving questions?</p>
-								<? print getEditor($guid,  $connection2, "learningExperiences", $row["learningExperiences"], 30, true, false, false, true, "purpose=Teaching%20and%20Learning%20Strategy", true) ?>
 							</td>
 						</tr>
+						<tr>
+							<td style='background-color: <? print $bg ?>'></td> 
+							<td colspan=2> 
+								<p style='color: black'>Smart content blocks are Gibbon's way of helping you organise and manage the content in your units. Create the content here, or collaboratively in working units, and you can quickly use it to make lesson plans in the future.</p>
+								<style>
+									#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+									#sortable div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
+									div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
+									html>body #sortable li { min-height: 58px; line-height: 1.2em; }
+									.ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
+								</style>
+								<script>
+									$(function() {
+										$( "#sortable" ).sortable({
+											placeholder: "ui-state-highlight", 
+											axis: 'y'
+										});
+									});
+								</script>
+								
+								
+								<div class="sortable" id="sortable" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333'>
+									<? 
+									try {
+										$dataBlocks=array("ibPYPUnitMasterID"=>$ibPYPUnitMasterID); 
+										$sqlBlocks="SELECT * FROM ibPYPUnitMasterSmartBlock WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID ORDER BY sequenceNumber" ;
+										$resultBlocks=$connection2->prepare($sqlBlocks);
+										$resultBlocks->execute($dataBlocks);
+									}
+									catch(PDOException $e) { 
+										print "<div class='error'>" . $e->getMessage() . "</div>" ; 
+									}
+									$i=1 ;
+									while ($rowBlocks=$resultBlocks->fetch()) {
+										makeBlock($guid, $connection2, $i, "masterEdit", $rowBlocks["title"], $rowBlocks["type"], $rowBlocks["length"], $rowBlocks["contents"], "N", $rowBlocks["ibPYPUnitMasterSmartBlockID"], "", $rowBlocks["teachersNotes"]) ;
+										$i++ ;
+									}
+									?>
+								</div>
+								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
+									<div class="ui-state-default_dud odd" style='padding: 0px;'>
+										<table style='width: 100%'>
+											<tr>
+												<td style='width: 50%'>
+													<script type="text/javascript">
+														var count=<? print ($resultBlocks->rowCount()+1) ?> ;
+														$(document).ready(function(){
+															$("#new").click(function(){
+																$("#sortable").append('<div id=\'blockOuter' + count + '\'><img style=\'margin: 10px 0 5px 0\' src=\'<? print $_SESSION[$guid]["absoluteURL"] ?>/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');
+																$("#blockOuter" + count).load("<? print $_SESSION[$guid]["absoluteURL"] ?>/modules/Planner/units_add_blockAjax.php","id=" + count + "&mode=masterAdd") ;
+																count++ ;
+															 });
+														});
+													</script>
+													<div id='new' style='cursor: default; float: none; border: 1px dotted #aaa; background: none; margin-left: 3px; color: #999; margin-top: 0px; font-size: 140%; font-weight: bold; width: 350px'>Click to create a new block</div><br/>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</td>
+						</tr>
+						
 						<tr>
 							<td style='background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
@@ -893,77 +953,6 @@ else {
 								<? print getEditor($guid,  $connection2, "environments", $row["environments"], 30 ) ?>
 							</td>
 						</tr>
-						
-						<? $bg="#6767EF" ; ?>
-						<tr>
-							<td colspan=3> 
-								<a id='6'>
-								<h3>6. Smart Content Blocks</h3><br/>
-							</td>
-						</tr>
-						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
-							<td colspan=2> 
-								<p style='color: black'>Smart content blocks are Gibbon's way of helping you organise and manage the content in your units. Create the content here, or collaboratively in working units, and you can quickly use it to make lesson plans in the future.</p>
-								<style>
-									#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-									#sortable div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-									div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-									html>body #sortable li { min-height: 58px; line-height: 1.2em; }
-									.ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
-								</style>
-								<script>
-									$(function() {
-										$( "#sortable" ).sortable({
-											placeholder: "ui-state-highlight", 
-											axis: 'y'
-										});
-									});
-								</script>
-								
-								
-								<div class="sortable" id="sortable" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333'>
-									<? 
-									try {
-										$dataBlocks=array("ibPYPUnitMasterID"=>$ibPYPUnitMasterID); 
-										$sqlBlocks="SELECT * FROM ibPYPUnitMasterSmartBlock WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID ORDER BY sequenceNumber" ;
-										$resultBlocks=$connection2->prepare($sqlBlocks);
-										$resultBlocks->execute($dataBlocks);
-									}
-									catch(PDOException $e) { 
-										print "<div class='error'>" . $e->getMessage() . "</div>" ; 
-									}
-									$i=1 ;
-									while ($rowBlocks=$resultBlocks->fetch()) {
-										makeBlock($guid, $connection2, $i, "masterEdit", $rowBlocks["title"], $rowBlocks["type"], $rowBlocks["length"], $rowBlocks["contents"], "N", $rowBlocks["ibPYPUnitMasterSmartBlockID"], "", $rowBlocks["teachersNotes"]) ;
-										$i++ ;
-									}
-									?>
-								</div>
-								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
-									<div class="ui-state-default_dud odd" style='padding: 0px;'>
-										<table style='width: 100%'>
-											<tr>
-												<td style='width: 50%'>
-													<script type="text/javascript">
-														var count=<? print ($resultBlocks->rowCount()+1) ?> ;
-														$(document).ready(function(){
-															$("#new").click(function(){
-																$("#sortable").append('<div id=\'blockOuter' + count + '\'><img style=\'margin: 10px 0 5px 0\' src=\'<? print $_SESSION[$guid]["absoluteURL"] ?>/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');
-																$("#blockOuter" + count).load("<? print $_SESSION[$guid]["absoluteURL"] ?>/modules/Planner/units_add_blockAjax.php","id=" + count + "&mode=masterAdd") ;
-																count++ ;
-															 });
-														});
-													</script>
-													<div id='new' style='cursor: default; float: none; border: 1px dotted #aaa; background: none; margin-left: 3px; color: #999; margin-top: 0px; font-size: 140%; font-weight: bold; width: 350px'>Click to create a new block</div><br/>
-												</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</td>
-						</tr>
-						
 						
 						<tr>
 							<td class="right" colspan=3>

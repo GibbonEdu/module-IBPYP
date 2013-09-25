@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+v1.0.03
+-------
+Added resource addition to summative assessment in master and working units.
+Replaced Learning Experiences in master and working with smart blocks.
+
 v1.0.02
 -------
 Fixed outcome filtering issue, where first item in filtered list cannot be selected.

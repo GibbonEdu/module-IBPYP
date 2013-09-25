@@ -25,7 +25,7 @@ $description="A module to facilitate schools to run the IB Primary Years Program
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="IB" ;
-$version="1.0.02" ;
+$version="1.0.03" ;
 $author="Ross Parker" ;
 $url="http://rossparker.org" ;
 
@@ -61,7 +61,6 @@ $moduleTables[2]="CREATE TABLE `ibPYPUnitMaster` (
   `provocation` text NOT NULL,
   `preAssessment` text NOT NULL,
   `formativeAssessment` text NOT NULL,
-  `learningExperiences` text NOT NULL,
   `resources` text NOT NULL,
   `action` text NOT NULL,
   `environments` text NOT NULL,
@@ -114,7 +113,6 @@ $moduleTables[6]="CREATE TABLE `ibPYPUnitWorking` (
   `provocation` text NOT NULL,
   `preAssessment` text NOT NULL,
   `formativeAssessment` text NOT NULL,
-  `learningExperiences` text NOT NULL,
   `resources` text NOT NULL,
   `action` text NOT NULL,
   `environments` text NOT NULL,

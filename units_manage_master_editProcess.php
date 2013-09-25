@@ -85,7 +85,6 @@ else {
 			$provocation=$_POST["provocation"] ;
 			$preAssessment=$_POST["preAssessment"] ;
 			$formativeAssessment=$_POST["formativeAssessment"] ;
-			$learningExperiences=$_POST["learningExperiences"] ;
 			$resources=$_POST["resources"] ;
 			$action=$_POST["action"] ;
 			$environments=$_POST["environments"] ;
@@ -193,7 +192,7 @@ else {
 				$whereRemove="" ;
 				if (count($order)<0) {
 					//Fail 3
-					$URL = $URL . "&addReturn=fail3" ;
+					$URL = $URL . "&updateReturn=fail3" ;
 					header("Location: {$URL}");
 				}
 				else {
@@ -263,14 +262,14 @@ else {
 			
 				//Write to database
 				try {
-					$data=array("name"=>$name, "active"=>$active, "theme"=>$theme, "centralIdea"=>$centralIdea, "summativeAssessment"=>$summativeAssessment, "relatedConcepts"=>$relatedConcepts, "linesOfInquiry"=>$linesOfInquiry, "teacherQuestions"=>$teacherQuestions, "provocation"=>$provocation, "preAssessment"=>$preAssessment, "formativeAssessment"=>$formativeAssessment, "learningExperiences"=>$learningExperiences, "resources"=>$resources, "action"=>$action, "environments"=>$environments );  
-					$sql="UPDATE ibPYPUnitMaster SET name=:name, active=:active, theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, learningExperiences=:learningExperiences, resources=:resources, action=:action, environments=:environments WHERE ibPYPUnitMasterID=$ibPYPUnitMasterID" ;
+					$data=array("name"=>$name, "active"=>$active, "theme"=>$theme, "centralIdea"=>$centralIdea, "summativeAssessment"=>$summativeAssessment, "relatedConcepts"=>$relatedConcepts, "linesOfInquiry"=>$linesOfInquiry, "teacherQuestions"=>$teacherQuestions, "provocation"=>$provocation, "preAssessment"=>$preAssessment, "formativeAssessment"=>$formativeAssessment, "resources"=>$resources, "action"=>$action, "environments"=>$environments );  
+					$sql="UPDATE ibPYPUnitMaster SET name=:name, active=:active, theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, resources=:resources, action=:action, environments=:environments WHERE ibPYPUnitMasterID=$ibPYPUnitMasterID" ;
 					$result=$connection2->prepare($sql);
 					$result->execute($data);  
 				}
 				catch(PDOException $e) { 
 					//Fail 2
-					$URL = $URL . "&addReturn=fail2" ;
+					$URL = $URL . "&updateReturn=fail2" ;
 					header("Location: {$URL}");
 					break ;
 				}
