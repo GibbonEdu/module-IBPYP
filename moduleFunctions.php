@@ -32,7 +32,7 @@ function makeBlock($guid, $connection2, $i, $mode="masterAdd", $title="", $type=
 				
 				$( "#sortable" ).bind( "sortstart", function(event, ui) { 
 					$("#blockInner<? print $i ?>").css("display","none") ;
-					$("#block<? print $i ?>").css("height","58px") ;
+					$("#block<? print $i ?>").css("height","72px") ;
 					$('#show<? print $i ?>').css("background-image", "<? print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)"); 
 					tinyMCE.execCommand('mceRemoveControl', false, 'contents<? print $i ?>') ;
 					tinyMCE.execCommand('mceRemoveControl', false, 'teachersNotes<? print $i ?>') ;
@@ -43,20 +43,20 @@ function makeBlock($guid, $connection2, $i, $mode="masterAdd", $title="", $type=
 					//These two lines have been removed to improve performance with long lists
 					//tinyMCE.execCommand('mceAddControl', false, 'contents<? print $i ?>') ;
 					//tinyMCE.execCommand('mceAddControl', false, 'teachersNotes<? print $i ?>') ;
-					$("#block<? print $i ?>").css("height","58px") ;
+					$("#block<? print $i ?>").css("height","72px") ;
 				});
 			});
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#blockInner<? print $i ?>").css("display","none");
-				$("#block<? print $i ?>").css("height","58px")
+				$("#block<? print $i ?>").css("height","72px")
 				
 				//Block contents control
 				$('#show<? print $i ?>').unbind('click').click(function() {
 					if ($("#blockInner<? print $i ?>").is(":visible")) {
 						$("#blockInner<? print $i ?>").css("display","none");
-						$("#block<? print $i ?>").css("height","58px")
+						$("#block<? print $i ?>").css("height","72px")
 						$('#show<? print $i ?>').css("background-image", "<? print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)"); 
 						tinyMCE.execCommand('mceRemoveControl', false, 'contents<? print $i ?>') ;
 						tinyMCE.execCommand('mceRemoveControl', false, 'teachersNotes<? print $i ?>') ;
@@ -107,8 +107,8 @@ function makeBlock($guid, $connection2, $i, $mode="masterAdd", $title="", $type=
 				});
 			});
 		</script>
-		<div class="odd" style='border: 1px solid #d8dcdf; margin: 0 0 5px' id="block<? print $i ?>" style='padding: 0px'>
-			<table style='width: 100%'>
+		<div style='border: 1px solid #d8dcdf; margin: 0 0 5px' id="block<? print $i ?>" style='padding: 0px'>
+			<table class='noIntBorder' cellspacing='0' style='width: 100%'>
 				<tr>
 					<td style='width: 50%'>
 						<input name='order[]' type='hidden' value='<? print $i ?>'>
@@ -225,7 +225,7 @@ function pypMakeBlock($guid,  $i, $type="", $ibPYPGlossaryID="", $title="", $cat
 				
 				$( "#<? print $type ?>" ).bind( "sortstart", function(event, ui) { 
 					$("#<? print $type ?>BlockInner<? print $i ?>").css("display","none") ;
-					$("#<? print $type ?>Block<? print $i ?>").css("height","58px") ;
+					$("#<? print $type ?>Block<? print $i ?>").css("height","72px") ;
 					$('#<? print $type ?>show<? print $i ?>').css("background-image", "<? print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)");  
 					tinyMCE.execCommand('mceRemoveControl', false, '<? print $type ?>contents<? print $i ?>') ;
 					$("#<? print $type ?>").sortable( "refreshPositions" ) ;
@@ -234,20 +234,20 @@ function pypMakeBlock($guid,  $i, $type="", $ibPYPGlossaryID="", $title="", $cat
 				$( "#<? print $type ?>" ).bind( "sortstop", function(event, ui) {
 					//Removed to improve performance
 					//tinyMCE.execCommand('mceAddControl', false, '<? print $type ?>contents<? print $i ?>') ;
-					$("#<? print $type ?>Block<? print $i ?>").css("height","58px") ;
+					$("#<? print $type ?>Block<? print $i ?>").css("height","72px") ;
 				});
 			});
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#<? print $type ?>BlockInner<? print $i ?>").css("display","none");
-				$("#<? print $type ?>Block<? print $i ?>").css("height","58px")
+				$("#<? print $type ?>Block<? print $i ?>").css("height","72px")
 				
 				//Block contents control
 				$('#<? print $type ?>show<? print $i ?>').unbind('click').click(function() {
 					if ($("#<? print $type ?>BlockInner<? print $i ?>").is(":visible")) {
 						$("#<? print $type ?>BlockInner<? print $i ?>").css("display","none");
-						$("#<? print $type ?>Block<? print $i ?>").css("height","58px") ;
+						$("#<? print $type ?>Block<? print $i ?>").css("height","72px") ;
 						$('#<? print $type ?>show<? print $i ?>').css("background-image", "<? print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)");  
 						tinyMCE.execCommand('mceRemoveControl', false, '<? print $type ?>contents<? print $i ?>') ;
 					} else {
@@ -269,8 +269,8 @@ function pypMakeBlock($guid,  $i, $type="", $ibPYPGlossaryID="", $title="", $cat
 				
 			});
 		</script>
-		<div class="odd" style='border: 1px solid #d8dcdf; margin: 0 0 5px' id="<? print $type ?>Block<? print $i ?>" style='padding: 0px'>
-			<table style='width: 100%'>
+		<div style='border: 1px solid #d8dcdf; margin: 0 0 5px' id="<? print $type ?>Block<? print $i ?>" style='padding: 0px'>
+			<table class='noIntBorder' cellspacing='0' style='width: 100%'>
 				<tr>
 					<td style='width: 50%'>
 						<input name='<? print $type ?>order[]' type='hidden' value='<? print $i ?>'>

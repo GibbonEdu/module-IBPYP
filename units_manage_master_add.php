@@ -81,16 +81,15 @@ else {
 			if ($step==1) {
 				?>
 				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage_master_add.php&gibbonSchoolYearID=$gibbonSchoolYearID&step=2" ?>">
-					<table style="width: 100%;">	
-						<tr><td style="width: 4px"></td><td style="width: 50%"></td><td style="width: 50%"></td></tr>
+					<table class='smallIntBorder' cellspacing='0' style="width: 100%;">	
 						<? $bg="#fff" ; ?>
-						<tr>
+						<tr class='break'>
 							<td colspan=3> 
 								<h3 class='top'>Step 1 - Basics</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Unit Name *</b><br/>
 							</td>
@@ -103,7 +102,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Active *</b><br/>
 								<span style="font-size: 90%"><i></i></span>
@@ -116,7 +115,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Course *</b><br/>
 								<span style="font-size: 90%"><i>Which course does this unit belong to?<br/></i></span>
@@ -144,7 +143,10 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td class="right" colspan=3>
+							<td>
+								<span style="font-size: 90%"><i>* denotes a required field</i></span>
+							</td>
+							<td class="right" colspan=2>
 								<script type="text/javascript">
 									$(document).ready(function(){
 										$("#submit").click(function(){
@@ -157,11 +159,6 @@ else {
 								<input type="reset" value="Reset"> <input type="submit" value="Submit">
 							</td>
 						</tr>
-						<tr>
-							<td class="right" colspan=3>
-								<span style="font-size: 90%"><i>* denotes a required field</i></span>
-							</td>
-						</tr>
 					</table>
 				</form>		
 			<?
@@ -169,15 +166,14 @@ else {
 			else {
 				?>
 				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/" . $_SESSION[$guid]["module"] . "/units_manage_master_addProcess.php?gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
-					<table style="width: 100%;">	
-						<tr><td style="width: 4px"></td><td style="width: 50%"></td><td style="width: 50%"></td></tr>
-						<tr>
+					<table class='smallIntBorder' cellspacing='0' style="width: 100%;">	
+						<tr class='break'>
 							<td colspan=3> 
 								<h3 class='top'>Step 2 - Details</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Unit Name *</b><br/>
 								<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
@@ -187,7 +183,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Active *</b><br/>
 								<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
@@ -197,7 +193,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Course *</b><br/>
 								<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
@@ -222,7 +218,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='padding-top: 20px; background-color: <? print $bg ?>'></td> 
+							<td style='padding-top: 20px; background: none; background-color: <? print $bg ?>'></td> 
 							<td style='padding-top: 20px'> 
 								<b>Section Menu</b><br/>
 								<a href='#1'>1. What is our purpose?</a><br/>
@@ -236,28 +232,29 @@ else {
 						</tr>
 				
 						<? $bg="#EDC951" ; ?>
-						<tr>
-							<td colspan=3> 
+						<tr class='break'>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td colspan=2> 
 								<a id='1'>
 								<h3>1. What Is Our Purpose?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Transdisciplinary Theme</div> 
 								<? print getEditor($guid,  $connection2, "theme", $row["theme"], 30 ) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Central Idea</div> 
 								<? print getEditor($guid,  $connection2, "centralIdea", $row["centralIdea"], 30 ) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px;font-weight: bold; text-decoration: underline; font-size: 130%'>Outcomes</div> 
 								<p>What would you like students to accomplish in this unit? These outcomes are drawn from the system-wide collection stored in the Planner module.</p>
@@ -272,10 +269,10 @@ else {
 						?> 
 						<style>
 							#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-							#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-							div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-							html>body #<? print $type ?> li { min-height: 58px; line-height: 1.2em; }
-							.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
+							#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+							div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+							html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
+							.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 							.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 						</style>
 						<script>
@@ -287,16 +284,16 @@ else {
 							});
 						</script>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
-								<div class="outcome" id="outcome" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333; min-height: 66px'>
+								<div class="outcome" id="outcome" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<div id="outcomeOuter0">
 											<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Key outcomes listed here...</div>
 										</div>
 									</div>
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
-									<div class="ui-state-default_dud odd" style='padding: 0px; height: 60px'>
-										<table style='width: 100%'>
+									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
+										<table cellspacing='0' style='width: 100%'>
 											<tr>
 												<td style='width: 50%'>
 													<script type="text/javascript">
@@ -440,7 +437,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Summative Assessment</div>
 								<p>What are the possible ways of assessing students’ understanding of the central idea? What evidence, including student initiated actions will we look for?</p>
@@ -449,14 +446,15 @@ else {
 						</tr>
 				
 						<? $bg="#6A4A3C" ; ?>
-						<tr>
-							<td colspan=3> 
+						<tr class='break'>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td colspan=2> 
 								<a id='2'>
 								<h3>2. What Do We Want To Learn?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Key Concepts</div> 
 								<p>What are the key concepts to be emphasized within this inquiry?</p>
@@ -466,10 +464,10 @@ else {
 						<? $type="concept" ; ?> 
 						<style>
 							#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-							#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-							div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-							html>body #<? print $type ?> li { min-height: 58px; line-height: 1.2em; }
-							.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
+							#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+							div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+							html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
+							.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 							.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 						</style>
 						<script>
@@ -481,16 +479,16 @@ else {
 							});
 						</script>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
-								<div class="concept" id="concept" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333; min-height: 66px'>
+								<div class="concept" id="concept" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<div id="conceptOuter0">
 											<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Key concepts listed here...</div>
 										</div>
 									</div>
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
-									<div class="ui-state-default_dud odd" style='padding: 0px; height: 60px'>
-										<table style='width: 100%'>
+									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
+										<table cellspacing='0' style='width: 100%'>
 											<tr>
 												<td style='width: 50%'>
 													<script type="text/javascript">
@@ -562,7 +560,7 @@ else {
 						</tr>
 					
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Related Concepts</div> 
 								<p>What are the concepts that are related to this inquiry?</p>
@@ -571,7 +569,7 @@ else {
 						</tr>
 						
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Lines of Inquiry</div> 
 								<p>What lines of inquiry will define the scope of the inquiry into the central idea?</p>
@@ -579,7 +577,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Teacher Questions<br/></div>
 								<p>What teacher questions will drive these inquiries?<br/><br/></p>
@@ -588,7 +586,7 @@ else {
 						</tr>
 					
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Provocation</div> 
 								<? print getEditor($guid,  $connection2, "provocation", $row["provocation"], 30, true, false, false, true, "purpose=Provocation", true ) ?>
@@ -596,14 +594,15 @@ else {
 						</tr>
 				
 						<? $bg="#00A0B0" ; ?>
-						<tr>
-							<td colspan=3> 
+						<tr class='break'>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td colspan=2> 
 								<a id='3'>
 								<h3>3. How Might We Know What We Have Learned?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Assessing Prior Knowledge & Skills</div> 
 								<p>What are the possible ways of assessing students’ prior knowledge and skills? What evidence will we look for? </p>
@@ -611,7 +610,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Formative Assessment</div> 
 								<p>What are the possible ways of assessing student learning in the context of the lines of inquiry? What evidence will we look for?</p>
@@ -620,29 +619,30 @@ else {
 						</tr>
 				
 						<? $bg="#C44D58" ; ?>
-						<tr>
-							<td colspan=3> 
+						<tr class='break'>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td colspan=2> 
 								<a id='4'>
 								<h3>4. How Best Might We Learn?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Learning Experiences</div> 
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<p style='color: black'>Smart content blocks are Gibbon's way of helping you organise and manage the content in your units. <b>These blocks are shared across the master unit, and all of it's working units: so, changes here are collaborative, and will impact other version of this unit.</p>
 								
 								<style>
 									#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-									#sortable div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-									div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-									html>body #sortable li { min-height: 58px; line-height: 1.2em; }
-									.ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
+									#sortable div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+									div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+									html>body #sortable li { min-height: 72px; line-height: 1.2em; }
+									.ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 								</style>
 								<script>
 									$(function() {
@@ -663,7 +663,7 @@ else {
 					
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud odd" style='padding: 0px;'>
-										<table style='width: 100%'>
+										<table cellspacing='0' style='width: 100%'>
 											<tr>
 												<td style='width: 50%'>
 													<script type="text/javascript">
@@ -686,21 +686,21 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Transdisciplinary Skills</div> 
 								<p>What opportunities will occur for transdisciplinary skills?</p>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<? $type="skills" ; ?> 
 							<style>
 								#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-								#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-								div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-								html>body #<? print $type ?> li { min-height: 58px; line-height: 1.2em; }
-								.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
+								#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+								div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+								html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
+								.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 								.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 							</style>
 							<script>
@@ -712,14 +712,14 @@ else {
 								});
 							</script>
 							<td colspan=2> 
-								<div class="skills" id="skills" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333; min-height: 66px'>
+								<div class="skills" id="skills" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 									<div id="skillsOuter0">
 										<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Transdisciplinary Skills listed here...</div>
 									</div>
 								</div>
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
-									<div class="ui-state-default_dud odd" style='padding: 0px; height: 60px'>
-										<table style='width: 100%'>
+									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
+										<table cellspacing='0' style='width: 100%'>
 											<tr>
 												<td style='width: 50%'>
 													<script type="text/javascript">
@@ -790,21 +790,21 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Learner Profile & Attitudes</div> 
 								<p>What opportunity will occur for the development of the attributes of the learner profile and attitudes?</p>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<? $type="learnerProfile" ; ?> 
 							<style>
 								#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-								#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-								div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 58px; }
-								html>body #<? print $type ?> li { min-height: 58px; line-height: 1.2em; }
-								.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 58px; line-height: 1.2em; width: 100%; }
+								#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+								div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+								html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
+								.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 								.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 							</style>
 							<script>
@@ -816,14 +816,14 @@ else {
 								});
 							</script>
 							<td colspan=2> 
-								<div class="learnerProfile" id="learnerProfile" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333; min-height: 66px'>
+								<div class="learnerProfile" id="learnerProfile" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 									<div id="learnerProfileOuter0">
 										<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Learner Profile & Attitudes listed here...</div>
 									</div>
 								</div>
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
-									<div class="ui-state-default_dud odd" style='padding: 0px; height: 60px'>
-										<table style='width: 100%'>
+									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
+										<table cellspacing='0' style='width: 100%'>
 											<tr>
 												<td style='width: 50%'>
 													<script type="text/javascript">
@@ -896,14 +896,15 @@ else {
 						</tr>
 				
 						<? $bg="#EB6841" ; ?>
-						<tr>
-							<td colspan=3> 
+						<tr class='break'>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td colspan=2> 
 								<a id='5'>
 								<h3>5. What Resources Need To Be Gathered?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Resources</div> 
 								<p>What people, places, audio-visual materials, related literature, music, art, computer software etc will be available?</p>
@@ -911,7 +912,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Action</div> 
 								<p>What possible action could be inspired by this inquiry?</p>
@@ -919,7 +920,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Classroom Environment</div> 
 								<p>How will the classroom environment, local environment and or community be used to facilitate the inquiry? </p>
@@ -928,7 +929,10 @@ else {
 						</tr>
 				
 						<tr>
-							<td class="right" colspan=3>
+							<td colspan=2>
+								<span style="font-size: 90%"><i>* denotes a required field</i></span>
+							</td>
+							<td class="right">
 								<script type="text/javascript">
 									$(document).ready(function(){
 										$("#submit").click(function(){
@@ -939,11 +943,6 @@ else {
 								<input name="blockCount" id=blockCount value="5" type="hidden">
 								<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
 								<input type="reset" value="Reset"> <input type="submit" value="Submit">
-							</td>
-						</tr>
-						<tr>
-							<td class="right" colspan=3>
-								<span style="font-size: 90%"><i>* denotes a required field</i></span>
 							</td>
 						</tr>
 					</table>

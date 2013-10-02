@@ -84,7 +84,7 @@ else {
 			$row=$result->fetch() ;
 			?>
 			<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/staff_manage_deleteProcess.php?ibPYPStaffTeachingID=$ibPYPStaffTeachingID" ?>">
-				<table style="width: 100%">	
+				<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 					<tr>
 						<td> 
 							<b>Are you sure you want to delete "<? print formatName("", $row["preferredName"], $row["surname"], "Staff", false, true) ; ?>" from the PYP programme?</b><br/>

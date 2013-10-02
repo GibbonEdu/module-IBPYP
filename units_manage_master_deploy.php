@@ -108,8 +108,7 @@ else {
 					$rowSchoolYear=$resultSchoolYear->fetch() ;
 					?>
 					<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_master_deployProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID" ?>">
-						<table style="width: 100%">	
-							<tr><td style="width: 30%"></td><td></td></tr>
+						<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 							<tr>
 								<td> 
 									<b>Unit *</b><br/>

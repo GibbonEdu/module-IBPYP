@@ -91,7 +91,7 @@ else {
 				//Let's go!
 				$row=$result->fetch() ;
 				
-				print "<table style='width: 100%'>" ;
+				print "<table class='smallIntBorder' cellspacing='0' style='width: 100%'>" ;
 					print "<tr>" ;
 						print "<td style='width: 34%; vertical-align: top'>" ;
 							print "<span style='font-size: 115%; font-weight: bold'>Unit</span><br/>" ;
@@ -113,7 +113,7 @@ else {
 				
 				?>
 				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_working_copyBackProcess.php?ibPYPUnitWorkingID=$ibPYPUnitWorkingID&gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
-					<table style="width: 100%">	
+					<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 						<tr>
 							<td> 
 								<b>Are you sure you want to proceed with the unit copy back?</b><br/>

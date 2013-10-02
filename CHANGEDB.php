@@ -105,4 +105,10 @@ $sql[$count][1]="
 ALTER TABLE ibPYPUnitMaster DROP COLUMN learningExperiences;end
 ALTER TABLE ibPYPUnitWorking DROP COLUMN learningExperiences;end
 " ;
+
+//v1.0.03
+$count++ ;
+$sql[$count][0]="1.0.03" ;
+$sql[$count][1]="
+" ;
 ?>
