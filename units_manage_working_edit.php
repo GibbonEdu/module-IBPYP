@@ -24,7 +24,6 @@ $_SESSION[$guid]["ibPYPUnitsTab"]=0 ;
 include "./modules/IB PYP/moduleFunctions.php" ;
 
 if (isActionAccessible($guid, $connection2, "/modules/IB PYP/units_manage_working_edit.php")==FALSE) {
-
 	//Acess denied
 	print "<div class='error'>" ;
 		print "You do not have access to this action." ;

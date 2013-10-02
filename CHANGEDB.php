@@ -106,9 +106,16 @@ ALTER TABLE ibPYPUnitMaster DROP COLUMN learningExperiences;end
 ALTER TABLE ibPYPUnitWorking DROP COLUMN learningExperiences;end
 " ;
 
-//v1.0.03
+//v1.0.04
 $count++ ;
-$sql[$count][0]="1.0.03" ;
+$sql[$count][0]="1.0.04" ;
 $sql[$count][1]="
+" ;
+
+//v1.1.00
+$count++ ;
+$sql[$count][0]="1.1.00" ;
+$sql[$count][1]="
+ALTER TABLE `ibPYPUnitMaster` ADD `assessOutcomes` TEXT NOT NULL AFTER `environments` ,ADD `assessmentImprovements` TEXT NOT NULL AFTER `assessOutcomes` ,ADD `ideasThemes` TEXT NOT NULL AFTER `assessmentImprovements` ,ADD `learningExperiencesConcepts` TEXT NOT NULL AFTER `ideasThemes` ,ADD `learningExperiencesTransSkills` TEXT NOT NULL AFTER `learningExperiencesConcepts` ,ADD `learningExperiencesProfileAttitudes` TEXT NOT NULL AFTER `learningExperiencesTransSkills` ,ADD `inquiriesQuestions` TEXT NOT NULL AFTER `learningExperiencesProfileAttitudes` ,ADD `questionsProvocations` TEXT NOT NULL AFTER `inquiriesQuestions` ,ADD `studentInitAction` TEXT NOT NULL AFTER `questionsProvocations` ,ADD `teachersNotes` TEXT NOT NULL AFTER `studentInitAction` ;end
 " ;
 ?>

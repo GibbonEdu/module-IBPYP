@@ -136,6 +136,9 @@ else {
 	
 		$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
 	
+		if ($_GET["tab"]!="") {
+			$_SESSION[$guid]["ibPYPUnitsTab"]=$_GET["tab"] ;
+		}
 		if ($_SESSION[$guid]["ibPYPUnitsTab"]=="" OR !(is_numeric($_SESSION[$guid]["ibPYPUnitsTab"]))) {
 			$_SESSION[$guid]["ibPYPUnitsTab"]=0 ;
 		}
@@ -163,14 +166,60 @@ else {
 				print "</ul>" ;
 			
 				print "<div id='tabs-1'>" ;
+					print "<h3>" ;
+					print "Filter" ;
+					print "</h3>" ;
+		
+					$search=$_GET["search"] ;
+	
+					?>
+					<form method="get" action="<? print $_SESSION[$guid]["absoluteURL"]?>/index.php">
+						<table class='noIntBorder' cellspacing='0' style="width: 100%">	
+							<tr><td style="width: 30%"></td><td></td></tr>
+							<tr>
+								<td> 
+									<b>Search By Name</b><br/>
+									<span style="font-size: 90%"><i>Unit name, course name</i></span>
+								</td>
+								<td class="right">
+									<input name="search" id="search" maxlength=20 value="<? print $search ?>" type="text" style="width: 300px">
+								</td>
+							</tr>
+							<tr>
+								<td colspan=2 class="right">
+									<input type="hidden" name="q" value="/modules/<? print $_SESSION[$guid]["module"] ?>/units_manage.php">
+									<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+									<input type="hidden" name="tab" value="0">
+									<?
+									print "<a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage.php&tab=0'>Clear Filters</a>" ;
+									?>
+									<input type="submit" value="Submit">
+								</td>
+							</tr>
+						</table>
+					</form>
+					<?
+					
+					print "<h3>" ;
+					print "Units" ;
+					print "</h3>" ;
+				
 					try {
 						if ($role=="Coordinator" OR $role=="Teacher (Curriculum)") {
 							$data=array("gibbonSchoolYearID"=>$gibbonSchoolYearID);  
 							$sql="SELECT ibPYPUnitWorking.*, gibbonCourse.nameShort AS course, gibbonCourseClass.nameShort AS class FROM ibPYPUnitWorking JOIN gibbonCourseClass ON (ibPYPUnitWorking.gibbonCourseClassID=gibbonCourseClass.gibbonCourseClassID) JOIN gibbonCourse ON (gibbonCourse.gibbonCourseID=gibbonCourseClass.gibbonCourseID) WHERE gibbonCourse.gibbonSchoolYearID=:gibbonSchoolYearID ORDER BY ibPYPUnitWorking.name, course, class" ; 
+							if ($search!="") {
+								$data=array("gibbonSchoolYearID"=>$gibbonSchoolYearID, "search1"=>"%$search%", "search2"=>"%$search%");  
+								$sql="SELECT ibPYPUnitWorking.*, gibbonCourse.nameShort AS course, gibbonCourseClass.nameShort AS class FROM ibPYPUnitWorking JOIN gibbonCourseClass ON (ibPYPUnitWorking.gibbonCourseClassID=gibbonCourseClass.gibbonCourseClassID) JOIN gibbonCourse ON (gibbonCourse.gibbonCourseID=gibbonCourseClass.gibbonCourseID) WHERE gibbonCourse.gibbonSchoolYearID=:gibbonSchoolYearID AND (ibPYPUnitWorking.name LIKE :search1 OR gibbonCourse.nameShort LIKE :search2) ORDER BY ibPYPUnitWorking.name, course, class" ; 
+							}
 						}
 						else {
 							$data=array("gibbonSchoolYearID"=>$gibbonSchoolYearID, "gibbonPersonID"=>$_SESSION[$guid]["gibbonPersonID"]);  
 							$sql="SELECT DISTINCT ibPYPUnitWorking.*, gibbonCourse.nameShort AS course, gibbonCourseClass.nameShort AS class FROM ibPYPUnitWorking JOIN gibbonCourseClass ON (ibPYPUnitWorking.gibbonCourseClassID=gibbonCourseClass.gibbonCourseClassID) JOIN gibbonCourse ON (ibPYPUnitWorking.gibbonCourseID=gibbonCourse.gibbonCourseID) JOIN gibbonCourseClassPerson ON (gibbonCourseClassPerson.gibbonCourseClassID=gibbonCourseClass.gibbonCourseClassID) WHERE gibbonCourse.gibbonSchoolYearID=:gibbonSchoolYearID AND gibbonCourseClassPerson.gibbonPersonID=:gibbonPersonID ORDER BY name, course, class" ; 
+							if ($search!="") {
+								$data=array("gibbonSchoolYearID"=>$gibbonSchoolYearID, "gibbonPersonID"=>$_SESSION[$guid]["gibbonPersonID"], "search1"=>"%$search%", "search2"=>"%$search%");  
+								$sql="SELECT DISTINCT ibPYPUnitWorking.*, gibbonCourse.nameShort AS course, gibbonCourseClass.nameShort AS class FROM ibPYPUnitWorking JOIN gibbonCourseClass ON (ibPYPUnitWorking.gibbonCourseClassID=gibbonCourseClass.gibbonCourseClassID) JOIN gibbonCourse ON (ibPYPUnitWorking.gibbonCourseID=gibbonCourse.gibbonCourseID) JOIN gibbonCourseClassPerson ON (gibbonCourseClassPerson.gibbonCourseClassID=gibbonCourseClass.gibbonCourseClassID) WHERE gibbonCourse.gibbonSchoolYearID=:gibbonSchoolYearID AND gibbonCourseClassPerson.gibbonPersonID=:gibbonPersonID AND (ibPYPUnitWorking.name LIKE :search1 OR gibbonCourse.nameShort LIKE :search2) ORDER BY name, course, class" ; 
+							}
 						}
 						$result=$connection2->prepare($sql);
 						$result->execute($data);
@@ -235,9 +284,51 @@ else {
 				print "</div>" ;
 				if ($role=="Coordinator" OR $role=="Teacher (Curriculum)") {
 					print "<div id='tabs-2'>" ;
+						print "<h3>" ;
+						print "Filter" ;
+						print "</h3>" ;
+	
+						$search=$_GET["search"] ;
+
+						?>
+						<form method="get" action="<? print $_SESSION[$guid]["absoluteURL"]?>/index.php">
+							<table class='noIntBorder' cellspacing='0' style="width: 100%">	
+								<tr><td style="width: 30%"></td><td></td></tr>
+								<tr>
+									<td> 
+										<b>Search By Name</b><br/>
+										<span style="font-size: 90%"><i>Unit name, course name</i></span>
+									</td>
+									<td class="right">
+										<input name="search" id="search" maxlength=20 value="<? print $search ?>" type="text" style="width: 300px">
+									</td>
+								</tr>
+								<tr>
+									<td colspan=2 class="right">
+										<input type="hidden" name="q" value="/modules/<? print $_SESSION[$guid]["module"] ?>/units_manage.php">
+										<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+										<input type="hidden" name="tab" value="1">
+										<?
+										print "<a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage.php&tab=1'>Clear Filters</a>" ;
+										?>
+										<input type="submit" value="Submit">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<?
+				
+						print "<h3>" ;
+						print "Units" ;
+						print "</h3>" ;
+					
 						try {
 							$data=array("gibbonSchoolYearID"=>$gibbonSchoolYearID);  
 							$sql="SELECT ibPYPUnitMaster.*, gibbonCourse.nameShort FROM ibPYPUnitMaster LEFT JOIN gibbonCourse ON (ibPYPUnitMaster.gibbonCourseID=gibbonCourse.gibbonCourseID) WHERE gibbonCourse.gibbonSchoolYearID=:gibbonSchoolYearID ORDER BY ibPYPUnitMaster.name, nameShort" ; 
+							if ($search!="") {
+								$data=array("gibbonSchoolYearID"=>$gibbonSchoolYearID, "search1"=>"%$search%", "search2"=>"%$search%");  
+								$sql="SELECT ibPYPUnitMaster.*, gibbonCourse.nameShort FROM ibPYPUnitMaster LEFT JOIN gibbonCourse ON (ibPYPUnitMaster.gibbonCourseID=gibbonCourse.gibbonCourseID) WHERE gibbonCourse.gibbonSchoolYearID=:gibbonSchoolYearID AND (ibPYPUnitMaster.name LIKE :search1 OR gibbonCourse.nameShort LIKE :search2) ORDER BY ibPYPUnitMaster.name, nameShort" ; 
+							}
 							$result=$connection2->prepare($sql);
 							$result->execute($data);
 						}

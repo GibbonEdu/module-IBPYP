@@ -25,7 +25,7 @@ $description="A module to facilitate schools to run the IB Primary Years Program
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="IB" ;
-$version="1.0.04" ;
+$version="1.1.00" ;
 $author="Ross Parker" ;
 $url="http://rossparker.org" ;
 
@@ -64,6 +64,16 @@ $moduleTables[2]="CREATE TABLE `ibPYPUnitMaster` (
   `resources` text NOT NULL,
   `action` text NOT NULL,
   `environments` text NOT NULL,
+  `assessOutcomes` text NOT NULL,
+  `assessmentImprovements` text NOT NULL,
+  `ideasThemes` text NOT NULL,
+  `learningExperiencesConcepts` text NOT NULL,
+  `learningExperiencesTransSkills` text NOT NULL,
+  `learningExperiencesProfileAttitudes` text NOT NULL,
+  `inquiriesQuestions` text NOT NULL,
+  `questionsProvocations` text NOT NULL,
+  `studentInitAction` text NOT NULL,
+  `teachersNotes` text NOT NULL,
   PRIMARY KEY (`ibPYPUnitMasterID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;" ;
 

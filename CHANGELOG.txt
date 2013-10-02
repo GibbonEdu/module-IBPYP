@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+v1.1.00
+-------
+Added filters to master and working unit listings
+Added working unit reflection fields to master unit.
+
 v1.0.04
 -------
 Brought module up to visual refresh standard of Gibbon Core v7
