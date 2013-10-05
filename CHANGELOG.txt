@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+v1.2.00
+-------
+Added ability to associate a rubric with a working unit
+Added ability to specify a default rubric to be associated with all working units
+Added ability to specify a start date for a working unit
+
 v1.1.00
 -------
 Added filters to master and working unit listings

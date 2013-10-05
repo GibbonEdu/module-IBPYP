@@ -82,6 +82,14 @@ else {
 			
 			if ($step==1) {
 				//Validate Inputs
+				$dateStart=dateConvert($_POST["dateStart"]);
+				if ($_POST["dateStart"]=="") {
+					$dateStart=NULL ;
+				}
+				$gibbonRubricID=$_POST["gibbonRubricID"];
+				if ($gibbonRubricID=="") {
+					$gibbonRubricID=NULL ;
+				}
 				$theme=$_POST["theme"] ;
 				$centralIdea=$_POST["centralIdea"] ;
 				$summativeAssessment=$_POST["summativeAssessment"] ;
@@ -264,8 +272,8 @@ else {
 			
 				//Write to database
 				try {
-					$data=array("theme"=>$theme, "centralIdea"=>$centralIdea, "summativeAssessment"=>$summativeAssessment, "relatedConcepts"=>$relatedConcepts, "linesOfInquiry"=>$linesOfInquiry, "teacherQuestions"=>$teacherQuestions, "provocation"=>$provocation, "preAssessment"=>$preAssessment, "formativeAssessment"=>$formativeAssessment, "resources"=>$resources, "action"=>$action, "environments"=>$environments, "ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
-					$sql="UPDATE ibPYPUnitWorking SET theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, resources=:resources, action=:action, environments=:environments WHERE ibPYPUnitWorkingID=:ibPYPUnitWorkingID" ;
+					$data=array("dateStart"=>$dateStart, "gibbonRubricID"=>$gibbonRubricID, "theme"=>$theme, "centralIdea"=>$centralIdea, "summativeAssessment"=>$summativeAssessment, "relatedConcepts"=>$relatedConcepts, "linesOfInquiry"=>$linesOfInquiry, "teacherQuestions"=>$teacherQuestions, "provocation"=>$provocation, "preAssessment"=>$preAssessment, "formativeAssessment"=>$formativeAssessment, "resources"=>$resources, "action"=>$action, "environments"=>$environments, "ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
+					$sql="UPDATE ibPYPUnitWorking SET dateStart=:dateStart, gibbonRubricID=:gibbonRubricID, theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, resources=:resources, action=:action, environments=:environments WHERE ibPYPUnitWorkingID=:ibPYPUnitWorkingID" ;
 					$result=$connection2->prepare($sql);
 					$result->execute($data);  
 				}

@@ -84,12 +84,11 @@ else {
 					<table class='smallIntBorder' cellspacing='0' style="width: 100%;">	
 						<? $bg="#fff" ; ?>
 						<tr class='break'>
-							<td colspan=3> 
+							<td colspan=2> 
 								<h3 class='top'>Step 1 - Basics</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Unit Name *</b><br/>
 							</td>
@@ -102,7 +101,6 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Active *</b><br/>
 								<span style="font-size: 90%"><i></i></span>
@@ -115,7 +113,6 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td> 
 								<b>Course *</b><br/>
 								<span style="font-size: 90%"><i>Which course does this unit belong to?<br/></i></span>
@@ -642,7 +639,7 @@ else {
 									#sortable div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 									div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 									html>body #sortable li { min-height: 72px; line-height: 1.2em; }
-									.ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
+									#sortable .ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 								</style>
 								<script>
 									$(function() {

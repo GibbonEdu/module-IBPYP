@@ -25,7 +25,7 @@ $description="A module to facilitate schools to run the IB Primary Years Program
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="IB" ;
-$version="1.1.00" ;
+$version="1.2.00" ;
 $author="Ross Parker" ;
 $url="http://rossparker.org" ;
 
@@ -114,6 +114,8 @@ $moduleTables[6]="CREATE TABLE `ibPYPUnitWorking` (
   `timestamp` datetime NOT NULL,
   `name` varchar(50) NOT NULL,
   `gibbonCourseID` int(8) unsigned zerofill NOT NULL,
+  `dateStart` date DEFAULT NULL,
+  `gibbonRubricID` int(8) unsigned zerofill DEFAULT NULL,
   `theme` text NOT NULL,
   `centralIdea` text NOT NULL,
   `summativeAssessment` text NOT NULL,
@@ -175,6 +177,8 @@ $moduleTables[9]="CREATE TABLE `ibPYPUnitWorkingSmartBlock` (
   `complete` enum('N','Y') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`ibPYPUnitWorkingSmartBlockID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;" ;
+
+$moduleTables[9]="INSERT INTO `gibbonSetting` (`gibbonSystemSettingsID` ,`scope` ,`name` ,`nameDisplay` ,`description` ,`value`) VALUES (NULL , 'IB PYP', 'defaultRubric', 'Default Rubric', 'This is the default rubric associated with al new working units.', '');";
 
 //Action rows
 $actionRows[0]["name"]="Manage Staff - Teaching" ;
@@ -240,6 +244,22 @@ $actionRows[3]["categoryPermissionStaff"]="Y" ;
 $actionRows[3]["categoryPermissionStudent"]="N" ;
 $actionRows[3]["categoryPermissionParent"]="N" ;
 $actionRows[3]["categoryPermissionOther"]="N" ;
+
+$actionRows[4]["name"]="Manage Settings" ;
+$actionRows[4]["precedence"]="0";
+$actionRows[4]["category"]="Admin" ;
+$actionRows[4]["description"]="Manage settings to control the behaviour of the module." ;
+$actionRows[4]["URLList"]="settings_manage.php" ;
+$actionRows[4]["entryURL"]="settings_manage.php" ;
+$actionRows[4]["defaultPermissionAdmin"]="Y" ;
+$actionRows[4]["defaultPermissionTeacher"]="N" ;
+$actionRows[4]["defaultPermissionStudent"]="N" ;
+$actionRows[4]["defaultPermissionParent"]="N" ;
+$actionRows[4]["defaultPermissionSupport"]="N" ;
+$actionRows[4]["categoryPermissionStaff"]="Y" ;
+$actionRows[4]["categoryPermissionStudent"]="N" ;
+$actionRows[4]["categoryPermissionParent"]="N" ;
+$actionRows[4]["categoryPermissionOther"]="N" ;
 
 //Hooks
 $array=array() ;

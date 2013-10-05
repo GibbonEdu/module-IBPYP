@@ -118,4 +118,15 @@ $sql[$count][0]="1.1.00" ;
 $sql[$count][1]="
 ALTER TABLE `ibPYPUnitMaster` ADD `assessOutcomes` TEXT NOT NULL AFTER `environments` ,ADD `assessmentImprovements` TEXT NOT NULL AFTER `assessOutcomes` ,ADD `ideasThemes` TEXT NOT NULL AFTER `assessmentImprovements` ,ADD `learningExperiencesConcepts` TEXT NOT NULL AFTER `ideasThemes` ,ADD `learningExperiencesTransSkills` TEXT NOT NULL AFTER `learningExperiencesConcepts` ,ADD `learningExperiencesProfileAttitudes` TEXT NOT NULL AFTER `learningExperiencesTransSkills` ,ADD `inquiriesQuestions` TEXT NOT NULL AFTER `learningExperiencesProfileAttitudes` ,ADD `questionsProvocations` TEXT NOT NULL AFTER `inquiriesQuestions` ,ADD `studentInitAction` TEXT NOT NULL AFTER `questionsProvocations` ,ADD `teachersNotes` TEXT NOT NULL AFTER `studentInitAction` ;end
 " ;
+
+//v1.2.00
+$count++ ;
+$sql[$count][0]="1.2.00" ;
+$sql[$count][1]="
+INSERT INTO `gibbonSetting` (`gibbonSystemSettingsID` ,`scope` ,`name` ,`nameDisplay` ,`description` ,`value`) VALUES (NULL , 'IB PYP', 'defaultRubric', 'Default Rubric', 'This is the default rubric associated with al new working units.', '');end
+ALTER TABLE `ibPYPUnitWorking` ADD `dateStart` DATE NULL DEFAULT NULL AFTER `gibbonCourseID` , ADD `gibbonRubricID` INT( 8 ) UNSIGNED ZEROFILL NULL DEFAULT NULL AFTER `dateStart` ;end
+INSERT INTO `gibbonAction` (`gibbonActionID`, `gibbonModuleID`, `name`, `precedence`, `category`, `description`, `URLList`, `entryURL`, `entrySidebar`, `defaultPermissionAdmin`, `defaultPermissionTeacher`, `defaultPermissionStudent`, `defaultPermissionParent`, `defaultPermissionSupport`, `categoryPermissionStaff`, `categoryPermissionStudent`, `categoryPermissionParent`, `categoryPermissionOther`) VALUES (NULL, (SELECT gibbonModuleID FROM gibbonModule WHERE name='IB PYP'), 'Manage Settings', 1, 'Admin', 'Manage settings to control the behaviour of the module.', 'settings_manage.php', 'settings_manage.php', 'Y', 'Y', 'N', 'N', 'N', 'N', 'Y', 'N', 'N', 'N');end
+INSERT INTO `gibbonPermission` (`permissionID` ,`gibbonRoleID` ,`gibbonActionID`) VALUES (NULL , '1', (SELECT gibbonActionID FROM gibbonAction JOIN gibbonModule ON (gibbonAction.gibbonModuleID=gibbonModule.gibbonModuleID) WHERE gibbonModule.name='IB PYP' AND gibbonAction.name='Manage Settings'));end
+" ;
+
 ?>

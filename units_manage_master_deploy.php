@@ -72,7 +72,7 @@ else {
 		else {
 			try {
 				$data=array("ibPYPUnitMasterID"=>$ibPYPUnitMasterID);  
-				$sql="SELECT * FROM ibPYPUnitMaster WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID" ;
+				$sql="SELECT ibPYPUnitMaster.*, gibbonYearGroupIDList, gibbonDepartmentID FROM ibPYPUnitMaster JOIN gibbonCourse ON (ibPYPUnitMaster.gibbonCourseID=gibbonCourse.gibbonCourseID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID" ;
 				$result=$connection2->prepare($sql);
 				$result->execute($data);
 			}
@@ -154,7 +154,99 @@ else {
 									</select>
 								</td>
 							</tr>
-							
+							<tr>
+								<td> 
+									<b>Unit Start Date</b><br/>
+									<span style="font-size: 90%"><i>When will this class start this unit?<br/>dd/mm/yyyy</i></span>
+								</td>
+								<td class="right">
+									<input name="dateStart" id="dateStart" maxlength=10 value="<? print dateConvertBack($row["dateStart"]) ?>" type="text" style="width: 300px">
+									<script type="text/javascript">
+										var dateStart = new LiveValidation('dateStart');
+										dateStart.add( Validate.Format, {pattern: /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/i, failureMessage: "Use dd/mm/yyyy." } ); 
+									 </script>
+									 <script type="text/javascript">
+										$(function() {
+											$( "#dateStart" ).datepicker();
+										});
+									</script>
+								</td>
+							</tr>
+							<tr>
+								<td> 
+									<b>Rubric</b><br/>
+								</td>
+								<td class="right">
+									<?
+									$defaultRubric=getSettingByScope( $connection2, "IB PYP", "defaultRubric" ) ;
+									?>
+									<select name="gibbonRubricID" id="gibbonRubricID" style="width: 302px">
+										<option><option>
+										<optgroup label='--School Rubrics --'>
+										<?
+										try {
+											$dataSelect=array(); 
+											$sqlSelectWhere="" ;
+											$years=explode(",",$row["gibbonYearGroupIDList"]) ;
+											foreach ($years as $year) {
+												$dataSelect[$year]="%$year%" ;
+												$sqlSelectWhere.=" AND gibbonYearGroupIDList LIKE :$year" ;
+											}
+											$sqlSelect="SELECT * FROM gibbonRubric WHERE active='Y' AND scope='School' $sqlSelectWhere ORDER BY category, name" ;
+											$resultSelect=$connection2->prepare($sqlSelect);
+											$resultSelect->execute($dataSelect);
+										}
+										catch(PDOException $e) { }
+										while ($rowSelect=$resultSelect->fetch()) {
+											$label="" ;
+											if ($rowSelect["category"]=="") {
+												$label=$rowSelect["name"] ;
+											}
+											else {
+												$label=$rowSelect["category"] . " - " . $rowSelect["name"] ;
+											}
+											$selected="" ;
+											if ($defaultRubric==$rowSelect["gibbonRubricID"]) {
+												$selected="selected" ;
+											}
+											print "<option $selected value='" . $rowSelect["gibbonRubricID"] . "'>$label</option>" ;
+										}
+										if ($row["gibbonDepartmentID"]!="") {
+											?>
+											<optgroup label='--Learning Area Rubrics --'>
+											<?
+											try {
+												$dataSelect=array("gibbonDepartmentID"=>$row["gibbonDepartmentID"]); 
+												$sqlSelectWhere="" ;
+												$years=explode(",",$row["gibbonYearGroupIDList"]) ;
+												foreach ($years as $year) {
+													$dataSelect[$year]="%$year%" ;
+													$sqlSelectWhere.=" AND gibbonYearGroupIDList LIKE :$year" ;
+												}
+												$sqlSelect="SELECT * FROM gibbonRubric WHERE active='Y' AND scope='Learning Area' AND gibbonDepartmentID=:gibbonDepartmentID $sqlSelectWhere ORDER BY category, name" ;
+												$resultSelect=$connection2->prepare($sqlSelect);
+												$resultSelect->execute($dataSelect);
+											}
+											catch(PDOException $e) { }
+											while ($rowSelect=$resultSelect->fetch()) {
+												$label="" ;
+												if ($rowSelect["category"]=="") {
+													$label=$rowSelect["name"] ;
+												}
+												else {
+													$label=$rowSelect["category"] . " - " . $rowSelect["name"] ;
+												}
+												$selected="" ;
+												if ($defaultRubric==$rowSelect["gibbonRubricID"]) {
+													$selected="selected" ;
+												}
+												print "<option $selected value='" . $rowSelect["gibbonRubricID"] . "'>$label</option>" ;
+											}
+										}
+										?>				
+									</select>
+								</td>
+							</tr>
 							<?
 							print "<tr>" ;
 								print "<td class='right' colspan=2>" ;

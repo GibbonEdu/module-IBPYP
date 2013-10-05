@@ -135,6 +135,98 @@ else {
 							</td>
 						</tr>
 						<tr>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td>
+							<td> 
+								<b>Unit Start Date</b><br/>
+								<span style="font-size: 90%"><i>When will this class start this unit?<br/>dd/mm/yyyy</i></span>
+							</td>
+							<td class="right">
+								<input name="dateStart" id="dateStart" maxlength=10 value="<? print dateConvertBack($row["dateStart"]) ?>" type="text" style="width: 300px">
+								<script type="text/javascript">
+									var dateStart = new LiveValidation('dateStart');
+									dateStart.add( Validate.Format, {pattern: /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/i, failureMessage: "Use dd/mm/yyyy." } ); 
+								 </script>
+								 <script type="text/javascript">
+									$(function() {
+										$( "#dateStart" ).datepicker();
+									});
+								</script>
+							</td>
+						</tr>
+						<tr>
+							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td> 
+								<b>Rubric</b><br/>
+							</td>
+							<td class="right">
+								<select name="gibbonRubricID" id="gibbonRubricID" style="width: 302px">
+									<option><option>
+									<optgroup label='--School Rubrics --'>
+									<?
+									try {
+										$dataSelect=array(); 
+										$sqlSelectWhere="" ;
+										$years=explode(",",$row["gibbonYearGroupIDList"]) ;
+										foreach ($years as $year) {
+											$dataSelect[$year]="%$year%" ;
+											$sqlSelectWhere.=" AND gibbonYearGroupIDList LIKE :$year" ;
+										}
+										$sqlSelect="SELECT * FROM gibbonRubric WHERE active='Y' AND scope='School' $sqlSelectWhere ORDER BY category, name" ;
+										$resultSelect=$connection2->prepare($sqlSelect);
+										$resultSelect->execute($dataSelect);
+									}
+									catch(PDOException $e) { }
+									while ($rowSelect=$resultSelect->fetch()) {
+										$label="" ;
+										if ($rowSelect["category"]=="") {
+											$label=$rowSelect["name"] ;
+										}
+										else {
+											$label=$rowSelect["category"] . " - " . $rowSelect["name"] ;
+										}
+										$selected="" ;
+										if ($row["gibbonRubricID"]==$rowSelect["gibbonRubricID"]) {
+											$selected="selected" ;
+										}
+										print "<option $selected value='" . $rowSelect["gibbonRubricID"] . "'>$label</option>" ;
+									}
+									if ($row["gibbonDepartmentID"]!="") {
+										?>
+										<optgroup label='--Learning Area Rubrics --'>
+										<?
+										try {
+											$dataSelect=array("gibbonDepartmentID"=>$row["gibbonDepartmentID"]); 
+											$sqlSelectWhere="" ;
+											$years=explode(",",$row["gibbonYearGroupIDList"]) ;
+											foreach ($years as $year) {
+												$dataSelect[$year]="%$year%" ;
+												$sqlSelectWhere.=" AND gibbonYearGroupIDList LIKE :$year" ;
+											}
+											$sqlSelect="SELECT * FROM gibbonRubric WHERE active='Y' AND scope='Learning Area' AND gibbonDepartmentID=:gibbonDepartmentID $sqlSelectWhere ORDER BY category, name" ;
+											$resultSelect=$connection2->prepare($sqlSelect);
+											$resultSelect->execute($dataSelect);
+										}
+										catch(PDOException $e) { }
+										while ($rowSelect=$resultSelect->fetch()) {
+											$label="" ;
+											if ($rowSelect["category"]=="") {
+												$label=$rowSelect["name"] ;
+											}
+											else {
+												$label=$rowSelect["category"] . " - " . $rowSelect["name"] ;
+											}
+											$selected="" ;
+											if ($row["gibbonRubricID"]==$rowSelect["gibbonRubricID"]) {
+												$selected="selected" ;
+											}
+											print "<option $selected value='" . $rowSelect["gibbonRubricID"] . "'>$label</option>" ;
+										}
+									}
+									?>				
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
 							<td colspan=2> 
 								<br/><b>Planning</b><br/>
@@ -598,7 +690,7 @@ else {
 									#sortable div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 									div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 									html>body #sortable li { min-height: 72px; line-height: 1.2em; }
-									.ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
+									#sortable .ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
 								</style>
 								<script>
 									$(function() {
