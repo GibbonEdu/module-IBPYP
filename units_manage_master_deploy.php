@@ -253,7 +253,7 @@ else {
 									print "<input type='hidden' name='ibPYPUnitMasterID' value='$ibPYPUnitMasterID'>" ;
 									print "<input type='hidden' name='gibbonSchoolYearID' value='$gibbonSchoolYearID'>" ;
 									print "<input type='hidden' name='address' value='" . $_GET["q"] . "'>" ;
-									print "<input type='reset' value='Reset'> <input id='submit' type='submit' value='Submit'>" ;
+									print "<input id='submit' type='submit' value='Submit'>" ;
 								print "</td>" ;
 							print "</tr>" ;
 						print "</table>" ;

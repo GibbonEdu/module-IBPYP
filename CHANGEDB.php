@@ -129,4 +129,10 @@ INSERT INTO `gibbonAction` (`gibbonActionID`, `gibbonModuleID`, `name`, `precede
 INSERT INTO `gibbonPermission` (`permissionID` ,`gibbonRoleID` ,`gibbonActionID`) VALUES (NULL , '1', (SELECT gibbonActionID FROM gibbonAction JOIN gibbonModule ON (gibbonAction.gibbonModuleID=gibbonModule.gibbonModuleID) WHERE gibbonModule.name='IB PYP' AND gibbonAction.name='Manage Settings'));end
 " ;
 
+//v1.2.01
+$count++ ;
+$sql[$count][0]="1.2.01" ;
+$sql[$count][1]="
+" ;
+
 ?>
