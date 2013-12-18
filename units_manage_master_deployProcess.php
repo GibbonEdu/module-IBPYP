@@ -40,7 +40,10 @@ date_default_timezone_set($_SESSION[$guid]["timezone"]);
 
 $gibbonSchoolYearID=$_POST["gibbonSchoolYearID"];
 $ibPYPUnitMasterID=$_POST["ibPYPUnitMasterID"]; 
-
+$classes=NULL ;
+if (isset($_POST["classes"])) {
+	$classes=$_POST["classes"] ;
+}
 $URL=$_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_POST["address"]) . "/units_manage_master_deploy.php&ibPYPUnitMasterID=$ibPYPUnitMasterID&gibbonSchoolYearID=$gibbonSchoolYearID" ;
 $URLSuccess=$_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_POST["address"]) . "/units_manage.php&gibbonSchoolYearID=$gibbonSchoolYearID" ;
 
@@ -65,7 +68,7 @@ else {
 		else {
 			//Proceed!
 			//Validate Inputs
-			if ($gibbonSchoolYearID=="" OR $ibPYPUnitMasterID=="" OR count($_POST["classes"])<1) {
+			if ($gibbonSchoolYearID=="" OR $ibPYPUnitMasterID=="" OR count($classes)<1) {
 				//Fail 3
 				$URL = $URL . "&deployReturn=fail3" ;
 				header("Location: {$URL}");
@@ -108,7 +111,7 @@ else {
 					$partialFail=false;
 					
 					//Create required copies
-					foreach ($_POST["classes"] as $class) {
+					foreach ($classes as $class) {
 						//Check for existing deployment
 						try {
 							$dataCheck=array("ibPYPUnitMasterID"=>$ibPYPUnitMasterID, "gibbonCourseClassID"=>$class);  

@@ -32,7 +32,7 @@ catch(PDOException $e) {
     echo $e->getMessage();
 }
 
-session_start() ;
+@session_start() ;
 $_SESSION[$guid]["ibPYPUnitsTab"]=0 ;
 
 //Set timezone from session variable
@@ -45,21 +45,21 @@ $URLCopy=$_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleN
 
 if (isActionAccessible($guid, $connection2, "/modules/IB PYP/units_manage_working_copyBack.php")==FALSE) {
 	//Fail 0
-	$URL = $URL . "&copyReturn=fail0" ;
+	$URL=$URL . "&copyReturn=fail0" ;
 	header("Location: {$URL}");
 }
 else {
 	$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
 	if ($role!="Coordinator" AND $role!="Teacher (Curriculum)") {
 		//Fail 0
-		$URL = $URL . "&addReturn=fail0" ;
+		$URL=$URL . "&addReturn=fail0" ;
 		header("Location: {$URL}");
 	}
 	else {
 		//Proceed!
 		if ($ibPYPUnitWorkingID=="") {
 			//Fail1
-			$URL = $URL . "&copyReturn=fail1" ;
+			$URL=$URL . "&copyReturn=fail1" ;
 			header("Location: {$URL}");
 		}
 		else {
@@ -71,14 +71,14 @@ else {
 			}
 			catch(PDOException $e) { 
 				//Fail2
-				$URL = $URL . "&copyReturn=fail2" ;
+				$URL=$URL . "&copyReturn=fail2" ;
 				header("Location: {$URL}");
 				break ;
 			}
 			
 			if ($result->rowCount()!=1) {
 				//Fail 2
-				$URL = $URL . "&copyReturn=fail2" ;
+				$URL=$URL . "&copyReturn=fail2" ;
 				header("Location: {$URL}");
 			}
 			else {
@@ -93,7 +93,7 @@ else {
 				}
 				catch(PDOException $e) { 
 					//Fail 2
-					$URL = $URL . "&copyReturn=fail2" ;
+					$URL=$URL . "&copyReturn=fail2" ;
 					header("Location: {$URL}");
 					break ;
 				}
@@ -105,7 +105,7 @@ else {
 				}
 				catch(PDOException $e) { 
 					//Fail 2
-					$URL = $URL . "&copyReturn=fail2" ;
+					$URL=$URL . "&copyReturn=fail2" ;
 					header("Location: {$URL}");
 					break ;
 				}
@@ -125,14 +125,14 @@ else {
 				
 				//Write to database
 				try {
-					$dataUnit=array("theme"=>$row["theme"], "centralIdea"=>$row["centralIdea"], "summativeAssessment"=>$row["summativeAssessment"], "relatedConcepts"=>$row["relatedConcepts"], "linesOfInquiry"=>$row["linesOfInquiry"], "teacherQuestions"=>$row["$teacherQuestions"], "provocation"=>$row["provocation"], "preAssessment"=>$row["preAssessment"], "formativeAssessment"=>$row["formativeAssessment"], "resources"=>$row["resources"], "action"=>$row["action"], "environments"=>$row["environments"], "ibPYPUnitMasterID"=>$row["ibPYPUnitMasterID"]);  
+					$dataUnit=array("theme"=>$row["theme"], "centralIdea"=>$row["centralIdea"], "summativeAssessment"=>$row["summativeAssessment"], "relatedConcepts"=>$row["relatedConcepts"], "linesOfInquiry"=>$row["linesOfInquiry"], "teacherQuestions"=>$row["teacherQuestions"], "provocation"=>$row["provocation"], "preAssessment"=>$row["preAssessment"], "formativeAssessment"=>$row["formativeAssessment"], "resources"=>$row["resources"], "action"=>$row["action"], "environments"=>$row["environments"], "ibPYPUnitMasterID"=>$row["ibPYPUnitMasterID"]);  
 					$sqlUnit="UPDATE ibPYPUnitMaster SET theme=:theme, centralIdea=:centralIdea, summativeAssessment=:summativeAssessment, relatedConcepts=:relatedConcepts, linesOfInquiry=:linesOfInquiry, teacherQuestions=:teacherQuestions, provocation=:provocation, preAssessment=:preAssessment, formativeAssessment=:formativeAssessment, resources=:resources, action=:action, environments=:environments WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID" ;
 					$resultUnit=$connection2->prepare($sqlUnit);
 					$resultUnit->execute($dataUnit);
 				}
 				catch(PDOException $e) { 
 					//Fail 2
-					$URL = $URL . "&copyReturn=fail2" ;
+					$URL=$URL . "&copyReturn=fail2" ;
 					header("Location: {$URL}");
 					break ;
 				}
@@ -140,12 +140,12 @@ else {
 				
 				if ($partialFail==true) {
 					//Fail 6
-					$URL = $URL . "&copyReturn=fail6" ;
+					$URL=$URL . "&copyReturn=fail6" ;
 					header("Location: {$URL}");
 				}
 				else {
 					//Success 0
-					$URLCopy = $URLCopy . "&copyReturn=success0" ;
+					$URLCopy=$URLCopy . "&copyReturn=success0" ;
 					header("Location: {$URLCopy}");
 				}
 			}

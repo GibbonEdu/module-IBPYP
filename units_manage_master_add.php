@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-session_start() ;
+@session_start() ;
 $_SESSION[$guid]["ibPYPUnitsTab"]=1 ;
 
 //Module includes
@@ -34,7 +34,7 @@ else {
 	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/units_manage.php&gibbonSchoolYearID=" . $_GET["gibbonSchoolYearID"] . "'>Manage Units</a> > </div><div class='trailEnd'>Add Master Unit</div>" ;
 	print "</div>" ;
 	
-	$addReturn = $_GET["addReturn"] ;
+	if (isset($_GET["addReturn"])) { $addReturn=$_GET["addReturn"] ; } else { $addReturn="" ; }
 	$addReturnMessage ="" ;
 	$class="error" ;
 	if (!($addReturn=="")) {
@@ -73,7 +73,10 @@ else {
 			print "</div>" ;
 		}
 		else {
-			$step=$_GET["step"] ;
+			$step=NULL ;
+			if (isset($_GET["step"])) {
+				$step=$_GET["step"] ;
+			}
 			if ($step!=1 AND $step!=2) {
 				$step=1 ;
 			}
@@ -95,7 +98,7 @@ else {
 							<td class="right">
 								<input name="unitname" id="unitname" maxlength=50 value="" type="text" style="width: 300px">
 								<script type="text/javascript">
-									var unitname = new LiveValidation('unitname');
+									var unitname=new LiveValidation('unitname');
 									unitname.add(Validate.Presence);
 								 </script>
 							</td>
@@ -134,7 +137,7 @@ else {
 									?>
 								</select>
 								<script type="text/javascript">
-									var gibbonCourseID = new LiveValidation('gibbonCourseID');
+									var gibbonCourseID=new LiveValidation('gibbonCourseID');
 									gibbonCourseID.add(Validate.Exclusion, { within: ['Please select...'], failureMessage: "Select something!"});
 								 </script>
 							</td>
@@ -240,14 +243,14 @@ else {
 							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Transdisciplinary Theme</div> 
-								<? print getEditor($guid,  $connection2, "theme", $row["theme"], 30 ) ?>
+								<? print getEditor($guid,  $connection2, "theme", "", 30 ) ?>
 							</td>
 						</tr>
 						<tr>
 							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Central Idea</div> 
-								<? print getEditor($guid,  $connection2, "centralIdea", $row["centralIdea"], 30 ) ?>
+								<? print getEditor($guid,  $connection2, "centralIdea", "", 30 ) ?>
 							</td>
 						</tr>
 						<tr>
@@ -438,7 +441,7 @@ else {
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Summative Assessment</div>
 								<p>What are the possible ways of assessing students’ understanding of the central idea? What evidence, including student initiated actions will we look for?</p>
-								<? print getEditor($guid,  $connection2, "summativeAssessment", $row["summativeAssessment"], 30, TRUE ) ?>
+								<? print getEditor($guid,  $connection2, "summativeAssessment", "", 30, TRUE ) ?>
 							</td>
 						</tr>
 				
@@ -486,7 +489,7 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
 														var conceptCount=1 ;
@@ -498,7 +501,7 @@ else {
 														});
 													</script>
 													<select id='newConcept' onChange='conceptDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
-														<option value='0'>Chose a concept to add it to this unit</option>
+														<option value='0'>Choose a concept to add it to this unit</option>
 														<?
 														$currentCategory="" ;
 														$lastCategory="" ;
@@ -586,7 +589,7 @@ else {
 							<td style='background: none; background-color: <? print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Provocation</div> 
-								<? print getEditor($guid,  $connection2, "provocation", $row["provocation"], 30, true, false, false, true, "purpose=Provocation", true ) ?>
+								<? print getEditor($guid,  $connection2, "provocation", "", 30, true, false, false, true, "purpose=Provocation", true ) ?>
 							</td>
 						</tr>
 				
@@ -603,7 +606,7 @@ else {
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Assessing Prior Knowledge & Skills</div> 
 								<p>What are the possible ways of assessing students’ prior knowledge and skills? What evidence will we look for? </p>
-								<? print getEditor($guid,  $connection2, "preAssessment", $row["preAssessment"], 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
+								<? print getEditor($guid,  $connection2, "preAssessment", "", 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
 							</td>
 						</tr>
 						<tr>
@@ -611,7 +614,7 @@ else {
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Formative Assessment</div> 
 								<p>What are the possible ways of assessing student learning in the context of the lines of inquiry? What evidence will we look for?</p>
-								<? print getEditor($guid,  $connection2, "formativeAssessment", $row["formativeAssessment"], 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
+								<? print getEditor($guid,  $connection2, "formativeAssessment", "", 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
 							</td>
 						</tr>
 				
@@ -661,7 +664,7 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud odd" style='padding: 0px;'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
 														var count=6 ;
@@ -717,7 +720,7 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
 														var skillsCount=1 ;
@@ -729,7 +732,7 @@ else {
 														});
 													</script>
 													<select id='newSkill' onChange='skillsDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
-														<option value='0'>Chose a skill to add it to this unit</option>
+														<option value='0'>Choose a skill to add it to this unit</option>
 														<?
 														$currentCategory="" ;
 														$lastCategory="" ;
@@ -821,7 +824,7 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
 														var learnerProfileCount=1 ;
@@ -833,7 +836,7 @@ else {
 														});
 													</script>
 													<select id='newLearnerProfile' onChange='learnerProfileDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
-														<option value='0'>Chose a learner profile or attitude to add it to this unit</option>
+														<option value='0'>Choose a learner profile or attitude to add it to this unit</option>
 														<?
 														$currentType="" ;
 														$lastType="" ;
@@ -905,7 +908,7 @@ else {
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Resources</div> 
 								<p>What people, places, audio-visual materials, related literature, music, art, computer software etc will be available?</p>
-								<? print getEditor($guid,  $connection2, "resources", $row["resources"], 30, true, false, false, true, "", true) ?>
+								<? print getEditor($guid,  $connection2, "resources", "", 30, true, false, false, true, "", true) ?>
 							</td>
 						</tr>
 						<tr>
@@ -913,7 +916,7 @@ else {
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Action</div> 
 								<p>What possible action could be inspired by this inquiry?</p>
-								<? print getEditor($guid,  $connection2, "action", $row["action"], 30, false, false, false, true, "", true) ?>
+								<? print getEditor($guid,  $connection2, "action", "", 30, false, false, false, true, "", true) ?>
 							</td>
 						</tr>
 						<tr>
@@ -921,7 +924,7 @@ else {
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Classroom Environment</div> 
 								<p>How will the classroom environment, local environment and or community be used to facilitate the inquiry? </p>
-								<? print getEditor($guid,  $connection2, "environments", $row["environments"], 30 ) ?>
+								<? print getEditor($guid,  $connection2, "environments", "", 30 ) ?>
 							</td>
 						</tr>
 				

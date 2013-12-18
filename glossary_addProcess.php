@@ -33,7 +33,7 @@ catch(PDOException $e) {
 }
 
 
-session_start() ;
+@session_start() ;
 
 //Set timezone from session variable
 date_default_timezone_set($_SESSION[$guid]["timezone"]);
@@ -43,14 +43,14 @@ $URL=$_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName(
 if (isActionAccessible($guid, $connection2, "/modules/IB PYP/glossary_add.php")==FALSE) {
 
 	//Fail 0
-	$URL = $URL . "&addReturn=fail0" ;
+	$URL=$URL . "&addReturn=fail0" ;
 	header("Location: {$URL}");
 }
 else {
 	$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
 	if ($role!="Coordinator" AND $role!="Teacher (Curriculum)") {
 		//Fail 0
-		$URL = $URL . "&addReturn=fail0" ;
+		$URL=$URL . "&addReturn=fail0" ;
 		header("Location: {$URL}");
 	}
 	else {
@@ -62,7 +62,7 @@ else {
 				
 		if ($type=="" OR $title=="") {
 			//Fail 3
-			$URL = $URL . "&addReturn=fail3" ;
+			$URL=$URL . "&addReturn=fail3" ;
 			header("Location: {$URL}");
 		}
 		else {
@@ -75,13 +75,13 @@ else {
 			}
 			catch(PDOException $e) { 
 				//Fail 2
-				$URL = $URL . "&addReturn=fail2" ;
+				$URL=$URL . "&addReturn=fail2" ;
 				header("Location: {$URL}");
 				break ;
 			}
 
 			//Success 0
-			$URL = $URL . "&addReturn=success0" ;
+			$URL=$URL . "&addReturn=success0" ;
 			header("Location: {$URL}");
 		}
 	}

@@ -30,7 +30,7 @@ catch(PDOException $e) {
     echo $e->getMessage();
 }
 
-session_start() ;
+@session_start() ;
 $_SESSION[$guid]["ibPYPUnitsTab"]=0 ;
 
 //Set timezone from session variable
@@ -46,7 +46,7 @@ $URL=$_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName(
 
 if (isActionAccessible($guid, $connection2, "/modules/IB PYP/units_manage_working_edit.php")==FALSE) {
 	//Fail 0
-	$URL = $URL . "&updateReturn=fail0&step=1" ;
+	$URL=$URL . "&updateReturn=fail0&step=1" ;
 	header("Location: {$URL}");
 }
 else {
@@ -54,7 +54,7 @@ else {
 	//Check if school year specified
 	if ($ibPYPUnitWorkingID=="" OR $gibbonSchoolYearID=="") {
 		//Fail1
-		$URL = $URL . "&updateReturn=fail1&step=1" ;
+		$URL=$URL . "&updateReturn=fail1&step=1" ;
 		header("Location: {$URL}");
 	}
 	else {
@@ -66,14 +66,14 @@ else {
 		}
 		catch(PDOException $e) { 
 			//Fail2
-			$URL = $URL . "&updateReturn=fail2&step=1" ;
+			$URL=$URL . "&updateReturn=fail2&step=1" ;
 			header("Location: {$URL}");
 			break ;
 		}
 		
 		if ($result->rowCount()!=1) {
 			//Fail 2
-			$URL = $URL . "&updateReturn=fail2&step=1" ;
+			$URL=$URL . "&updateReturn=fail2&step=1" ;
 			header("Location: {$URL}");
 		}
 		else {
@@ -112,97 +112,106 @@ else {
 				}
 				catch(PDOException $e) { 
 					//Fail2
-					$URL = $URL . "&updateReturn=fail2" ;
+					$URL=$URL . "&updateReturn=fail2" ;
 					header("Location: {$URL}");
 					break ;
 				}
 				
 				//Insert outcomes
 				$count=0 ;
-				if (count($_POST["outcomeorder"])>0) {
-					foreach ($_POST["outcomeorder"] AS $outcome) {
-						if ($_POST["outcomeibPYPGlossaryID$outcome"]!="") {
-							try {
-								$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "gibbonOutcomeID"=>$_POST["outcomeibPYPGlossaryID$outcome"], "content"=>$_POST["outcomecontents$outcome"], "count"=>$count);  
-								$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, gibbonOutcomeID=:gibbonOutcomeID, content=:content, sequenceNumber=:count" ;
-								$resultInsert=$connection2->prepare($sqlInsert);
-								$resultInsert->execute($dataInsert);
+				if (isset($_POST["outcomeorder"])) {
+					if (count($_POST["outcomeorder"])>0) {
+						foreach ($_POST["outcomeorder"] AS $outcome) {
+							if ($_POST["outcomeibPYPGlossaryID$outcome"]!="") {
+								try {
+									$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "gibbonOutcomeID"=>$_POST["outcomeibPYPGlossaryID$outcome"], "content"=>$_POST["outcomecontents$outcome"], "count"=>$count);  
+									$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, gibbonOutcomeID=:gibbonOutcomeID, content=:content, sequenceNumber=:count" ;
+									$resultInsert=$connection2->prepare($sqlInsert);
+									$resultInsert->execute($dataInsert);
+								}
+								catch(PDOException $e) {
+									$partialFail=true ;
+								}
 							}
-							catch(PDOException $e) {
-								$partialFail=true ;
-							}
-						}
-						$count++ ;
-					}	
+							$count++ ;
+						}	
+					}
 				}
-				
-				
 				
 				//Insert key concepts
 				$count=0 ;
-				if (count($_POST["conceptorder"])>0) {
-					foreach ($_POST["conceptorder"] AS $concept) {
-						if ($_POST["conceptibPYPGlossaryID$concept"]!="") {
-							try {
-								$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "ibPYPGlossaryID"=>$_POST["conceptibPYPGlossaryID$concept"], "content"=>$_POST["conceptcontents$concept"], "count"=>$count);  
-								$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, ibPYPGlossaryID=:ibPYPGlossaryID, content=:content, sequenceNumber=:count" ;
-								$resultInsert=$connection2->prepare($sqlInsert);
-								$resultInsert->execute($dataInsert);
+				if (isset($_POST["conceptorder"])) {
+					if (count($_POST["conceptorder"])>0) {
+						foreach ($_POST["conceptorder"] AS $concept) {
+							if ($_POST["conceptibPYPGlossaryID$concept"]!="") {
+								try {
+									$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "ibPYPGlossaryID"=>$_POST["conceptibPYPGlossaryID$concept"], "content"=>$_POST["conceptcontents$concept"], "count"=>$count);  
+									$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, ibPYPGlossaryID=:ibPYPGlossaryID, content=:content, sequenceNumber=:count" ;
+									$resultInsert=$connection2->prepare($sqlInsert);
+									$resultInsert->execute($dataInsert);
+								}
+								catch(PDOException $e) { 
+									$partialFail=true ;
+								}
 							}
-							catch(PDOException $e) { 
-								$partialFail=true ;
-							}
-						}
-						$count++ ;
-					}	
+							$count++ ;
+						}	
+					}
 				}
 				
 				//Insert trans skills
 				$count=0 ;
-				if (count($_POST["skillsorder"])>0) {
-					foreach ($_POST["skillsorder"] AS $skill) {
-						if ($_POST["skillsibPYPGlossaryID$skill"]!="") {
-							try {
-								$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "ibPYPGlossaryID"=>$_POST["skillsibPYPGlossaryID$skill"], "content"=>$_POST["skillscontents$skill"], "count"=>$count);  
-								$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, ibPYPGlossaryID=:ibPYPGlossaryID, content=:content, sequenceNumber=:count" ;
-								$resultInsert=$connection2->prepare($sqlInsert);
-								$resultInsert->execute($dataInsert);
+				if (isset($_POST["skillsorder"])) {
+					if (count($_POST["skillsorder"])>0) {
+						foreach ($_POST["skillsorder"] AS $skill) {
+							if ($_POST["skillsibPYPGlossaryID$skill"]!="") {
+								try {
+									$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "ibPYPGlossaryID"=>$_POST["skillsibPYPGlossaryID$skill"], "content"=>$_POST["skillscontents$skill"], "count"=>$count);  
+									$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, ibPYPGlossaryID=:ibPYPGlossaryID, content=:content, sequenceNumber=:count" ;
+									$resultInsert=$connection2->prepare($sqlInsert);
+									$resultInsert->execute($dataInsert);
+								}
+								catch(PDOException $e) { 
+									$partialFail=true ;
+								}
 							}
-							catch(PDOException $e) { 
-								$partialFail=true ;
-							}
-						}
-						$count++ ;
-					}	
+							$count++ ;
+						}	
+					}
 				}
 				
 				//Insert learner profiles
 				$count=0 ;
-				if (count($_POST["learnerProfileorder"])>0) {
-					foreach ($_POST["learnerProfileorder"] AS $learnerProfile) {
-						if ($_POST["learnerProfileibPYPGlossaryID$learnerProfile"]!="") {
-							try {
-								$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "ibPYPGlossaryID"=>$_POST["learnerProfileibPYPGlossaryID$learnerProfile"], "content"=>$_POST["learnerProfilecontents$learnerProfile"], "count"=>$count);  
-								$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, ibPYPGlossaryID=:ibPYPGlossaryID, content=:content, sequenceNumber=:count" ;
-								$resultInsert=$connection2->prepare($sqlInsert);
-								$resultInsert->execute($dataInsert);
+				if (isset($_POST["skillsorder"])) {
+					if (count($_POST["learnerProfileorder"])>0) {
+						foreach ($_POST["learnerProfileorder"] AS $learnerProfile) {
+							if ($_POST["learnerProfileibPYPGlossaryID$learnerProfile"]!="") {
+								try {
+									$dataInsert=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID, "ibPYPGlossaryID"=>$_POST["learnerProfileibPYPGlossaryID$learnerProfile"], "content"=>$_POST["learnerProfilecontents$learnerProfile"], "count"=>$count);  
+									$sqlInsert="INSERT INTO ibPYPUnitWorkingBlock SET ibPYPUnitWorkingID=:ibPYPUnitWorkingID, ibPYPGlossaryID=:ibPYPGlossaryID, content=:content, sequenceNumber=:count" ;
+									$resultInsert=$connection2->prepare($sqlInsert);
+									$resultInsert->execute($dataInsert);
+								}
+								catch(PDOException $e) { 
+									$partialFail=true ;
+								}
 							}
-							catch(PDOException $e) { 
-								$partialFail=true ;
-							}
-						}
-						$count++ ;
-					}	
+							$count++ ;
+						}	
+					}
 				}
 				
 				//Update smart blocks
-				$order=$_POST["order"] ;
+				$order=NULL ;
+				if (isset($_POST["order"])) {
+					$order=$_POST["order"] ;
+				}
 				$sequenceNumber=0 ;
 				$dataRemove=array() ;
 				$whereRemove="" ;
 				if (count($order)<0) {
 					//Fail 3
-					$URL = $URL . "&updateReturn=fail3" ;
+					$URL=$URL . "&updateReturn=fail3" ;
 					header("Location: {$URL}");
 				}
 				else {
@@ -222,7 +231,10 @@ else {
 							}
 							$contents=$_POST["contents$i"];
 							$teachersNotes=$_POST["teachersNotes$i"];
-							$ibPYPUnitMasterSmartBlockID=$_POST["ibPYPUnitMasterSmartBlockID$i"];
+							$ibPYPUnitMasterSmartBlockID=NULL ;
+							if (isset($_POST["ibPYPUnitMasterSmartBlockID$i"])) {
+								$ibPYPUnitMasterSmartBlockID=$_POST["ibPYPUnitMasterSmartBlockID$i"];
+							}
 							
 							if ($ibPYPUnitMasterSmartBlockID!="") {
 								try {
@@ -279,13 +291,13 @@ else {
 				}
 				catch(PDOException $e) { 
 					//Fail 2
-					$URL = $URL . "&updateReturn=fail2" ;
+					$URL=$URL . "&updateReturn=fail2" ;
 					header("Location: {$URL}");
 					break ;
 				}
 				
 				//Success 0
-				$URL = $URL . "&updateReturn=success0" ;
+				$URL=$URL . "&updateReturn=success0" ;
 				header("Location: {$URL}");
 			}
 			else if ($step==2) {
@@ -311,13 +323,13 @@ else {
 				}
 				catch(PDOException $e) { 
 					//Fail 5
-					$URL = $URL . "&updateReturn=fail5&step=2" ;
+					$URL=$URL . "&updateReturn=fail5&step=2" ;
 					header("Location: {$URL}");
 					break ;
 				}
 
 				//Success 0
-				$URL = $URL . "&updateReturn=success0&step=2" ;
+				$URL=$URL . "&updateReturn=success0&step=2" ;
 				header("Location: {$URL}");
 			}
 		}

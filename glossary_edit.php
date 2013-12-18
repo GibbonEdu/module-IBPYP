@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-session_start() ;
+@session_start() ;
 
 //Module includes
 include "./modules/IB PYP/moduleFunctions.php" ;
@@ -36,7 +36,7 @@ else {
 	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/glossary.php'>Essential Elements</a> > </div><div class='trailEnd'>Edit Item</div>" ;
 	print "</div>" ;
 	
-	$updateReturn = $_GET["updateReturn"] ;
+	if (isset($_GET["updateReturn"])) { $updateReturn=$_GET["updateReturn"] ; } else { $updateReturn="" ; }
 	$updateReturnMessage ="" ;
 	$class="error" ;
 	if (!($updateReturn=="")) {
@@ -117,7 +117,7 @@ else {
 									<option <? if ($row["type"]=="Transdisciplinary Skill") { print "selected " ;} ?>value="Transdisciplinary Skill">Transdisciplinary Skill</option>
 								</select>
 								<script type="text/javascript">
-									var type = new LiveValidation('type');
+									var type=new LiveValidation('type');
 									type.add(Validate.Exclusion, { within: ['Please select...'], failureMessage: "Select something!"});
 								 </script>
 							</td>
@@ -129,7 +129,7 @@ else {
 							<td class="right">
 								<input name="title" id="title" maxlength=100 value="<? print htmlPrep($row["title"]) ?>" type="text" style="width: 300px">
 								<script type="text/javascript">
-									var title = new LiveValidation('title');
+									var title=new LiveValidation('title');
 									title.add(Validate.Presence);
 								</script>
 							</td>
@@ -142,7 +142,7 @@ else {
 								<input name="category" id="category" maxlength=100 value="<? print htmlPrep($row["category"]) ?>" type="text" style="width: 300px">
 								<script type="text/javascript">
 									$(function() {
-										var availableTags = [
+										var availableTags=[
 											<?
 											try {
 												$dataAuto=array();  

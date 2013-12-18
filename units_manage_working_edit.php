@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-session_start() ;
+@session_start() ;
 $_SESSION[$guid]["ibPYPUnitsTab"]=0 ;
 
 //Module includes
@@ -34,7 +34,7 @@ else {
 	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/units_manage.php&gibbonSchoolYearID=" . $_GET["gibbonSchoolYearID"] .  "'>Manage Units</a> > </div><div class='trailEnd'>Edit Working Unit</div>" ;
 	print "</div>" ;
 	
-	$updateReturn = $_GET["updateReturn"] ;
+	if (isset($_GET["updateReturn"])) { $updateReturn=$_GET["updateReturn"] ; } else { $updateReturn="" ; }
 	$updateReturnMessage ="" ;
 	$class="error" ;
 	if (!($updateReturn=="")) {
@@ -95,8 +95,10 @@ else {
 			$gibbonYearGroupIDList=$row["gibbonYearGroupIDList"] ;
 			$gibbonDepartmentID=$row["gibbonDepartmentID"] ;
 									
-			
-			$step=$_GET["step"] ;
+			$step=NULL ;
+			if (isset($_GET["step"])) {
+				$step=$_GET["step"] ;
+			}
 			if ($step!=1 AND $step!=2) {
 				$step=1 ;
 			}
@@ -143,7 +145,7 @@ else {
 							<td class="right">
 								<input name="dateStart" id="dateStart" maxlength=10 value="<? print dateConvertBack($row["dateStart"]) ?>" type="text" style="width: 300px">
 								<script type="text/javascript">
-									var dateStart = new LiveValidation('dateStart');
+									var dateStart=new LiveValidation('dateStart');
 									dateStart.add( Validate.Format, {pattern: /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/i, failureMessage: "Use dd/mm/yyyy." } ); 
 								 </script>
 								 <script type="text/javascript">
@@ -294,6 +296,7 @@ else {
 							<td colspan=2> 
 								<div class="outcome" id="outcome" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 									<?
+									$usedArrayFill="" ;
 									try {
 										$dataBlocks=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
 										$sqlBlocks="SELECT ibPYPUnitWorkingBlock.*, scope, name, category FROM ibPYPUnitWorkingBlock JOIN gibbonOutcome ON (ibPYPUnitWorkingBlock.gibbonOutcomeID=gibbonOutcome.gibbonOutcomeID) WHERE ibPYPUnitWorkingID=:ibPYPUnitWorkingID AND active='Y' ORDER BY sequenceNumber" ;
@@ -309,7 +312,6 @@ else {
 										print "</div>" ;
 									}
 									else {
-										$usedArrayFill="" ;
 										$i=1 ;
 										while ($rowBlocks=$resultBlocks->fetch()) {
 											pypMakeBlock($guid, $i, "outcome", $rowBlocks["gibbonOutcomeID"],  $rowBlocks["name"],  $rowBlocks["category"], $rowBlocks["content"],"",TRUE, $allowOutcomeEditing) ;
@@ -325,7 +327,7 @@ else {
 											<tr>
 												<td style='width: 50%'>
 													<script type="text/javascript">
-														<? if (is_numeric($i)==FALSE) { $i=0 ; } ?>
+														<? if (isset($i)) { if (is_numeric($i)==FALSE) { $i=0 ; } } else { $i=0 ; } ?>
 														var outcomeCount=<? print $i ?> ;
 														/* Unit type control */
 														$(document).ready(function(){
@@ -512,6 +514,7 @@ else {
 							<td colspan=2> 
 								<div class="concept" id="concept" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 									<?
+									$usedArrayFill="" ;
 									try {
 										$dataBlocks=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
 										$sqlBlocks="SELECT ibPYPUnitWorkingBlock.*, type, title, category FROM ibPYPUnitWorkingBlock JOIN ibPYPGlossary ON (ibPYPUnitWorkingBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitWorkingID=:ibPYPUnitWorkingID AND type='Concept' ORDER BY sequenceNumber" ;
@@ -527,7 +530,6 @@ else {
 										print "</div>" ;
 									}
 									else {
-										$usedArrayFill="" ;
 										$i=1 ;
 										while ($rowBlocks=$resultBlocks->fetch()) {
 											pypMakeBlock($guid, $i, "concept", $rowBlocks["ibPYPGlossaryID"],  $rowBlocks["title"],  $rowBlocks["category"], $rowBlocks["content"]) ;
@@ -540,10 +542,10 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
-														<? if (is_numeric($i)==FALSE) { $i=0 ; } ?>
+														<? if (isset($i)) { if (is_numeric($i)==FALSE) { $i=0 ; } } else { $i=0 ; } ?>
 														var conceptCount=<? print $i ?> ;
 														/* Unit type control */
 														$(document).ready(function(){
@@ -553,7 +555,7 @@ else {
 														});
 													</script>
 													<select id='newConcept' onChange='conceptDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
-														<option value='0'>Chose a concept to add it to this unit</option>
+														<option value='0'>Choose a concept to add it to this unit</option>
 														<?
 														$currentCategory="" ;
 														$lastCategory="" ;
@@ -723,7 +725,7 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px;'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
 														var count=<? print ($resultBlocks->rowCount()+1) ?> ;
@@ -772,6 +774,7 @@ else {
 							<td colspan=2> 
 								<div class="skills" id="skills" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 									<?
+									$usedArrayFill="" ;
 									try {
 										$dataBlocks=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
 										$sqlBlocks="SELECT ibPYPUnitWorkingBlock.*, type, title, category FROM ibPYPUnitWorkingBlock JOIN ibPYPGlossary ON (ibPYPUnitWorkingBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitWorkingID=:ibPYPUnitWorkingID AND type='Transdisciplinary Skill' ORDER BY sequenceNumber" ;
@@ -787,7 +790,6 @@ else {
 										print "</div>" ;
 									}
 									else {
-										$usedArrayFill="" ;
 										$i=1 ;
 										while ($rowBlocks=$resultBlocks->fetch()) {
 											pypMakeBlock($guid, $i, "skills", $rowBlocks["ibPYPGlossaryID"],  $rowBlocks["title"],  $rowBlocks["category"], $rowBlocks["content"]) ;
@@ -800,10 +802,10 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
-														<? if (is_numeric($i)==FALSE) { $i=0 ; } ?>
+														<? if (isset($i)) { if (is_numeric($i)==FALSE) { $i=0 ; } } else { $i=0 ; } ?>
 														var skillsCount=<? print $i ?> ;
 														/* Unit type control */
 														$(document).ready(function(){
@@ -813,7 +815,7 @@ else {
 														});
 													</script>
 													<select id='newSkill' onChange='skillsDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
-														<option value='0'>Chose a skill to add it to this unit</option>
+														<option value='0'>Choose a skill to add it to this unit</option>
 														<?
 														$currentCategory="" ;
 														$lastCategory="" ;
@@ -896,6 +898,7 @@ else {
 							<td colspan=2> 
 								<div class="learnerProfile" id="learnerProfile" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 									<?
+									$usedArrayFill="" ;
 									try {
 										$dataBlocks=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
 										$sqlBlocks="SELECT ibPYPUnitWorkingBlock.*, type, title, category FROM ibPYPUnitWorkingBlock JOIN ibPYPGlossary ON (ibPYPUnitWorkingBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitWorkingID=:ibPYPUnitWorkingID AND (type='Attitude' OR type='Learner Profile') ORDER BY sequenceNumber" ;
@@ -911,7 +914,6 @@ else {
 										print "</div>" ;
 									}
 									else {
-										$usedArrayFill="" ;
 										$i=1 ;
 										while ($rowBlocks=$resultBlocks->fetch()) {
 											pypMakeBlock($guid, $i, "learnerProfile", $rowBlocks["ibPYPGlossaryID"],  $rowBlocks["title"],  $rowBlocks["category"], $rowBlocks["content"]) ;
@@ -924,10 +926,10 @@ else {
 								<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 									<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
 										<table cellspacing='0' style='width: 100%'>
-											<tr>
+											<tr style='height: 60px'>
 												<td style='width: 50%'>
 													<script type="text/javascript">
-														<? if (is_numeric($i)==FALSE) { $i=0 ; } ?>
+														<? if (isset($i)) { if (is_numeric($i)==FALSE) { $i=0 ; } } else { $i=0 ; } ?>
 														var learnerProfileCount=<? print $i ?> ;
 														/* Unit type control */
 														$(document).ready(function(){
@@ -937,7 +939,7 @@ else {
 														});
 													</script>
 													<select id='newLearnerProfile' onChange='learnerProfileDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
-														<option value='0'>Chose a learner profile or attitude to add it to this unit</option>
+														<option value='0'>Choose a learner profile or attitude to add it to this unit</option>
 														<?
 														$currentType="" ;
 														$lastType="" ;

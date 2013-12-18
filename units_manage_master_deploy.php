@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-session_start() ;
+@session_start() ;
 $_SESSION[$guid]["ibPYPUnitsTab"]=1 ;
 
 //Module includes
@@ -35,7 +35,7 @@ else {
 	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/units_manage.php&gibbonSchoolYearID=" . $_GET["gibbonSchoolYearID"] . "'>Manage Units</a> > </div><div class='trailEnd'>Deploy Working Copy</div>" ;
 	print "</div>" ;
 	
-	$deployReturn = $_GET["deployReturn"] ;
+	if (isset($_GET["deployReturn"])) { $deployReturn=$_GET["deployReturn"] ; } else { $deployReturn="" ; }
 	$deployReturnMessage ="" ;
 	$class="error" ;
 	if (!($deployReturn=="")) {
@@ -160,9 +160,9 @@ else {
 									<span style="font-size: 90%"><i>When will this class start this unit?<br/>dd/mm/yyyy</i></span>
 								</td>
 								<td class="right">
-									<input name="dateStart" id="dateStart" maxlength=10 value="<? print dateConvertBack($row["dateStart"]) ?>" type="text" style="width: 300px">
+									<input name="dateStart" id="dateStart" maxlength=10 value="" type="text" style="width: 300px">
 									<script type="text/javascript">
-										var dateStart = new LiveValidation('dateStart');
+										var dateStart=new LiveValidation('dateStart');
 										dateStart.add( Validate.Format, {pattern: /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/i, failureMessage: "Use dd/mm/yyyy." } ); 
 									 </script>
 									 <script type="text/javascript">

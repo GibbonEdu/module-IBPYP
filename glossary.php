@@ -17,13 +17,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-session_start() ;
+@session_start() ;
 
 //Module includes
 include "./modules/IB PYP/moduleFunctions.php" ;
 
 if (isActionAccessible($guid, $connection2, "/modules/IB PYP/glossary.php")==FALSE) {
-
 	//Acess denied
 	print "<div class='error'>" ;
 		print "You do not have access to this action." ;
@@ -34,7 +33,7 @@ else {
 	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > </div><div class='trailEnd'>Essential Elements</div>" ;
 	print "</div>" ;
 	
-	$deleteReturn = $_GET["deleteReturn"] ;
+	if (isset($_GET["deleteReturn"])) { $deleteReturn=$_GET["deleteReturn"] ; } else { $deleteReturn="" ; }
 	$deleteReturnMessage ="" ;
 	$class="error" ;
 	if (!($deleteReturn=="")) {
@@ -47,6 +46,8 @@ else {
 		print "</div>" ;
 	} 
 	
+	$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
+	
 	print "<p>" ;
 		if ($role=="Coordinator") {
 			print "Essential Elements allows users to view and edit the school's stock of concepts, transdisciplinary skills, learner profiles and attitudes." ;
@@ -55,8 +56,6 @@ else {
 			print "Essential Elements allows users to view the school's stock of concepts, transdisciplinary skills, learner profiles and attitudes." ;
 		}
 	print "</p>" ;
-	
-	$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
 	
 	if ($role!="") {
 		try {
@@ -109,10 +108,6 @@ else {
 					}
 					$count++ ;
 					
-					if ($row["active"]=="N") {
-						$rowNum="error" ;
-					}
-	
 					//COLOR ROW BY STATUS!
 					print "<tr class=$rowNum>" ;
 						print "<td>" ;

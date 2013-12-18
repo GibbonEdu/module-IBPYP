@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-session_start() ;
+@session_start() ;
 
 //Module includes
 include "./modules/IB PYP/moduleFunctions.php" ;
@@ -36,7 +36,7 @@ else {
 		print "Master Units holds the school stock of teaching units: these can be deployed to a particular group to create a Working Unit. Units exist in a particular school year, and are tied to a specific course." ;
 	print "</p>" ;
 	
-	$deleteReturn = $_GET["deleteReturn"] ;
+	if (isset($_GET["deleteReturn"])) { $deleteReturn=$_GET["deleteReturn"] ; } else { $deleteReturn="" ; }
 	$deleteReturnMessage ="" ;
 	$class="error" ;
 	if (!($deleteReturn=="")) {
@@ -52,7 +52,7 @@ else {
 		print "</div>" ;
 	}
 	
-	$copyReturn = $_GET["copyReturn"] ;
+	if (isset($_GET["copyReturn"])) { $copyReturn=$_GET["copyReturn"] ; } else { $copyReturn="" ; }
 	$copyReturnMessage ="" ;
 	$class="error" ;
 	if (!($copyReturn=="")) {
@@ -65,7 +65,7 @@ else {
 		print "</div>" ;
 	} 
 	
-	$deployReturn = $_GET["deployReturn"] ;
+	if (isset($_GET["deployReturn"])) { $deployReturn=$_GET["deployReturn"] ; } else { $deployReturn="" ; }
 	$deployReturnMessage ="" ;
 	$class="error" ;
 	if (!($deployReturn=="")) {
@@ -78,12 +78,15 @@ else {
 		print "</div>" ;
 	} 
 	
-	$gibbonSchoolYearID=$_GET["gibbonSchoolYearID"] ;
+	$gibbonSchoolYearID=NULL ;
+	if (isset($_GET["gibbonSchoolYearID"])) {
+		$gibbonSchoolYearID=$_GET["gibbonSchoolYearID"] ;
+	}
 	if ($gibbonSchoolYearID=="") {
 		$gibbonSchoolYearID=$_SESSION[$guid]["gibbonSchoolYearID"] ;
 		$gibbonSchoolYearName=$_SESSION[$guid]["gibbonSchoolYearName"] ;
 	}
-	if ($_GET["gibbonSchoolYearID"]!="") {
+	if (isset($_GET["gibbonSchoolYearID"])) {
 		try {
 			$data=array("gibbonSchoolYearID"=>$_GET["gibbonSchoolYearID"]); 
 			$sql="SELECT * FROM gibbonSchoolYear WHERE gibbonSchoolYearID=:gibbonSchoolYearID" ;
@@ -129,14 +132,17 @@ else {
 		print "</div>" ;
 	
 		//Set pagination variable
-		$page=$_GET["page"] ;
+		$page=NULL ;
+		if (isset($_GET["page"])) {
+			$page=$_GET["page"] ;
+		}
 		if ((!is_numeric($page)) OR $page<1) {
 			$page=1 ;
 		}
 	
 		$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
 	
-		if ($_GET["tab"]!="") {
+		if (isset($_GET["tab"])) {
 			$_SESSION[$guid]["ibPYPUnitsTab"]=$_GET["tab"] ;
 		}
 		if ($_SESSION[$guid]["ibPYPUnitsTab"]=="" OR !(is_numeric($_SESSION[$guid]["ibPYPUnitsTab"]))) {
@@ -170,7 +176,10 @@ else {
 					print "Filter" ;
 					print "</h3>" ;
 		
-					$search=$_GET["search"] ;
+					$search=NULL ;
+					if (isset($_GET["search"])) {
+						$search=$_GET["search"] ;
+					}
 	
 					?>
 					<form method="get" action="<? print $_SESSION[$guid]["absoluteURL"]?>/index.php">
@@ -257,10 +266,6 @@ else {
 									$rowNum="odd" ;
 								}
 								$count++ ;
-							
-								if ($row["active"]=="N") {
-									$rowNum="error" ;
-								}
 			
 								//COLOR ROW BY STATUS!
 								print "<tr class=$rowNum>" ;
@@ -288,7 +293,10 @@ else {
 						print "Filter" ;
 						print "</h3>" ;
 	
-						$search=$_GET["search"] ;
+						$search=NULL ;
+						if (isset($_GET["search"])) {
+							$search=$_GET["search"] ;
+						}
 
 						?>
 						<form method="get" action="<? print $_SESSION[$guid]["absoluteURL"]?>/index.php">
