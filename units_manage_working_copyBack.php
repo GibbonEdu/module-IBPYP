@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -112,7 +112,7 @@ else {
 				print "</p>" ;
 				
 				?>
-				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_working_copyBackProcess.php?ibPYPUnitWorkingID=$ibPYPUnitWorkingID&gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
+				<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_working_copyBackProcess.php?ibPYPUnitWorkingID=$ibPYPUnitWorkingID&gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
 					<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 						<tr>
 							<td> 
@@ -125,8 +125,8 @@ else {
 						</tr>
 						<tr>
 							<td>
-								<input name="ibPYPUnitWorkingID" id="ibPYPUnitWorkingID" value="<? print $ibPYPUnitWorkingID ?>" type="hidden">
-								<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+								<input name="ibPYPUnitWorkingID" id="ibPYPUnitWorkingID" value="<?php print $ibPYPUnitWorkingID ?>" type="hidden">
+								<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 								<input type="submit" value="Yes">
 							</td>
 							<td class="right">
@@ -135,7 +135,7 @@ else {
 						</tr>
 					</table>
 				</form>
-				<?
+				<?php
 			}
 		}	
 	}

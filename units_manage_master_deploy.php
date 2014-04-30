@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -107,7 +107,7 @@ else {
 				else {
 					$rowSchoolYear=$resultSchoolYear->fetch() ;
 					?>
-					<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_master_deployProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID" ?>">
+					<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_master_deployProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID" ?>">
 						<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 							<tr>
 								<td> 
@@ -115,7 +115,7 @@ else {
 									<span style="font-size: 90%"><i>This value cannot be changed</i></span>
 								</td>
 								<td class="right">
-									<input readonly name="name" id="name" value="<? print $row["name"] ?>" type="text" style="width: 300px">
+									<input readonly name="name" id="name" value="<?php print $row["name"] ?>" type="text" style="width: 300px">
 								</td>
 							</tr>
 							<tr>
@@ -124,7 +124,7 @@ else {
 									<span style="font-size: 90%"><i>This value cannot be changed</i></span>
 								</td>
 								<td class="right">
-									<?
+									<?php
 									print "<input readonly name='schoolYear' id='schoolYear' value='" . $rowSchoolYear["name"] . "' type='text' style='width: 300px'>" ;
 									?>
 								</td>
@@ -135,9 +135,9 @@ else {
 									<span style="font-size: 90%"><i>Use Control and/or Shift to select multiple.</i></span>
 								</td>
 								<td class="right">
-									<input type='hidden' name='gibbonCourseID' value='<? print $row["gibbonCourseID"] ?>'>
+									<input type='hidden' name='gibbonCourseID' value='<?php print $row["gibbonCourseID"] ?>'>
 									<select name="classes[]" id="classes" multiple style="width: 302px; height: 150px">
-										<?
+										<?php
 										try {
 											$dataSelect=array("gibbonSchoolYearID"=>$gibbonSchoolYearID, "gibbonCourseID"=>$row["gibbonCourseID"]);  
 											$sqlSelect="SELECT gibbonCourse.gibbonCourseID, gibbonCourseClassID, gibbonCourse.name, gibbonCourse.nameShort AS course, gibbonCourseClass.nameShort AS class FROM gibbonCourse JOIN gibbonCourseClass ON (gibbonCourse.gibbonCourseID=gibbonCourseClass.gibbonCourseID) WHERE gibbonSchoolYearID=:gibbonSchoolYearID AND gibbonCourse.gibbonCourseID=:gibbonCourseID ORDER BY course, class" ;
@@ -177,13 +177,13 @@ else {
 									<b>Rubric</b><br/>
 								</td>
 								<td class="right">
-									<?
+									<?php
 									$defaultRubric=getSettingByScope( $connection2, "IB PYP", "defaultRubric" ) ;
 									?>
 									<select name="gibbonRubricID" id="gibbonRubricID" style="width: 302px">
 										<option><option>
 										<optgroup label='--School Rubrics --'>
-										<?
+										<?php
 										try {
 											$dataSelect=array(); 
 											$sqlSelectWhere="" ;
@@ -214,7 +214,7 @@ else {
 										if ($row["gibbonDepartmentID"]!="") {
 											?>
 											<optgroup label='--Learning Area Rubrics --'>
-											<?
+											<?php
 											try {
 												$dataSelect=array("gibbonDepartmentID"=>$row["gibbonDepartmentID"]); 
 												$sqlSelectWhere="" ;
@@ -247,7 +247,7 @@ else {
 									</select>
 								</td>
 							</tr>
-							<?
+							<?php
 							print "<tr>" ;
 								print "<td class='right' colspan=2>" ;
 									print "<input type='hidden' name='ibPYPUnitMasterID' value='$ibPYPUnitMasterID'>" ;

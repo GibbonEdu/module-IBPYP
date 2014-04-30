@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -151,7 +151,7 @@ else {
 		?><script type='text/javascript'>
 			$(function() {
 				$( "#tabs" ).tabs({
-					active: <? print $_SESSION[$guid]["ibPYPUnitsTab"] ?>, 
+					active: <?php print $_SESSION[$guid]["ibPYPUnitsTab"] ?>, 
 					ajaxOptions: {
 						error: function( xhr, status, index, anchor ) {
 							$( anchor.hash ).html(
@@ -160,7 +160,7 @@ else {
 					}
 				});
 			});
-		</script><?
+		</script><?php
 	
 		if ($role!="") {
 			print "<div id='tabs' style='margin: 20px 0'>" ;
@@ -182,7 +182,7 @@ else {
 					}
 	
 					?>
-					<form method="get" action="<? print $_SESSION[$guid]["absoluteURL"]?>/index.php">
+					<form method="get" action="<?php print $_SESSION[$guid]["absoluteURL"]?>/index.php">
 						<table class='noIntBorder' cellspacing='0' style="width: 100%">	
 							<tr><td style="width: 30%"></td><td></td></tr>
 							<tr>
@@ -191,15 +191,15 @@ else {
 									<span style="font-size: 90%"><i>Unit name, course name</i></span>
 								</td>
 								<td class="right">
-									<input name="search" id="search" maxlength=20 value="<? print $search ?>" type="text" style="width: 300px">
+									<input name="search" id="search" maxlength=20 value="<?php print $search ?>" type="text" style="width: 300px">
 								</td>
 							</tr>
 							<tr>
 								<td colspan=2 class="right">
-									<input type="hidden" name="q" value="/modules/<? print $_SESSION[$guid]["module"] ?>/units_manage.php">
-									<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+									<input type="hidden" name="q" value="/modules/<?php print $_SESSION[$guid]["module"] ?>/units_manage.php">
+									<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 									<input type="hidden" name="tab" value="0">
-									<?
+									<?php
 									print "<a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage.php&tab=0'>Clear Filters</a>" ;
 									?>
 									<input type="submit" value="Submit">
@@ -207,7 +207,7 @@ else {
 							</tr>
 						</table>
 					</form>
-					<?
+					<?php
 					
 					print "<h3>" ;
 					print "Units" ;
@@ -299,7 +299,7 @@ else {
 						}
 
 						?>
-						<form method="get" action="<? print $_SESSION[$guid]["absoluteURL"]?>/index.php">
+						<form method="get" action="<?php print $_SESSION[$guid]["absoluteURL"]?>/index.php">
 							<table class='noIntBorder' cellspacing='0' style="width: 100%">	
 								<tr><td style="width: 30%"></td><td></td></tr>
 								<tr>
@@ -308,15 +308,15 @@ else {
 										<span style="font-size: 90%"><i>Unit name, course name</i></span>
 									</td>
 									<td class="right">
-										<input name="search" id="search" maxlength=20 value="<? print $search ?>" type="text" style="width: 300px">
+										<input name="search" id="search" maxlength=20 value="<?php print $search ?>" type="text" style="width: 300px">
 									</td>
 								</tr>
 								<tr>
 									<td colspan=2 class="right">
-										<input type="hidden" name="q" value="/modules/<? print $_SESSION[$guid]["module"] ?>/units_manage.php">
-										<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+										<input type="hidden" name="q" value="/modules/<?php print $_SESSION[$guid]["module"] ?>/units_manage.php">
+										<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 										<input type="hidden" name="tab" value="1">
-										<?
+										<?php
 										print "<a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage.php&tab=1'>Clear Filters</a>" ;
 										?>
 										<input type="submit" value="Submit">
@@ -324,7 +324,7 @@ else {
 								</tr>
 							</table>
 						</form>
-						<?
+						<?php
 				
 						print "<h3>" ;
 						print "Units" ;

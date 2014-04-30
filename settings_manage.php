@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -57,7 +57,7 @@ else {
 	} 
 	?>
 	
-	<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/" . $_SESSION[$guid]["module"] . "/settings_manageProcess.php" ?>">
+	<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/" . $_SESSION[$guid]["module"] . "/settings_manageProcess.php" ?>">
 		<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 			<tr class='break'>
 				<td colspan=2> 
@@ -65,7 +65,7 @@ else {
 				</td>
 			</tr>
 			<tr>
-				<?
+				<?php
 				try {
 					$data=array(); 
 					$sql="SELECT * FROM gibbonSetting WHERE scope='IB PYP' AND name='defaultRubric'" ;
@@ -78,13 +78,13 @@ else {
 				$row=$result->fetch() ;
 				?>
 				<td> 
-					<b><? print $row["nameDisplay"] ?></b><br/>
-					<span style="font-size: 90%"><i><? print $row["description"] ?></i></span>
+					<b><?php print $row["nameDisplay"] ?></b><br/>
+					<span style="font-size: 90%"><i><?php print $row["description"] ?></i></span>
 				</td>
 				<td class="right">
-					<select name="<? print $row["name"] ?>" id="<? print $row["name"] ?>" style="width: 302px">
+					<select name="<?php print $row["name"] ?>" id="<?php print $row["name"] ?>" style="width: 302px">
 						<option><option>
-						<?
+						<?php
 						try {
 							$dataSelect=array(); 
 							$sqlSelect="SELECT * FROM gibbonRubric WHERE active='Y' AND scope='School' ORDER BY category, name" ;
@@ -108,12 +108,12 @@ else {
 					<span style="font-size: 90%"><i>* denotes a required field</i></span>
 				</td>
 				<td class="right">
-					<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+					<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 					<input type="submit" value="Submit">
 				</td>
 			</tr>
 		</table>
 	</form>
-<?
+<?php
 }
 ?>

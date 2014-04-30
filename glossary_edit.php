@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -101,7 +101,7 @@ else {
 				//Let's go!
 				$row=$result->fetch() ;
 				?>
-				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/glossary_editProcess.php?ibPYPGlossaryID=$ibPYPGlossaryID" ?>">
+				<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/glossary_editProcess.php?ibPYPGlossaryID=$ibPYPGlossaryID" ?>">
 					<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 						<tr>
 							<td> 
@@ -111,10 +111,10 @@ else {
 							<td class="right">
 								<select name="type" id="type" style="width: 302px">
 									<option value="Please select...">Please select...</option>
-									<option <? if ($row["type"]=="Attitude") { print "selected " ;} ?>value="Attitude">Attitude</option>
-									<option <? if ($row["type"]=="Concept") { print "selected " ;} ?>value="Concept">Concept</option>
-									<option <? if ($row["type"]=="Learner Profile") { print "selected " ;} ?>value="Learner Profile">Learner Profile</option>
-									<option <? if ($row["type"]=="Transdisciplinary Skill") { print "selected " ;} ?>value="Transdisciplinary Skill">Transdisciplinary Skill</option>
+									<option <?php if ($row["type"]=="Attitude") { print "selected " ;} ?>value="Attitude">Attitude</option>
+									<option <?php if ($row["type"]=="Concept") { print "selected " ;} ?>value="Concept">Concept</option>
+									<option <?php if ($row["type"]=="Learner Profile") { print "selected " ;} ?>value="Learner Profile">Learner Profile</option>
+									<option <?php if ($row["type"]=="Transdisciplinary Skill") { print "selected " ;} ?>value="Transdisciplinary Skill">Transdisciplinary Skill</option>
 								</select>
 								<script type="text/javascript">
 									var type=new LiveValidation('type');
@@ -127,7 +127,7 @@ else {
 								<b>Title *</b><br/>
 							</td>
 							<td class="right">
-								<input name="title" id="title" maxlength=100 value="<? print htmlPrep($row["title"]) ?>" type="text" style="width: 300px">
+								<input name="title" id="title" maxlength=100 value="<?php print htmlPrep($row["title"]) ?>" type="text" style="width: 300px">
 								<script type="text/javascript">
 									var title=new LiveValidation('title');
 									title.add(Validate.Presence);
@@ -139,11 +139,11 @@ else {
 								<b>Category</b><br/>
 							</td>
 							<td class="right">
-								<input name="category" id="category" maxlength=100 value="<? print htmlPrep($row["category"]) ?>" type="text" style="width: 300px">
+								<input name="category" id="category" maxlength=100 value="<?php print htmlPrep($row["category"]) ?>" type="text" style="width: 300px">
 								<script type="text/javascript">
 									$(function() {
 										var availableTags=[
-											<?
+											<?php
 											try {
 												$dataAuto=array();  
 												$sqlAuto="SELECT DISTINCT category FROM ibPYPGlossary ORDER BY category" ;
@@ -167,7 +167,7 @@ else {
 								<b>Content</b><br/>
 							</td>
 							<td class="right">
-								<textarea name='content' id='contentText' rows=5 style='width: 300px'><? print htmlPrep($row["content"]) ?></textarea>
+								<textarea name='content' id='contentText' rows=5 style='width: 300px'><?php print htmlPrep($row["content"]) ?></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -175,13 +175,13 @@ else {
 								<span style="font-size: 90%"><i>* denotes a required field</i></span>
 							</td>
 							<td class="right">
-								<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+								<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 								<input type="submit" value="Submit">
 							</td>
 						</tr>
 					</table>
 				</form>
-				<?
+				<?php
 			}
 		}
 	}

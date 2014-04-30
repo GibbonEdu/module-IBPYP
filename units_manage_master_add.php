@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -83,9 +83,9 @@ else {
 			
 			if ($step==1) {
 				?>
-				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage_master_add.php&gibbonSchoolYearID=$gibbonSchoolYearID&step=2" ?>">
+				<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . $_SESSION[$guid]["module"] . "/units_manage_master_add.php&gibbonSchoolYearID=$gibbonSchoolYearID&step=2" ?>">
 					<table class='smallIntBorder' cellspacing='0' style="width: 100%;">	
-						<? $bg="#fff" ; ?>
+						<?php $bg="#fff" ; ?>
 						<tr class='break'>
 							<td colspan=2> 
 								<h3 class='top'>Step 1 - Basics</h3><br/>
@@ -123,7 +123,7 @@ else {
 							<td class="right">
 								<select name="gibbonCourseID" id="gibbonCourseID" style="width: 302px">
 									<option value="Please select...">Please select...</option>
-									<?
+									<?php
 									try {
 										$dataSelect=array("gibbonSchoolYearID"=>$gibbonSchoolYearID); 
 										$sqlSelect="SELECT * FROM gibbonCourse WHERE gibbonSchoolYearID=:gibbonSchoolYearID ORDER BY nameShort" ;
@@ -155,17 +155,17 @@ else {
 									});
 								</script>
 								<input name="blockCount" id=blockCount value="5" type="hidden">
-								<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+								<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 								<input type="submit" value="Submit">
 							</td>
 						</tr>
 					</table>
 				</form>		
-			<?
+			<?php
 			}
 			else {
 				?>
-				<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/" . $_SESSION[$guid]["module"] . "/units_manage_master_addProcess.php?gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
+				<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/" . $_SESSION[$guid]["module"] . "/units_manage_master_addProcess.php?gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
 					<table class='smallIntBorder' cellspacing='0' style="width: 100%;">	
 						<tr class='break'>
 							<td colspan=3> 
@@ -173,34 +173,34 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td> 
 								<b>Unit Name *</b><br/>
 								<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 							</td>
 							<td class="right">
-								<input readonly name="unitname" id="unitname" maxlength=50 value="<? print $_POST["unitname"] ?>" type="text" style="width: 300px">
+								<input readonly name="unitname" id="unitname" maxlength=50 value="<?php print $_POST["unitname"] ?>" type="text" style="width: 300px">
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td> 
 								<b>Active *</b><br/>
 								<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 							</td>
 							<td class="right">
-								<input readonly name="active" id="active" maxlength=50 value="<? print $_POST["active"] ?>" type="text" style="width: 300px">
+								<input readonly name="active" id="active" maxlength=50 value="<?php print $_POST["active"] ?>" type="text" style="width: 300px">
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td> 
 								<b>Course *</b><br/>
 								<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 							</td>
 							<td class="right">
-								<input name="gibbonCourseID" id="gibbonCourseID" value="<? print $_POST["gibbonCourseID"] ?>" type="hidden" style="width: 300px">
-								<?
+								<input name="gibbonCourseID" id="gibbonCourseID" value="<?php print $_POST["gibbonCourseID"] ?>" type="hidden" style="width: 300px">
+								<?php
 								try {
 									$dataSelect=array("gibbonCourseID"=>$_POST["gibbonCourseID"]); 
 									$sqlSelect="SELECT * FROM gibbonCourse WHERE gibbonCourseID=:gibbonCourseID" ;
@@ -218,7 +218,7 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='padding-top: 20px; background: none; background-color: <? print $bg ?>'></td> 
+							<td style='padding-top: 20px; background: none; background-color: <?php print $bg ?>'></td> 
 							<td style='padding-top: 20px'> 
 								<b>Section Menu</b><br/>
 								<a href='#1'>1. What is our purpose?</a><br/>
@@ -231,60 +231,60 @@ else {
 							</td>
 						</tr>
 				
-						<? $bg="#EDC951" ; ?>
+						<?php $bg="#EDC951" ; ?>
 						<tr class='break'>
-							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td style='background: none!important; background-color: <?php print $bg ?>!important'></td> 
 							<td colspan=2> 
 								<a id='1'>
 								<h3>1. What Is Our Purpose?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Transdisciplinary Theme</div> 
-								<? print getEditor($guid,  $connection2, "theme", "", 30 ) ?>
+								<?php print getEditor($guid,  $connection2, "theme", "", 30 ) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Central Idea</div> 
-								<? print getEditor($guid,  $connection2, "centralIdea", "", 30 ) ?>
+								<?php print getEditor($guid,  $connection2, "centralIdea", "", 30 ) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px;font-weight: bold; text-decoration: underline; font-size: 130%'>Outcomes</div> 
 								<p>What would you like students to accomplish in this unit? These outcomes are drawn from the system-wide collection stored in the Planner module.</p>
 							</td>
 						</tr>
 				
-						<? 
+						<?php 
 						$type="outcome" ;
 						$allowOutcomeEditing=getSettingByScope($connection2, "Planner", "allowOutcomeEditing") ; 
 						$categories=array() ;
 						$categoryCount=0 ;
 						?> 
 						<style>
-							#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-							#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+							#<?php print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+							#<?php print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 							div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
-							html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
-							.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
-							.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
+							html>body #<?php print $type ?> li { min-height: 72px; line-height: 1.2em; }
+							.<?php print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
+							.<?php print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 						</style>
 						<script>
 							$(function() {
-								$( "#<? print $type ?>" ).sortable({
-									placeholder: "<? print $type ?>-ui-state-highlight";
+								$( "#<?php print $type ?>" ).sortable({
+									placeholder: "<?php print $type ?>-ui-state-highlight";
 									axis: 'y'
 								});
 							});
 						</script>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div class="outcome" id="outcome" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<div id="outcomeOuter0">
@@ -307,7 +307,7 @@ else {
 													</script>
 													<select id='newOutcome' onChange='outcomeDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; margin-bottom: 3px; width: 350px'>
 														<option class='all' value='0'>Choose an outcome to add it to this unit</option>
-														<?
+														<?php
 														$currentCategory="" ;
 														$lastCategory="" ;
 														$switchContents="" ;
@@ -391,12 +391,12 @@ else {
 												
 														?>
 													</select><br/>
-													<?
+													<?php
 													if (count($categories)>0) {
 														?>
 														<select id='outcomeFilter' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
 															<option value='all'>View All</option>
-															<?
+															<?php
 															$categories=array_unique($categories) ;
 															$categories=msort($categories) ;
 															foreach ($categories AS $category) {
@@ -407,20 +407,20 @@ else {
 														<script type="text/javascript">
 															$("#newOutcome").chainedTo("#outcomeFilter");
 														</script>
-														<?
+														<?php
 													}
 													?>
 													<script type='text/javascript'>
-														var <? print $type ?>Used=new Array();
-														var <? print $type ?>UsedCount=0 ;
+														var <?php print $type ?>Used=new Array();
+														var <?php print $type ?>UsedCount=0 ;
 													
 														function outcomeDisplayElements(number) {
-															$("#<? print $type ?>Outer0").css("display", "none") ;
-															if (<? print $type ?>Used.indexOf(number)<0) {
-																<? print $type ?>Used[<? print $type ?>UsedCount]=number ;
-																<? print $type ?>UsedCount++ ;
+															$("#<?php print $type ?>Outer0").css("display", "none") ;
+															if (<?php print $type ?>Used.indexOf(number)<0) {
+																<?php print $type ?>Used[<?php print $type ?>UsedCount]=number ;
+																<?php print $type ?>UsedCount++ ;
 																switch(number) {
-																	<? print $switchContents ?>
+																	<?php print $switchContents ?>
 																}
 															}
 															else {
@@ -437,49 +437,49 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Summative Assessment</div>
 								<p>What are the possible ways of assessing students’ understanding of the central idea? What evidence, including student initiated actions will we look for?</p>
-								<? print getEditor($guid,  $connection2, "summativeAssessment", "", 30, TRUE ) ?>
+								<?php print getEditor($guid,  $connection2, "summativeAssessment", "", 30, TRUE ) ?>
 							</td>
 						</tr>
 				
-						<? $bg="#6A4A3C" ; ?>
+						<?php $bg="#6A4A3C" ; ?>
 						<tr class='break'>
-							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td style='background: none!important; background-color: <?php print $bg ?>!important'></td> 
 							<td colspan=2> 
 								<a id='2'>
 								<h3>2. What Do We Want To Learn?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Key Concepts</div> 
 								<p>What are the key concepts to be emphasized within this inquiry?</p>
 							</td>
 						</tr>
 				
-						<? $type="concept" ; ?> 
+						<?php $type="concept" ; ?> 
 						<style>
-							#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-							#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+							#<?php print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+							#<?php print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 							div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
-							html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
-							.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
-							.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
+							html>body #<?php print $type ?> li { min-height: 72px; line-height: 1.2em; }
+							.<?php print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
+							.<?php print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 						</style>
 						<script>
 							$(function() {
-								$( "#<? print $type ?>" ).sortable({
-									placeholder: "<? print $type ?>-ui-state-highlight";
+								$( "#<?php print $type ?>" ).sortable({
+									placeholder: "<?php print $type ?>-ui-state-highlight";
 									axis: 'y'
 								});
 							});
 						</script>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div class="concept" id="concept" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<div id="conceptOuter0">
@@ -502,7 +502,7 @@ else {
 													</script>
 													<select id='newConcept' onChange='conceptDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
 														<option value='0'>Choose a concept to add it to this unit</option>
-														<?
+														<?php
 														$currentCategory="" ;
 														$lastCategory="" ;
 														$switchContents="" ;
@@ -533,16 +533,16 @@ else {
 														?>
 													</select>
 													<script type='text/javascript'>
-														var <? print $type ?>Used=new Array();
-														var <? print $type ?>UsedCount=0 ;
+														var <?php print $type ?>Used=new Array();
+														var <?php print $type ?>UsedCount=0 ;
 													
 														function conceptDisplayElements(number) {
-															$("#<? print $type ?>Outer0").css("display", "none") ;
-															if (<? print $type ?>Used.indexOf(number)<0) {
-																<? print $type ?>Used[<? print $type ?>UsedCount]=number ;
-																<? print $type ?>UsedCount++ ;
+															$("#<?php print $type ?>Outer0").css("display", "none") ;
+															if (<?php print $type ?>Used.indexOf(number)<0) {
+																<?php print $type ?>Used[<?php print $type ?>UsedCount]=number ;
+																<?php print $type ?>UsedCount++ ;
 																switch(number) {
-																	<? print $switchContents ?>
+																	<?php print $switchContents ?>
 																}
 															}
 															else {
@@ -560,80 +560,80 @@ else {
 						</tr>
 					
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Related Concepts</div> 
 								<p>What are the concepts that are related to this inquiry?</p>
-								<? print getEditor($guid,  $connection2, "relatedConcepts", "<ul><li></li><li></li><li></li></ul>", 10 ) ?>
+								<?php print getEditor($guid,  $connection2, "relatedConcepts", "<ul><li></li><li></li><li></li></ul>", 10 ) ?>
 							</td>
 						</tr>
 						
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Lines of Inquiry</div> 
 								<p>What lines of inquiry will define the scope of the inquiry into the central idea?</p>
-								<? print getEditor($guid,  $connection2, "linesOfInquiry", "<ul><li></li><li></li><li></li></ul>", 10 ) ?>
+								<?php print getEditor($guid,  $connection2, "linesOfInquiry", "<ul><li></li><li></li><li></li></ul>", 10 ) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Teacher Questions<br/></div>
 								<p>What teacher questions will drive these inquiries?<br/><br/></p>
-								<? print getEditor($guid,  $connection2, "teacherQuestions", "<ol><li></li><li></li><li></li></ol>", 10 ) ?>
+								<?php print getEditor($guid,  $connection2, "teacherQuestions", "<ol><li></li><li></li><li></li></ol>", 10 ) ?>
 							</td>
 						</tr>
 					
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Provocation</div> 
-								<? print getEditor($guid,  $connection2, "provocation", "", 30, true, false, false, true, "purpose=Provocation", true ) ?>
+								<?php print getEditor($guid,  $connection2, "provocation", "", 30, true, false, false, true, "purpose=Provocation", true ) ?>
 							</td>
 						</tr>
 				
-						<? $bg="#00A0B0" ; ?>
+						<?php $bg="#00A0B0" ; ?>
 						<tr class='break'>
-							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td style='background: none!important; background-color: <?php print $bg ?>!important'></td> 
 							<td colspan=2> 
 								<a id='3'>
 								<h3>3. How Might We Know What We Have Learned?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Assessing Prior Knowledge & Skills</div> 
 								<p>What are the possible ways of assessing students’ prior knowledge and skills? What evidence will we look for? </p>
-								<? print getEditor($guid,  $connection2, "preAssessment", "", 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
+								<?php print getEditor($guid,  $connection2, "preAssessment", "", 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Formative Assessment</div> 
 								<p>What are the possible ways of assessing student learning in the context of the lines of inquiry? What evidence will we look for?</p>
-								<? print getEditor($guid,  $connection2, "formativeAssessment", "", 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
+								<?php print getEditor($guid,  $connection2, "formativeAssessment", "", 30, true, false, false, true, "purpose=Assessment%20Aid", true ) ?>
 							</td>
 						</tr>
 				
-						<? $bg="#C44D58" ; ?>
+						<?php $bg="#C44D58" ; ?>
 						<tr class='break'>
-							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td style='background: none!important; background-color: <?php print $bg ?>!important'></td> 
 							<td colspan=2> 
 								<a id='4'>
 								<h3>4. How Best Might We Learn?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Learning Experiences</div> 
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<p style='color: black'>Smart content blocks are Gibbon's way of helping you organise and manage the content in your units. <b>These blocks are shared across the master unit, and all of it's working units: so, changes here are collaborative, and will impact other version of this unit.</p>
 								
@@ -654,7 +654,7 @@ else {
 								</script>
 					
 								<div class="sortable" id="sortable" style='width: 100%; padding: 5px 0px 0px 0px; border-top: 1px solid #333; border-bottom: 1px solid #333'>
-									<? 
+									<?php 
 									for ($i=1; $i<=5; $i++) {
 										makeBlock($guid, $connection2, $i) ;
 									}
@@ -671,8 +671,8 @@ else {
 														/* Unit type control */
 														$(document).ready(function(){
 															$("#new").click(function(){
-																$("#sortable").append('<div id=\'blockOuter' + count + '\'><img style=\'margin: 10px 0 5px 0\' src=\'<? print $_SESSION[$guid]["absoluteURL"] ?>/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');
-																$("#blockOuter" + count).load("<? print $_SESSION[$guid]["absoluteURL"] ?>/modules/Planner/units_add_blockAjax.php","id=" + count) ;
+																$("#sortable").append('<div id=\'blockOuter' + count + '\'><img style=\'margin: 10px 0 5px 0\' src=\'<?php print $_SESSION[$guid]["absoluteURL"] ?>/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');
+																$("#blockOuter" + count).load("<?php print $_SESSION[$guid]["absoluteURL"] ?>/modules/Planner/units_add_blockAjax.php","id=" + count) ;
 																count++ ;
 															 });
 														});
@@ -686,27 +686,27 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Transdisciplinary Skills</div> 
 								<p>What opportunities will occur for transdisciplinary skills?</p>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
-							<? $type="skills" ; ?> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
+							<?php $type="skills" ; ?> 
 							<style>
-								#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-								#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+								#<?php print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+								#<?php print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 								div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
-								html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
-								.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
-								.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
+								html>body #<?php print $type ?> li { min-height: 72px; line-height: 1.2em; }
+								.<?php print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
+								.<?php print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 							</style>
 							<script>
 								$(function() {
-									$( "#<? print $type ?>" ).sortable({
-										placeholder: "<? print $type ?>-ui-state-highlight";
+									$( "#<?php print $type ?>" ).sortable({
+										placeholder: "<?php print $type ?>-ui-state-highlight";
 										axis: 'y'
 									});
 								});
@@ -733,7 +733,7 @@ else {
 													</script>
 													<select id='newSkill' onChange='skillsDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
 														<option value='0'>Choose a skill to add it to this unit</option>
-														<?
+														<?php
 														$currentCategory="" ;
 														$lastCategory="" ;
 														$switchContents="" ;
@@ -764,16 +764,16 @@ else {
 														?>
 													</select>
 													<script type='text/javascript'>
-														var <? print $type ?>Used=new Array();
-														var <? print $type ?>UsedCount=0 ;
+														var <?php print $type ?>Used=new Array();
+														var <?php print $type ?>UsedCount=0 ;
 													
 														function skillsDisplayElements(number) {
-															$("#<? print $type ?>Outer0").css("display", "none") ;
-															if (<? print $type ?>Used.indexOf(number)<0) {
-																<? print $type ?>Used[<? print $type ?>UsedCount]=number ;
-																<? print $type ?>UsedCount++ ;
+															$("#<?php print $type ?>Outer0").css("display", "none") ;
+															if (<?php print $type ?>Used.indexOf(number)<0) {
+																<?php print $type ?>Used[<?php print $type ?>UsedCount]=number ;
+																<?php print $type ?>UsedCount++ ;
 																switch(number) {
-																	<? print $switchContents ?>
+																	<?php print $switchContents ?>
 																}
 															}
 															else {
@@ -790,27 +790,27 @@ else {
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Learner Profile & Attitudes</div> 
 								<p>What opportunity will occur for the development of the attributes of the learner profile and attitudes?</p>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
-							<? $type="learnerProfile" ; ?> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
+							<?php $type="learnerProfile" ; ?> 
 							<style>
-								#<? print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-								#<? print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
+								#<?php print $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+								#<?php print $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
 								div.ui-state-default_dud { margin: 5px 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
-								html>body #<? print $type ?> li { min-height: 72px; line-height: 1.2em; }
-								.<? print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
-								.<? print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
+								html>body #<?php print $type ?> li { min-height: 72px; line-height: 1.2em; }
+								.<?php print $type ?>-ui-state-highlight { margin-bottom: 5px; min-height: 72px; line-height: 1.2em; width: 100%; }
+								.<?php print $type ?>-ui-state-highlight {border: 1px solid #fcd3a1; background: #fbf8ee url(images/ui-bg_glass_55_fbf8ee_1x400.png) 50% 50% repeat-x; color: #444444; }
 							</style>
 							<script>
 								$(function() {
-									$( "#<? print $type ?>" ).sortable({
-										placeholder: "<? print $type ?>-ui-state-highlight";
+									$( "#<?php print $type ?>" ).sortable({
+										placeholder: "<?php print $type ?>-ui-state-highlight";
 										axis: 'y'
 									});
 								});
@@ -837,7 +837,7 @@ else {
 													</script>
 													<select id='newLearnerProfile' onChange='learnerProfileDisplayElements(this.value);' style='float: none; margin-left: 3px; margin-top: 0px; width: 350px'>
 														<option value='0'>Choose a learner profile or attitude to add it to this unit</option>
-														<?
+														<?php
 														$currentType="" ;
 														$lastType="" ;
 														$switchContents="" ;
@@ -868,16 +868,16 @@ else {
 														?>
 													</select>
 													<script type='text/javascript'>
-														var <? print $type ?>Used=new Array();
-														var <? print $type ?>UsedCount=0 ;
+														var <?php print $type ?>Used=new Array();
+														var <?php print $type ?>UsedCount=0 ;
 													
 														function learnerProfileDisplayElements(number) {
-															$("#<? print $type ?>Outer0").css("display", "none") ;
-															if (<? print $type ?>Used.indexOf(number)<0) {
-																<? print $type ?>Used[<? print $type ?>UsedCount]=number ;
-																<? print $type ?>UsedCount++ ;
+															$("#<?php print $type ?>Outer0").css("display", "none") ;
+															if (<?php print $type ?>Used.indexOf(number)<0) {
+																<?php print $type ?>Used[<?php print $type ?>UsedCount]=number ;
+																<?php print $type ?>UsedCount++ ;
 																switch(number) {
-																	<? print $switchContents ?>
+																	<?php print $switchContents ?>
 																}
 															}
 															else {
@@ -895,36 +895,36 @@ else {
 							</td>
 						</tr>
 				
-						<? $bg="#EB6841" ; ?>
+						<?php $bg="#EB6841" ; ?>
 						<tr class='break'>
-							<td style='background: none!important; background-color: <? print $bg ?>!important'></td> 
+							<td style='background: none!important; background-color: <?php print $bg ?>!important'></td> 
 							<td colspan=2> 
 								<a id='5'>
 								<h3>5. What Resources Need To Be Gathered?</h3><br/>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='font-weight: bold; text-decoration: underline; font-size: 130%'>Resources</div> 
 								<p>What people, places, audio-visual materials, related literature, music, art, computer software etc will be available?</p>
-								<? print getEditor($guid,  $connection2, "resources", "", 30, true, false, false, true, "", true) ?>
+								<?php print getEditor($guid,  $connection2, "resources", "", 30, true, false, false, true, "", true) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Action</div> 
 								<p>What possible action could be inspired by this inquiry?</p>
-								<? print getEditor($guid,  $connection2, "action", "", 30, false, false, false, true, "", true) ?>
+								<?php print getEditor($guid,  $connection2, "action", "", 30, false, false, false, true, "", true) ?>
 							</td>
 						</tr>
 						<tr>
-							<td style='background: none; background-color: <? print $bg ?>'></td> 
+							<td style='background: none; background-color: <?php print $bg ?>'></td> 
 							<td colspan=2> 
 								<div style='margin-top: 40px; font-weight: bold; text-decoration: underline; font-size: 130%'>Classroom Environment</div> 
 								<p>How will the classroom environment, local environment and or community be used to facilitate the inquiry? </p>
-								<? print getEditor($guid,  $connection2, "environments", "", 30 ) ?>
+								<?php print getEditor($guid,  $connection2, "environments", "", 30 ) ?>
 							</td>
 						</tr>
 				
@@ -941,13 +941,13 @@ else {
 									});
 								</script>
 								<input name="blockCount" id=blockCount value="5" type="hidden">
-								<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+								<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 								<input type="submit" value="Submit">
 							</td>
 						</tr>
 					</table>
 				</form>
-				<?
+				<?php
 			}
 		}
 	}

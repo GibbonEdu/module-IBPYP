@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -98,7 +98,7 @@ else {
 			$row=$result->fetch() ;
 				
 			?>
-			<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_master_duplicateProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID&gibbonSchoolYearID=$gibbonSchoolYearID&address=" . $_GET["q"] ?>">
+			<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/units_manage_master_duplicateProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID&gibbonSchoolYearID=$gibbonSchoolYearID&address=" . $_GET["q"] ?>">
 				<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 					<tr class='break'>
 						<td colspan=2> 
@@ -111,7 +111,7 @@ else {
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<?
+							<?php
 							try {
 								$dataYear=array("gibbonSchoolYearID"=>$gibbonSchoolYearID); 
 								$sqlYear="SELECT * FROM gibbonSchoolYear WHERE gibbonSchoolYearID=:gibbonSchoolYearID" ;
@@ -138,7 +138,7 @@ else {
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<? print "<input readonly value='" . $row["courseName"] . "' type='text' style='width: 300px'>" ; ?>
+							<?php print "<input readonly value='" . $row["courseName"] . "' type='text' style='width: 300px'>" ; ?>
 						</td>
 					</tr>
 					<tr>
@@ -147,7 +147,7 @@ else {
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<? print "<input readonly value='" . $row["name"] . "' type='text' style='width: 300px'>" ; ?>
+							<?php print "<input readonly value='" . $row["name"] . "' type='text' style='width: 300px'>" ; ?>
 						</td>
 					</tr>
 					
@@ -163,7 +163,7 @@ else {
 						</td>
 						<td class="right">
 							<select name="gibbonSchoolYearIDCopyTo" id="gibbonSchoolYearIDCopyTo" style="width: 302px">
-								<?
+								<?php
 								print "<option value='Please select...'>Please select...</option>" ;
 								try {
 									$dataSelect=array("gibbonSchoolYearID"=>$_SESSION[$guid]["gibbonSchoolYearID"]); 
@@ -199,7 +199,7 @@ else {
 						</td>
 						<td class="right">
 							<select name="gibbonCourseIDTarget" id="gibbonCourseIDTarget" style="width: 302px">
-								<?
+								<?php
 								try {
 									$dataSelect=array(); 
 									$sqlSelect="SELECT gibbonCourse.nameShort AS course, gibbonSchoolYear.name AS year, gibbonCourseID, gibbonSchoolYear.gibbonSchoolYearID FROM gibbonCourse JOIN gibbonSchoolYear ON (gibbonCourse.gibbonSchoolYearID=gibbonSchoolYear.gibbonSchoolYearID) ORDER BY nameShort" ;
@@ -223,7 +223,7 @@ else {
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<? print "<input readonly value='" . $row["name"] . "' type='text' style='width: 300px'>" ; ?>
+							<?php print "<input readonly value='" . $row["name"] . "' type='text' style='width: 300px'>" ; ?>
 						</td>
 					</tr>
 					
@@ -232,13 +232,13 @@ else {
 							<span style="font-size: 90%"><i>* denotes a required field</i></span>
 						</td>
 						<td class="right">
-							<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+							<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 							<input type="submit" value="Submit">
 						</td>
 					</tr>
 				</table>
 			</form>
-			<?
+			<?php
 		}
 	}
 }

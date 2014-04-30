@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Gibbon, Flexible & Open School System
 Copyright (C) 2010, Ross Parker
@@ -70,7 +70,7 @@ else {
 	}
 	else {
 		?>
-		<form method="post" action="<? print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/glossary_addProcess.php" ?>">
+		<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/glossary_addProcess.php" ?>">
 			<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
 				<tr>
 					<td> 
@@ -112,7 +112,7 @@ else {
 						<script type="text/javascript">
 							$(function() {
 								var availableTags=[
-									<?
+									<?php
 									try {
 										$dataAuto=array();  
 										$sqlAuto="SELECT DISTINCT category FROM ibPYPGlossary ORDER BY category" ;
@@ -144,13 +144,13 @@ else {
 						<span style="font-size: 90%"><i>* denotes a required field</i></span>
 					</td>
 					<td class="right">
-						<input type="hidden" name="address" value="<? print $_SESSION[$guid]["address"] ?>">
+						<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
 						<input type="submit" value="Submit">
 					</td>
 				</tr>
 			</table>
 		</form>
-		<?
+		<?php
 	}
 }
 ?>
