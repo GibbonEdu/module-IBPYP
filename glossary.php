@@ -70,7 +70,7 @@ else {
 		
 		if ($role=="Coordinator") {
 			print "<div class='linkTop'>" ;
-			print "<a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/IB PYP/glossary_add.php'><img title='New' src='./themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/page_new.gif'/></a>" ;
+			print "<a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/IB PYP/glossary_add.php'><img title='New' src='./themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/page_new.png'/></a>" ;
 			print "</div>" ;
 		}
 		if ($result->rowCount()<1) {

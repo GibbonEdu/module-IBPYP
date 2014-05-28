@@ -25,7 +25,7 @@ $description="A module to facilitate schools to run the IB Primary Years Program
 $entryURL="index.php" ;
 $type="Additional" ;
 $category="IB" ;
-$version="1.2.03" ;
+$version="1.2.04" ;
 $author="Ross Parker" ;
 $url="http://rossparker.org" ;
 
