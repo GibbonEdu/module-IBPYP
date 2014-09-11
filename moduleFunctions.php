@@ -34,15 +34,15 @@ function makeBlock($guid, $connection2, $i, $mode="masterAdd", $title="", $type=
 					$("#blockInner<?php print $i ?>").css("display","none") ;
 					$("#block<?php print $i ?>").css("height","72px") ;
 					$('#show<?php print $i ?>').css("background-image", "<?php print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)"); 
-					tinyMCE.execCommand('mceRemoveControl', false, 'contents<?php print $i ?>') ;
-					tinyMCE.execCommand('mceRemoveControl', false, 'teachersNotes<?php print $i ?>') ;
+					tinyMCE.execCommand('mceRemoveEditor', false, 'contents<?php print $i ?>') ;
+					tinyMCE.execCommand('mceRemoveEditor', false, 'teachersNotes<?php print $i ?>') ;
 					$("#sortable").sortable( "refreshPositions" ) ;
 				});
 				
 				$( "#sortable" ).bind( "sortstop", function(event, ui) {
 					//These two lines have been removed to improve performance with long lists
-					//tinyMCE.execCommand('mceAddControl', false, 'contents<?php print $i ?>') ;
-					//tinyMCE.execCommand('mceAddControl', false, 'teachersNotes<?php print $i ?>') ;
+					//tinyMCE.execCommand('mceAddEditor', false, 'contents<?php print $i ?>') ;
+					//tinyMCE.execCommand('mceAddEditor', false, 'teachersNotes<?php print $i ?>') ;
 					$("#block<?php print $i ?>").css("height","72px") ;
 				});
 			});
@@ -58,16 +58,16 @@ function makeBlock($guid, $connection2, $i, $mode="masterAdd", $title="", $type=
 						$("#blockInner<?php print $i ?>").css("display","none");
 						$("#block<?php print $i ?>").css("height","72px")
 						$('#show<?php print $i ?>').css("background-image", "<?php print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)"); 
-						tinyMCE.execCommand('mceRemoveControl', false, 'contents<?php print $i ?>') ;
-						tinyMCE.execCommand('mceRemoveControl', false, 'teachersNotes<?php print $i ?>') ;
+						tinyMCE.execCommand('mceRemoveEditor', false, 'contents<?php print $i ?>') ;
+						tinyMCE.execCommand('mceRemoveEditor', false, 'teachersNotes<?php print $i ?>') ;
 					} else {
 						$("#blockInner<?php print $i ?>").slideDown("fast", $("#blockInner<?php print $i ?>").css("display","table-row")); //Slide Down Effect
 						$("#block<?php print $i ?>").css("height","auto")
 						$('#show<?php print $i ?>').css("background-image", "<?php print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/minus.png\'"?>)"); 
-						tinyMCE.execCommand('mceRemoveControl', false, 'contents<?php print $i ?>') ;	
-						tinyMCE.execCommand('mceAddControl', false, 'contents<?php print $i ?>') ;
-						tinyMCE.execCommand('mceRemoveControl', false, 'teachersNotes<?php print $i ?>') ;	
-						tinyMCE.execCommand('mceAddControl', false, 'teachersNotes<?php print $i ?>') ;
+						tinyMCE.execCommand('mceRemoveEditor', false, 'contents<?php print $i ?>') ;	
+						tinyMCE.execCommand('mceAddEditor', false, 'contents<?php print $i ?>') ;
+						tinyMCE.execCommand('mceRemoveEditor', false, 'teachersNotes<?php print $i ?>') ;	
+						tinyMCE.execCommand('mceAddEditor', false, 'teachersNotes<?php print $i ?>') ;
 					}
 				});
 				
@@ -227,13 +227,13 @@ function pypMakeBlock($guid,  $i, $type="", $ibPYPGlossaryID="", $title="", $cat
 					$("#<?php print $type ?>BlockInner<?php print $i ?>").css("display","none") ;
 					$("#<?php print $type ?>Block<?php print $i ?>").css("height","72px") ;
 					$('#<?php print $type ?>show<?php print $i ?>').css("background-image", "<?php print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)");  
-					tinyMCE.execCommand('mceRemoveControl', false, '<?php print $type ?>contents<?php print $i ?>') ;
+					tinyMCE.execCommand('mceRemoveEditor', false, '<?php print $type ?>contents<?php print $i ?>') ;
 					$("#<?php print $type ?>").sortable( "refreshPositions" ) ;
 				});
 				
 				$( "#<?php print $type ?>" ).bind( "sortstop", function(event, ui) {
 					//Removed to improve performance
-					//tinyMCE.execCommand('mceAddControl', false, '<?php print $type ?>contents<?php print $i ?>') ;
+					//tinyMCE.execCommand('mceAddEditor', false, '<?php print $type ?>contents<?php print $i ?>') ;
 					$("#<?php print $type ?>Block<?php print $i ?>").css("height","72px") ;
 				});
 			});
@@ -249,13 +249,13 @@ function pypMakeBlock($guid,  $i, $type="", $ibPYPGlossaryID="", $title="", $cat
 						$("#<?php print $type ?>BlockInner<?php print $i ?>").css("display","none");
 						$("#<?php print $type ?>Block<?php print $i ?>").css("height","72px") ;
 						$('#<?php print $type ?>show<?php print $i ?>').css("background-image", "<?php print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/plus.png\'"?>)");  
-						tinyMCE.execCommand('mceRemoveControl', false, '<?php print $type ?>contents<?php print $i ?>') ;
+						tinyMCE.execCommand('mceRemoveEditor', false, '<?php print $type ?>contents<?php print $i ?>') ;
 					} else {
 						$("#<?php print $type ?>BlockInner<?php print $i ?>").slideDown("fast", $("#<?php print $type ?>BlockInner<?php print $i ?>").css("display","table-row")); //Slide Down Effect
 						$("#<?php print $type ?>Block<?php print $i ?>").css("height","auto")
 						$('#<?php print $type ?>show<?php print $i ?>').css("background-image", "<?php print "url(\'" . $_SESSION[$guid]["absoluteURL"] . "/themes/" . $_SESSION[$guid]["gibbonThemeName"] . "/img/minus.png\'"?>)");  
-						tinyMCE.execCommand('mceRemoveControl', false, '<?php print $type ?>contents<?php print $i ?>') ;	
-						tinyMCE.execCommand('mceAddControl', false, '<?php print $type ?>contents<?php print $i ?>') ;
+						tinyMCE.execCommand('mceRemoveEditor', false, '<?php print $type ?>contents<?php print $i ?>') ;	
+						tinyMCE.execCommand('mceAddEditor', false, '<?php print $type ?>contents<?php print $i ?>') ;
 					}
 				});
 				
