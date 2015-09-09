@@ -153,11 +153,15 @@ $sql[$count][0]="1.2.04" ;
 $sql[$count][1]="
 " ;
 
-
 //v1.2.05
 $count++ ;
 $sql[$count][0]="1.2.05" ;
 $sql[$count][1]="
 " ;
 
+//v1.2.06
+$count++ ;
+$sql[$count][0]="1.2.06" ;
+$sql[$count][1]="
+" ;
 ?>
