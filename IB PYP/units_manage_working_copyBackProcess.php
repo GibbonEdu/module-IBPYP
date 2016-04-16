@@ -73,7 +73,7 @@ else {
 				//Fail2
 				$URL=$URL . "&copyReturn=fail2" ;
 				header("Location: {$URL}");
-				break ;
+				exit() ;
 			}
 			
 			if ($result->rowCount()!=1) {
@@ -95,7 +95,7 @@ else {
 					//Fail 2
 					$URL=$URL . "&copyReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 				try {
 					$dataBlocks=array("ibPYPUnitWorkingID"=>$ibPYPUnitWorkingID);  
@@ -107,7 +107,7 @@ else {
 					//Fail 2
 					$URL=$URL . "&copyReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 				$partialFail=false ;
 				while ($rowBlocks=$resultBlocks->fetch()) {
@@ -134,7 +134,7 @@ else {
 					//Fail 2
 					$URL=$URL . "&copyReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 				
 				

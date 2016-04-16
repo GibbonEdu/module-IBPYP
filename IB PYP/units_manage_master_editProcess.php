@@ -71,7 +71,7 @@ else {
 			//Fail2
 			$URL=$URL . "&deleteReturn=fail2" ;
 			header("Location: {$URL}");
-			break ;
+			exit() ;
 		}
 			
 		if ($result->rowCount()!=1) {
@@ -114,7 +114,7 @@ else {
 						//Fail2
 						$URL=$URL . "&updateReturn=fail2" ;
 						header("Location: {$URL}");
-						break ;
+						exit() ;
 					}
 
 					//Insert outcomes
@@ -293,7 +293,7 @@ else {
 						//Fail 2
 						$URL=$URL . "&updateReturn=fail2" ;
 						header("Location: {$URL}");
-						break ;
+						exit() ;
 					}
 				
 					//Success 0
@@ -326,7 +326,7 @@ else {
 					//Fail 5
 					$URL=$URL . "&updateReturn=fail5&step=2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 
 				//Success 0

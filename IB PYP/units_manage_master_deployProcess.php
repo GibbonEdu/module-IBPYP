@@ -85,7 +85,7 @@ else {
 					//Fail2
 					$URL = $URL . "&deleteReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 					
 				if ($result->rowCount()!=1) {
@@ -105,7 +105,7 @@ else {
 						//Fail 2
 						$URL = $URL . "&deployReturn=fail2" ;
 						header("Location: {$URL}");
-						break ;
+						exit() ;
 					}
 					
 					$partialFail=false;
@@ -135,14 +135,14 @@ else {
 								//Fail 2
 								$URL = $URL . "&deployReturn=fail2" ;
 								header("Location: {$URL}");
-								break ;
+								exit() ;
 							}
 			
 							if ($resultAI->rowCount()!=1) {
 								//Fail 2
 								$URL = $URL . "&deployReturn=fail2" ;
 								header("Location: {$URL}");
-								break ;
+								exit() ;
 							}
 							else {
 								$rowAI=$resultAI->fetch();
@@ -184,7 +184,7 @@ else {
 									//Fail 2
 									$URL = $URL . "&deployReturn=fail2" ;
 									header("Location: {$URL}");
-									break ;
+									exit() ;
 								}
 							
 								//Insert blocks

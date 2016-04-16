@@ -98,7 +98,7 @@ else {
 					//Fail 2
 					$URL=$URL . "&addReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 			
 				//Get next autoincrement
@@ -112,14 +112,14 @@ else {
 					//Fail 2
 					$URL=$URL . "&addReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 
 				if ($resultAI->rowCount()!=1) {
 					//Fail 2
 					$URL=$URL . "&addReturn=fail2" ;
 					header("Location: {$URL}");
-					break ;
+					exit() ;
 				}
 				else {
 					$rowAI=$resultAI->fetch();
@@ -261,7 +261,7 @@ else {
 						//Fail 2
 						$URL=$URL . "&addReturn=fail2" ;
 						header("Location: {$URL}");
-						break ;
+						exit() ;
 					}
 				
 					//Unlock module table
