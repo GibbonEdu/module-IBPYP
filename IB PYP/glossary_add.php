@@ -17,63 +17,42 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@session_start() ;
+@session_start();
 
 //Module includes
-include "./modules/IB PYP/moduleFunctions.php" ;
+include './modules/IB PYP/moduleFunctions.php';
 
-if (isActionAccessible($guid, $connection2, "/modules/IB PYP/glossary_add.php")==FALSE) {
+if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_add.php') == false) {
 
-	//Acess denied
-	print "<div class='error'>" ;
-		print "You do not have access to this action." ;
-	print "</div>" ;
-}
-else {
-	print "<div class='trail'>" ;
-	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/glossary.php'>Essential Elements</a> > </div><div class='trailEnd'>Add Item</div>" ;
-	print "</div>" ;
-	
-	if (isset($_GET["addReturn"])) { $addReturn=$_GET["addReturn"] ; } else { $addReturn="" ; }
-	$addReturnMessage ="" ;
-	$class="error" ;
-	if (!($addReturn=="")) {
-		if ($addReturn=="fail0") {
-			$addReturnMessage ="Add failed because you do not have access to this action." ;	
-		}
-		else if ($addReturn=="fail2") {
-			$addReturnMessage ="Add failed due to a database error." ;	
-		}
-		else if ($addReturn=="fail3") {
-			$addReturnMessage ="Add failed because your inputs were invalid." ;	
-		}
-		else if ($addReturn=="fail4") {
-			$addReturnMessage ="Add failed because the selected person is already registered." ;	
-		}
-		else if ($addReturn=="fail5") {
-			$addReturnMessage ="Add succeeded, but there were problems uploading one or more attachments." ;	
-		}
-		else if ($addReturn=="success0") {
-			$addReturnMessage ="Add was successful. You can add another record if you wish." ;	
-			$class="success" ;
-		}
-		print "<div class='$class'>" ;
-			print $addReturnMessage;
-		print "</div>" ;
-	} 
-	
-	$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
-	if ($role!="Coordinator" AND $role!="Teacher (Curriculum)") {
-		print "<div class='error'>" ;
-			print "You do not have access to this action." ;
-		print "</div>" ;
-	}
-	else {
-		?>
-		<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/glossary_addProcess.php" ?>">
-			<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
+    //Acess denied
+    echo "<div class='error'>";
+    echo 'You do not have access to this action.';
+    echo '</div>';
+} else {
+    echo "<div class='trail'>";
+    echo "<div class='trailHead'><a href='".$_SESSION[$guid]['absoluteURL']."'>Home</a> > <a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.getModuleName($_GET['q']).'/'.getModuleEntry($_GET['q'], $connection2, $guid)."'>".getModuleName($_GET['q'])."</a> > <a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.getModuleName($_GET['q'])."/glossary.php'>Essential Elements</a> > </div><div class='trailEnd'>Add Item</div>";
+    echo '</div>';
+
+    $returns = array();
+    $editLink = '';
+    if (isset($_GET['editID'])) {
+        $editLink = $_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/IB PYP/glossary_edit.php&ibPYPGlossaryID='.$_GET['editID'];
+    }
+    if (isset($_GET['return'])) {
+        returnProcess($guid, $_GET['return'], $editLink, $returns);
+    }
+
+    $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
+        echo "<div class='error'>";
+        echo 'You do not have access to this action.';
+        echo '</div>';
+    } else {
+        ?>
+		<form method="post" action="<?php echo $_SESSION[$guid]['absoluteURL'].'/modules/IB PYP/glossary_addProcess.php' ?>">
+			<table class='smallIntBorder' cellspacing='0' style="width: 100%">
 				<tr>
-					<td> 
+					<td>
 						<b>Type *</b><br/>
 						<span style="font-size: 90%"><i></i></span>
 					</td>
@@ -92,7 +71,7 @@ else {
 					</td>
 				</tr>
 				<tr>
-					<td> 
+					<td>
 						<b>Title *</b><br/>
 					</td>
 					<td class="right">
@@ -104,7 +83,7 @@ else {
 					</td>
 				</tr>
 				<tr>
-					<td> 
+					<td>
 						<b>Category</b><br/>
 					</td>
 					<td class="right">
@@ -113,18 +92,18 @@ else {
 							$(function() {
 								var availableTags=[
 									<?php
-									try {
-										$dataAuto=array();  
-										$sqlAuto="SELECT DISTINCT category FROM ibPYPGlossary ORDER BY category" ;
-										$resultAuto=$connection2->prepare($sqlAuto);
-										$resultAuto->execute($dataAuto);
-									}
-									catch(PDOException $e) { }
-									
-									while ($rowAuto=$resultAuto->fetch()) {
-										print "\"" . $rowAuto["category"] . "\", " ;
-									}
-									?>
+                                    try {
+                                        $dataAuto = array();
+                                        $sqlAuto = 'SELECT DISTINCT category FROM ibPYPGlossary ORDER BY category';
+                                        $resultAuto = $connection2->prepare($sqlAuto);
+                                        $resultAuto->execute($dataAuto);
+                                    } catch (PDOException $e) {
+                                    }
+
+        while ($rowAuto = $resultAuto->fetch()) {
+            echo '"'.$rowAuto['category'].'", ';
+        }
+        ?>
 								];
 								$( "#category" ).autocomplete({source: availableTags});
 							});
@@ -132,7 +111,7 @@ else {
 					</td>
 				</tr>
 				<tr>
-					<td> 
+					<td>
 						<b>Content</b><br/>
 					</td>
 					<td class="right">
@@ -144,13 +123,14 @@ else {
 						<span style="font-size: 90%"><i>* denotes a required field</i></span>
 					</td>
 					<td class="right">
-						<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
+						<input type="hidden" name="address" value="<?php echo $_SESSION[$guid]['address'] ?>">
 						<input type="submit" value="Submit">
 					</td>
 				</tr>
 			</table>
 		</form>
 		<?php
-	}
+
+    }
 }
 ?>

@@ -17,117 +17,60 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@session_start() ;
+@session_start();
 
 //Module includes
-include "./modules/IB PYP/moduleFunctions.php" ;
+include './modules/IB PYP/moduleFunctions.php';
 
+if (isActionAccessible($guid, $connection2, '/modules/IB PYP/staff_manage_edit.php') == false) {
 
-if (isActionAccessible($guid, $connection2, "/modules/IB PYP/staff_manage_edit.php")==FALSE) {
+    //Acess denied
+    echo "<div class='error'>";
+    echo 'You do not have access to this action.';
+    echo '</div>';
+} else {
+    //Proceed!
+    echo "<div class='trail'>";
+    echo "<div class='trailHead'><a href='".$_SESSION[$guid]['absoluteURL']."'>Home</a> > <a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.getModuleName($_GET['q']).'/'.getModuleEntry($_GET['q'], $connection2, $guid)."'>".getModuleName($_GET['q'])."</a> > <a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.getModuleName($_GET['q'])."/staff_manage.php'>Manage Teaching Staff</a> > </div><div class='trailEnd'>Edit CAS Staff</div>";
+    echo '</div>';
 
-	//Acess denied
-	print "<div class='error'>" ;
-		print "You do not have access to this action." ;
-	print "</div>" ;
-}
-else {
-	//Proceed!
-	print "<div class='trail'>" ;
-	print "<div class='trailHead'><a href='" . $_SESSION[$guid]["absoluteURL"] . "'>Home</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/" . getModuleEntry($_GET["q"], $connection2, $guid) . "'>" . getModuleName($_GET["q"]) . "</a> > <a href='" . $_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_GET["q"]) . "/staff_manage.php'>Manage Teaching Staff</a> > </div><div class='trailEnd'>Edit CAS Staff</div>" ;
-	print "</div>" ;
-	
-	if (isset($_GET["updateReturn"])) { $updateReturn=$_GET["updateReturn"] ; } else { $updateReturn="" ; }
-	$updateReturnMessage ="" ;
-	$class="error" ;
-	if (!($updateReturn=="")) {
-		if ($updateReturn=="fail0") {
-			$updateReturnMessage ="Update failed because you do not have access to this action." ;	
-		}
-		else if ($updateReturn=="fail1") {
-			$updateReturnMessage ="Update failed because a required parameter was not set." ;	
-		}
-		else if ($updateReturn=="fail2") {
-			$updateReturnMessage ="Update failed due to a database error." ;	
-		}
-		else if ($updateReturn=="fail3") {
-			$updateReturnMessage ="Update failed because your inputs were invalid." ;	
-		}
-		else if ($updateReturn=="fail4") {
-			$updateReturnMessage ="Update failed some values need to be unique but were not." ;	
-		}
-		else if ($updateReturn=="fail5") {
-			$updateReturnMessage ="Update failed because your attachment could not be uploaded." ;	
-		}
-		else if ($updateReturn=="success0") {
-			$updateReturnMessage ="Update was successful." ;	
-			$class="success" ;
-		}
-		print "<div class='$class'>" ;
-			print $updateReturnMessage;
-		print "</div>" ;
-	} 
-	
-	if (isset($_GET["deleteReturn"])) { $deleteReturn=$_GET["deleteReturn"] ; } else { $deleteReturn="" ; }
-	$deleteReturnMessage ="" ;
-	$class="error" ;
-	if (!($deleteReturn=="")) {
-		if ($deleteReturn=="fail0") {
-			$deleteReturnMessage ="Delete failed because you do not have access to this action." ;	
-		}
-		else if ($deleteReturn=="fail1") {
-			$deleteReturnMessage ="Delete failed because a required parameter was not set." ;	
-		}
-		else if ($deleteReturn=="fail2") {
-			$deleteReturnMessage ="Delete failed due to a database error." ;	
-		}
-		else if ($deleteReturn=="fail3") {
-			$deleteReturnMessage ="Delete failed because your inputs were invalid." ;	
-		}
-		else if ($deleteReturn=="success0") {
-			$deleteReturnMessage ="Delete was successful." ;	
-			$class="success" ;
-		}
-		print "<div class='$class'>" ;
-			print $deleteReturnMessage;
-		print "</div>" ;
-	} 
-	
-	//Check if school year specified
-	$ibPYPStaffTeachingID=$_GET["ibPYPStaffTeachingID"];
-	if ($ibPYPStaffTeachingID=="") {
-		print "<div class='error'>" ;
-			print "You have not specified a member of staff." ;
-		print "</div>" ;
-	}
-	else {
-		try {
-			$data=array("ibPYPStaffTeachingID"=>$ibPYPStaffTeachingID);  
-			$sql="SELECT ibPYPStaffTeachingID, ibPYPStaffTeaching.role, surname, preferredName FROM ibPYPStaffTeaching JOIN gibbonPerson ON (ibPYPStaffTeaching.gibbonPersonID=gibbonPerson.gibbonPersonID) WHERE status='Full' AND ibPYPStaffTeachingID=:ibPYPStaffTeachingID" ;
-			$result=$connection2->prepare($sql);
-			$result->execute($data);
-		}
-		catch(PDOException $e) { 
-			print "<div class='error'>" . $e->getMessage() . "</div>" ; 
-		}
-		
-		if ($result->rowCount()!=1) {
-			print "<div class='error'>" ;
-				print "The selected member of staff does not exist." ;
-			print "</div>" ;
-		}
-		else {
-			//Let's go!
-			$row=$result->fetch() ;
-			?>
-			<form method="post" action="<?php print $_SESSION[$guid]["absoluteURL"] . "/modules/IB PYP/staff_manage_editProcess.php?ibPYPStaffTeachingID=$ibPYPStaffTeachingID" ?>">
-				<table class='smallIntBorder' cellspacing='0' style="width: 100%">	
+    if (isset($_GET['return'])) {
+        returnProcess($guid, $_GET['return'], null, null);
+    }
+
+    //Check if school year specified
+    $ibPYPStaffTeachingID = $_GET['ibPYPStaffTeachingID'];
+    if ($ibPYPStaffTeachingID == '') {
+        echo "<div class='error'>";
+        echo 'You have not specified a member of staff.';
+        echo '</div>';
+    } else {
+        try {
+            $data = array('ibPYPStaffTeachingID' => $ibPYPStaffTeachingID);
+            $sql = "SELECT ibPYPStaffTeachingID, ibPYPStaffTeaching.role, surname, preferredName FROM ibPYPStaffTeaching JOIN gibbonPerson ON (ibPYPStaffTeaching.gibbonPersonID=gibbonPerson.gibbonPersonID) WHERE status='Full' AND ibPYPStaffTeachingID=:ibPYPStaffTeachingID";
+            $result = $connection2->prepare($sql);
+            $result->execute($data);
+        } catch (PDOException $e) {
+            echo "<div class='error'>".$e->getMessage().'</div>';
+        }
+
+        if ($result->rowCount() != 1) {
+            echo "<div class='error'>";
+            echo 'The selected member of staff does not exist.';
+            echo '</div>';
+        } else {
+            //Let's go!
+            $row = $result->fetch();
+            ?>
+			<form method="post" action="<?php echo $_SESSION[$guid]['absoluteURL']."/modules/IB PYP/staff_manage_editProcess.php?ibPYPStaffTeachingID=$ibPYPStaffTeachingID" ?>">
+				<table class='smallIntBorder' cellspacing='0' style="width: 100%">
 					<tr>
-						<td> 
+						<td>
 							<b>Staff *</b><br/>
 							<span style="font-size: 90%"><i>This value cannot be changed</i></span>
 						</td>
 						<td class="right">
-							<input readonly type='text' style='width: 302px' value='<?php print formatName("", $row["preferredName"], $row["surname"], "Staff", true, true) ?>'>
+							<input readonly type='text' style='width: 302px' value='<?php echo formatName('', $row['preferredName'], $row['surname'], 'Staff', true, true) ?>'>
 							<script type="text/javascript">
 								var gibbonPersonID=new LiveValidation('gibbonPersonID');
 								gibbonPersonID.add(Validate.Exclusion, { within: ['Please select...'], failureMessage: "Select something!"});
@@ -135,16 +78,25 @@ else {
 						</td>
 					</tr>
 					<tr>
-						<td> 
+						<td>
 							<b>Role *</b><br/>
 							<span style="font-size: 90%"><i></i></span>
 						</td>
 						<td class="right">
 							<select name="role" id="role" style="width: 302px">
 								<option value="Please select...">Please select...</option>
-								<option <?php if ($row["role"]=="Coordinator") {print "selected ";}?>value="Coordinator">Coordinator</option>
-								<option <?php if ($row["role"]=="Teacher (Curriculum)") {print "selected ";}?>value="Teacher (Curriculum)">Teacher (Curriculum)</option>
-								<option <?php if ($row["role"]=="Teacher") {print "selected ";}?>value="Teacher">Teacher</option>
+								<option <?php if ($row['role'] == 'Coordinator') {
+    echo 'selected ';
+}
+            ?>value="Coordinator">Coordinator</option>
+								<option <?php if ($row['role'] == 'Teacher (Curriculum)') {
+    echo 'selected ';
+}
+            ?>value="Teacher (Curriculum)">Teacher (Curriculum)</option>
+								<option <?php if ($row['role'] == 'Teacher') {
+    echo 'selected ';
+}
+            ?>value="Teacher">Teacher</option>
 							</select>
 							<script type="text/javascript">
 								var role=new LiveValidation('role');
@@ -157,14 +109,15 @@ else {
 							<span style="font-size: 90%"><i>* denotes a required field</i></span>
 						</td>
 						<td class="right">
-							<input type="hidden" name="address" value="<?php print $_SESSION[$guid]["address"] ?>">
+							<input type="hidden" name="address" value="<?php echo $_SESSION[$guid]['address'] ?>">
 							<input type="submit" value="Submit">
 						</td>
 					</tr>
 				</table>
 			</form>
 			<?php
-		}
-	}
+
+        }
+    }
 }
 ?>

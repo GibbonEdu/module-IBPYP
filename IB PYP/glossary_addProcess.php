@@ -17,73 +17,68 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include "../../functions.php" ;
-include "../../config.php" ;
+include '../../functions.php';
+include '../../config.php';
 
-include "./moduleFunctions.php" ;
+include './moduleFunctions.php';
 
 //New PDO DB connection
 try {
-    $connection2=new PDO("mysql:host=$databaseServer;dbname=$databaseName", $databaseUsername, $databasePassword);
-	$connection2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$connection2->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-}
-catch(PDOException $e) {
+    $connection2 = new PDO("mysql:host=$databaseServer;dbname=$databaseName", $databaseUsername, $databasePassword);
+    $connection2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $connection2->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
     echo $e->getMessage();
 }
 
-
-@session_start() ;
+@session_start();
 
 //Set timezone from session variable
-date_default_timezone_set($_SESSION[$guid]["timezone"]);
+date_default_timezone_set($_SESSION[$guid]['timezone']);
 
-$URL=$_SESSION[$guid]["absoluteURL"] . "/index.php?q=/modules/" . getModuleName($_POST["address"]) . "/glossary_add.php" ;
+$URL = $_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.getModuleName($_POST['address']).'/glossary_add.php';
 
-if (isActionAccessible($guid, $connection2, "/modules/IB PYP/glossary_add.php")==FALSE) {
+if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_add.php') == false) {
 
-	//Fail 0
-	$URL=$URL . "&addReturn=fail0" ;
-	header("Location: {$URL}");
+    //Fail 0
+    $URL = $URL.'&return=error0';
+    header("Location: {$URL}");
+} else {
+    $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
+        //Fail 0
+        $URL = $URL.'&return=error0';
+        header("Location: {$URL}");
+    } else {
+        //Proceed!
+        $type = $_POST['type'];
+        $category = $_POST['category'];
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+
+        if ($type == '' or $title == '') {
+            //Fail 3
+            $URL = $URL.'&return=error3';
+            header("Location: {$URL}");
+        } else {
+            //Write to database
+            try {
+                $data = array('type' => $type, 'category' => $category, 'title' => $title, 'content' => $content);
+                $sql = 'INSERT INTO ibPYPGlossary SET type=:type, category=:category, title=:title, content=:content';
+                $result = $connection2->prepare($sql);
+                $result->execute($data);
+            } catch (PDOException $e) {
+                //Fail 2
+                $URL = $URL.'&return=error2';
+                header("Location: {$URL}");
+                exit();
+            }
+
+            $AI = str_pad($connection2->lastInsertID(), 6, '0', STR_PAD_LEFT);
+
+            //Success 0
+            $URL = $URL.'&return=success0&editID='.$AI;
+            header("Location: {$URL}");
+        }
+    }
 }
-else {
-	$role=getRole($_SESSION[$guid]["gibbonPersonID"], $connection2) ;
-	if ($role!="Coordinator" AND $role!="Teacher (Curriculum)") {
-		//Fail 0
-		$URL=$URL . "&addReturn=fail0" ;
-		header("Location: {$URL}");
-	}
-	else {
-		//Proceed!
-		$type=$_POST["type"] ;
-		$category=$_POST["category"] ;
-		$title=$_POST["title"] ;
-		$content=$_POST["content"] ;
-				
-		if ($type=="" OR $title=="") {
-			//Fail 3
-			$URL=$URL . "&addReturn=fail3" ;
-			header("Location: {$URL}");
-		}
-		else {
-			//Write to database
-			try {
-				$data=array("type"=>$type, "category"=>$category, "title"=>$title, "content"=>$content);  
-				$sql="INSERT INTO ibPYPGlossary SET type=:type, category=:category, title=:title, content=:content" ;
-				$result=$connection2->prepare($sql);
-				$result->execute($data);  
-			}
-			catch(PDOException $e) { 
-				//Fail 2
-				$URL=$URL . "&addReturn=fail2" ;
-				header("Location: {$URL}");
-				exit() ;
-			}
-
-			//Success 0
-			$URL=$URL . "&addReturn=success0" ;
-			header("Location: {$URL}");
-		}
-	}
-}
-?>

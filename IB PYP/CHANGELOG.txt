@@ -1,8 +1,14 @@
 CHANGELOG
 =========
+v1.2.08
+-------
+Beautified PHP code
+Improved error handling
+Edit link added to add return
+
 v1.2.07
 -------
-Gibbon Core v12 & PHP 7 Compatibility 
+Gibbon Core v12 & PHP 7 Compatibility
 
 v1.2.06
 -------
@@ -69,12 +75,12 @@ Improved performance and behaviour of draggable blocks in master and working uni
 v0.3.00
 -------
 Made compatible with Gibbon v4.0.00
-Remove Outcomes from Essential Elements, in favour of using Gibbon's system-wide outcomes. 
+Remove Outcomes from Essential Elements, in favour of using Gibbon's system-wide outcomes.
 
 v0.3.00
 -------
 Made compatible with Gibbon v4.0.00
-Remove Outcomes from Essential Elements, in favour of using Gibbon's system-wide outcomes. 
+Remove Outcomes from Essential Elements, in favour of using Gibbon's system-wide outcomes.
 
 v0.2.00
 -------
@@ -105,6 +111,3 @@ Ability to register students into the IB PYP module, specifying academic year fo
 Incomplete ability to manage units
 Curriculum glossary
 Manifest + Publish
-
-	
-
