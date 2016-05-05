@@ -40,8 +40,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
     }
 
     $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
-    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
-        echo "<div class='error'>";
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') { echo "<div class='error'>";
         echo 'You do not have access to this action.';
         echo '</div>';
     } else {
@@ -74,8 +73,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 					<table class='smallIntBorder' cellspacing='0' style="width: 100%">
 						<tr>
 							<td>
-								<b>Are you sure you want to delete "<?php echo $row['name'];
-                ?>" from the PYP programme?</b><br/>
+								<b>Are you sure you want to delete "<?php echo $row['name']; ?>" from the PYP programme?</b><br/>
 								<span style="font-size: 90%; color: #cc0000"><i>This operation cannot be undone, and may lead to loss of vital data in your system.<br/>PROCEED WITH CAUTION!</i></span>
 							</td>
 							<td class="right">

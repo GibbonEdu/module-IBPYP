@@ -68,8 +68,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage.php') 
         }
     }
 
-    if ($gibbonSchoolYearID != '') {
-        echo "<h2 class='top'>";
+    if ($gibbonSchoolYearID != '') { echo "<h2 class='top'>";
         echo $gibbonSchoolYearName;
         echo '</h2>';
 
@@ -139,34 +138,34 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage.php') 
             }
 
             ?>
-					<form method="get" action="<?php echo $_SESSION[$guid]['absoluteURL']?>/index.php">
-						<table class='noIntBorder' cellspacing='0' style="width: 100%">
-							<tr><td style="width: 30%"></td><td></td></tr>
-							<tr>
-								<td>
-									<b>Search By Name</b><br/>
-									<span style="font-size: 90%"><i>Unit name, course name</i></span>
-								</td>
-								<td class="right">
-									<input name="search" id="search" maxlength=20 value="<?php echo $search ?>" type="text" style="width: 300px">
-								</td>
-							</tr>
-							<tr>
-								<td colspan=2 class="right">
-									<input type="hidden" name="q" value="/modules/<?php echo $_SESSION[$guid]['module'] ?>/units_manage.php">
-									<input type="hidden" name="address" value="<?php echo $_SESSION[$guid]['address'] ?>">
-									<input type="hidden" name="tab" value="0">
-									<?php
-                                    echo "<a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.$_SESSION[$guid]['module']."/units_manage.php&tab=0'>Clear Filters</a>";
-            ?>
-									<input type="submit" value="Submit">
-								</td>
-							</tr>
-						</table>
-					</form>
-					<?php
+			<form method="get" action="<?php echo $_SESSION[$guid]['absoluteURL']?>/index.php">
+				<table class='noIntBorder' cellspacing='0' style="width: 100%">
+					<tr><td style="width: 30%"></td><td></td></tr>
+					<tr>
+						<td>
+							<b>Search By Name</b><br/>
+							<span style="font-size: 90%"><i>Unit name, course name</i></span>
+						</td>
+						<td class="right">
+							<input name="search" id="search" maxlength=20 value="<?php echo $search ?>" type="text" style="width: 300px">
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2 class="right">
+							<input type="hidden" name="q" value="/modules/<?php echo $_SESSION[$guid]['module'] ?>/units_manage.php">
+							<input type="hidden" name="address" value="<?php echo $_SESSION[$guid]['address'] ?>">
+							<input type="hidden" name="tab" value="0">
+							<?php
+							echo "<a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.$_SESSION[$guid]['module']."/units_manage.php&tab=0'>Clear Filters</a>";
+							?>
+							<input type="submit" value="Submit">
+						</td>
+					</tr>
+				</table>
+			</form>
+			<?php
 
-                    echo '<h3>';
+			echo '<h3>';
             echo 'Units';
             echo '</h3>';
 
@@ -220,8 +219,8 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage.php') 
                     }
                     ++$count;
 
-                                //COLOR ROW BY STATUS!
-                                echo "<tr class=$rowNum>";
+					//COLOR ROW BY STATUS!
+					echo "<tr class=$rowNum>";
                     echo '<td>';
                     echo '<b>'.$row['name'].'<br/>';
                     echo '</td>';
@@ -252,34 +251,34 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage.php') 
                 }
 
                 ?>
-						<form method="get" action="<?php echo $_SESSION[$guid]['absoluteURL']?>/index.php">
-							<table class='noIntBorder' cellspacing='0' style="width: 100%">
-								<tr><td style="width: 30%"></td><td></td></tr>
-								<tr>
-									<td>
-										<b>Search By Name</b><br/>
-										<span style="font-size: 90%"><i>Unit name, course name</i></span>
-									</td>
-									<td class="right">
-										<input name="search" id="search" maxlength=20 value="<?php echo $search ?>" type="text" style="width: 300px">
-									</td>
-								</tr>
-								<tr>
-									<td colspan=2 class="right">
-										<input type="hidden" name="q" value="/modules/<?php echo $_SESSION[$guid]['module'] ?>/units_manage.php">
-										<input type="hidden" name="address" value="<?php echo $_SESSION[$guid]['address'] ?>">
-										<input type="hidden" name="tab" value="1">
-										<?php
-                                        echo "<a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.$_SESSION[$guid]['module']."/units_manage.php&tab=1'>Clear Filters</a>";
-                ?>
-										<input type="submit" value="Submit">
-									</td>
-								</tr>
-							</table>
-						</form>
-						<?php
+				<form method="get" action="<?php echo $_SESSION[$guid]['absoluteURL']?>/index.php">
+					<table class='noIntBorder' cellspacing='0' style="width: 100%">
+						<tr><td style="width: 30%"></td><td></td></tr>
+						<tr>
+							<td>
+								<b>Search By Name</b><br/>
+								<span style="font-size: 90%"><i>Unit name, course name</i></span>
+							</td>
+							<td class="right">
+								<input name="search" id="search" maxlength=20 value="<?php echo $search ?>" type="text" style="width: 300px">
+							</td>
+						</tr>
+						<tr>
+							<td colspan=2 class="right">
+								<input type="hidden" name="q" value="/modules/<?php echo $_SESSION[$guid]['module'] ?>/units_manage.php">
+								<input type="hidden" name="address" value="<?php echo $_SESSION[$guid]['address'] ?>">
+								<input type="hidden" name="tab" value="1">
+								<?php
+								echo "<a href='".$_SESSION[$guid]['absoluteURL'].'/index.php?q=/modules/'.$_SESSION[$guid]['module']."/units_manage.php&tab=1'>Clear Filters</a>";
+								?>
+								<input type="submit" value="Submit">
+							</td>
+						</tr>
+					</table>
+				</form>
+				<?php
 
-                        echo '<h3>';
+				echo '<h3>';
                 echo 'Units';
                 echo '</h3>';
 
@@ -335,8 +334,8 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage.php') 
                             $rowNum = 'error';
                         }
 
-                                    //COLOR ROW BY STATUS!
-                                    echo "<tr class=$rowNum>";
+						//COLOR ROW BY STATUS!
+						echo "<tr class=$rowNum>";
                         echo '<td>';
                         echo '<b>'.$row['name'].'<br/>';
                         echo '</td>';

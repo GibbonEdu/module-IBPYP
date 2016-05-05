@@ -39,8 +39,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_delete.php
     }
 
     $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
-    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
-        echo "<div class='error'>";
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') { echo "<div class='error'>";
         echo 'You do not have access to this action.';
         echo '</div>';
     } else {

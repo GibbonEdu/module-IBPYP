@@ -40,8 +40,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
     //Check if school year specified
     $gibbonSchoolYearID = $_GET['gibbonSchoolYearID'];
     $ibPYPUnitMasterID = $_GET['ibPYPUnitMasterID'];
-    if ($ibPYPUnitMasterID == '' or $gibbonSchoolYearID == '') {
-        echo "<div class='error'>";
+    if ($ibPYPUnitMasterID == '' or $gibbonSchoolYearID == '') { echo "<div class='error'>";
         echo 'You have not specified a unit.';
         echo '</div>';
     } else {
@@ -86,13 +85,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                 echo "<div class='error'>".$e->getMessage().'</div>';
                             }
 
-            if ($resultYear->rowCount() != 1) {
-                echo '<i>Unknown</i>';
-            } else {
-                $rowYear = $resultYear->fetch();
-                echo "<input readonly value='".$rowYear['name']."' type='text' style='width: 300px'>";
-            }
-            ?>
+							if ($resultYear->rowCount() != 1) {
+								echo '<i>Unknown</i>';
+							} else {
+								$rowYear = $resultYear->fetch();
+								echo "<input readonly value='".$rowYear['name']."' type='text' style='width: 300px'>";
+							}
+							?>
 						</td>
 					</tr>
 					<tr>
@@ -101,8 +100,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<?php echo "<input readonly value='".$row['courseName']."' type='text' style='width: 300px'>";
-            ?>
+							<?php echo "<input readonly value='".$row['courseName']."' type='text' style='width: 300px'>"; ?>
 						</td>
 					</tr>
 					<tr>
@@ -111,8 +109,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<?php echo "<input readonly value='".$row['name']."' type='text' style='width: 300px'>";
-            ?>
+							<?php echo "<input readonly value='".$row['name']."' type='text' style='width: 300px'>"; ?>
 						</td>
 					</tr>
 
@@ -130,27 +127,27 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							<select name="gibbonSchoolYearIDCopyTo" id="gibbonSchoolYearIDCopyTo" style="width: 302px">
 								<?php
                                 echo "<option value='Please select...'>Please select...</option>";
-            try {
-                $dataSelect = array('gibbonSchoolYearID' => $_SESSION[$guid]['gibbonSchoolYearID']);
-                $sqlSelect = 'SELECT * FROM gibbonSchoolYear WHERE gibbonSchoolYearID=:gibbonSchoolYearID';
-                $resultSelect = $connection2->prepare($sqlSelect);
-                $resultSelect->execute($dataSelect);
-            } catch (PDOException $e) {
-            }
-            if ($resultSelect->rowCount() == 1) {
-                $rowSelect = $resultSelect->fetch();
-                try {
-                    $dataSelect2 = array('sequenceNumber' => $rowSelect['sequenceNumber']);
-                    $sqlSelect2 = 'SELECT * FROM gibbonSchoolYear WHERE sequenceNumber>=:sequenceNumber ORDER BY sequenceNumber ASC';
-                    $resultSelect2 = $connection2->prepare($sqlSelect2);
-                    $resultSelect2->execute($dataSelect2);
-                } catch (PDOException $e) {
-                }
-                while ($rowSelect2 = $resultSelect2->fetch()) {
-                    echo "<option value='".$rowSelect2['gibbonSchoolYearID']."'>".htmlPrep($rowSelect2['name']).'</option>';
-                }
-            }
-            ?>
+								try {
+									$dataSelect = array('gibbonSchoolYearID' => $_SESSION[$guid]['gibbonSchoolYearID']);
+									$sqlSelect = 'SELECT * FROM gibbonSchoolYear WHERE gibbonSchoolYearID=:gibbonSchoolYearID';
+									$resultSelect = $connection2->prepare($sqlSelect);
+									$resultSelect->execute($dataSelect);
+								} catch (PDOException $e) {
+								}
+								if ($resultSelect->rowCount() == 1) {
+									$rowSelect = $resultSelect->fetch();
+									try {
+										$dataSelect2 = array('sequenceNumber' => $rowSelect['sequenceNumber']);
+										$sqlSelect2 = 'SELECT * FROM gibbonSchoolYear WHERE sequenceNumber>=:sequenceNumber ORDER BY sequenceNumber ASC';
+										$resultSelect2 = $connection2->prepare($sqlSelect2);
+										$resultSelect2->execute($dataSelect2);
+									} catch (PDOException $e) {
+									}
+									while ($rowSelect2 = $resultSelect2->fetch()) {
+										echo "<option value='".$rowSelect2['gibbonSchoolYearID']."'>".htmlPrep($rowSelect2['name']).'</option>';
+									}
+								}
+								?>
 							</select>
 							<script type="text/javascript">
 								var gibbonSchoolYearIDCopyTo=new LiveValidation('gibbonSchoolYearIDCopyTo');
@@ -172,10 +169,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                     $resultSelect->execute($dataSelect);
                                 } catch (PDOException $e) {
                                 }
-            while ($rowSelect = $resultSelect->fetch()) {
-                echo "<option class='".$rowSelect['gibbonSchoolYearID']."' value='".$rowSelect['gibbonCourseID']."'>".htmlPrep($rowSelect['course']).'</option>';
-            }
-            ?>
+								while ($rowSelect = $resultSelect->fetch()) {
+									echo "<option class='".$rowSelect['gibbonSchoolYearID']."' value='".$rowSelect['gibbonCourseID']."'>".htmlPrep($rowSelect['course']).'</option>';
+								}
+								?>
 							</select>
 							<script type="text/javascript">
 								$("#gibbonCourseIDTarget").chainedTo("#gibbonSchoolYearIDCopyTo");
@@ -188,8 +185,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							<span style="font-size: 90%"><i>This value cannot be changed.</i></span>
 						</td>
 						<td class="right">
-							<?php echo "<input readonly value='".$row['name']."' type='text' style='width: 300px'>";
-            ?>
+							<?php echo "<input readonly value='".$row['name']."' type='text' style='width: 300px'>"; ?>
 						</td>
 					</tr>
 

@@ -79,8 +79,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                     echo 'You cannot proceed, as the specified school year cannot be found.';
                     echo '</div>';
                 } else {
-                    $rowSchoolYear = $resultSchoolYear->fetch();
-                    ?>
+                    $rowSchoolYear = $resultSchoolYear->fetch(); ?>
 					<form method="post" action="<?php echo $_SESSION[$guid]['absoluteURL']."/modules/IB PYP/units_manage_master_deployProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID" ?>">
 						<table class='smallIntBorder' cellspacing='0' style="width: 100%">
 							<tr>
@@ -100,7 +99,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								<td class="right">
 									<?php
                                     echo "<input readonly name='schoolYear' id='schoolYear' value='".$rowSchoolYear['name']."' type='text' style='width: 300px'>";
-                    ?>
+                    				?>
 								</td>
 							</tr>
 							<tr>
@@ -120,10 +119,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                         } catch (PDOException $e) {
                                             echo "<div class='error'>".$e->getMessage().'</div>';
                                         }
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        echo "<option class='".$rowSelect['gibbonCourseID']."' value='".$rowSelect['gibbonCourseClassID']."'>".htmlPrep($rowSelect['course']).'.'.htmlPrep($rowSelect['class']).' - '.$rowSelect['name'].'</option>';
-                    }
-                    ?>
+										while ($rowSelect = $resultSelect->fetch()) {
+											echo "<option class='".$rowSelect['gibbonCourseID']."' value='".$rowSelect['gibbonCourseClassID']."'>".htmlPrep($rowSelect['course']).'.'.htmlPrep($rowSelect['class']).' - '.$rowSelect['name'].'</option>';
+										}
+										?>
 									</select>
 								</td>
 							</tr>
@@ -151,8 +150,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 								<td class="right">
 									<?php
-                                    $defaultRubric = getSettingByScope($connection2, 'IB PYP', 'defaultRubric');
-                    ?>
+                                    $defaultRubric = getSettingByScope($connection2, 'IB PYP', 'defaultRubric'); ?>
 									<select name="gibbonRubricID" id="gibbonRubricID" style="width: 302px">
 										<option><option>
 										<optgroup label='--School Rubrics --'>
@@ -170,21 +168,21 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                             $resultSelect->execute($dataSelect);
                                         } catch (PDOException $e) {
                                         }
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        $label = '';
-                        if ($rowSelect['category'] == '') {
-                            $label = $rowSelect['name'];
-                        } else {
-                            $label = $rowSelect['category'].' - '.$rowSelect['name'];
-                        }
-                        $selected = '';
-                        if ($defaultRubric == $rowSelect['gibbonRubricID']) {
-                            $selected = 'selected';
-                        }
-                        echo "<option $selected value='".$rowSelect['gibbonRubricID']."'>$label</option>";
-                    }
-                    if ($row['gibbonDepartmentID'] != '') {
-                        ?>
+										while ($rowSelect = $resultSelect->fetch()) {
+											$label = '';
+											if ($rowSelect['category'] == '') {
+												$label = $rowSelect['name'];
+											} else {
+												$label = $rowSelect['category'].' - '.$rowSelect['name'];
+											}
+											$selected = '';
+											if ($defaultRubric == $rowSelect['gibbonRubricID']) {
+												$selected = 'selected';
+											}
+											echo "<option $selected value='".$rowSelect['gibbonRubricID']."'>$label</option>";
+										}
+										if ($row['gibbonDepartmentID'] != '') {
+											?>
 											<optgroup label='--Learning Area Rubrics --'>
 											<?php
                                             try {
@@ -200,21 +198,21 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                                 $resultSelect->execute($dataSelect);
                                             } catch (PDOException $e) {
                                             }
-                        while ($rowSelect = $resultSelect->fetch()) {
-                            $label = '';
-                            if ($rowSelect['category'] == '') {
-                                $label = $rowSelect['name'];
-                            } else {
-                                $label = $rowSelect['category'].' - '.$rowSelect['name'];
-                            }
-                            $selected = '';
-                            if ($defaultRubric == $rowSelect['gibbonRubricID']) {
-                                $selected = 'selected';
-                            }
-                            echo "<option $selected value='".$rowSelect['gibbonRubricID']."'>$label</option>";
-                        }
-                    }
-                    ?>
+											while ($rowSelect = $resultSelect->fetch()) {
+												$label = '';
+												if ($rowSelect['category'] == '') {
+													$label = $rowSelect['name'];
+												} else {
+													$label = $rowSelect['category'].' - '.$rowSelect['name'];
+												}
+												$selected = '';
+												if ($defaultRubric == $rowSelect['gibbonRubricID']) {
+													$selected = 'selected';
+												}
+												echo "<option $selected value='".$rowSelect['gibbonRubricID']."'>$label</option>";
+											}
+										}
+										?>
 									</select>
 								</td>
 							</tr>

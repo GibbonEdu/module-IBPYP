@@ -25,7 +25,7 @@ $description = 'A module to facilitate schools to run the IB Primary Years Progr
 $entryURL = 'index.php';
 $type = 'Additional';
 $category = 'IB';
-$version = '1.2.08';
+$version = '1.2.09';
 $author = 'Ross Parker';
 $url = 'http://rossparker.org';
 

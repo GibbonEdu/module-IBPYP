@@ -53,8 +53,8 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/settings_manage.php
                 } catch (PDOException $e) {
                     echo "<div class='error'>".$e->getMessage().'</div>';
                 }
-    $row = $result->fetch();
-    ?>
+				$row = $result->fetch();
+				?>
 				<td>
 					<b><?php echo $row['nameDisplay'] ?></b><br/>
 					<span style="font-size: 90%"><i><?php echo $row['description'] ?></i></span>
@@ -70,14 +70,14 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/settings_manage.php
                             $resultSelect->execute($dataSelect);
                         } catch (PDOException $e) {
                         }
-    while ($rowSelect = $resultSelect->fetch()) {
-        $selected = '';
-        if ($row['value'] == $rowSelect['gibbonRubricID']) {
-            $selected = 'selected';
-        }
-        echo "<option $selected value='".$rowSelect['gibbonRubricID']."'>".$rowSelect['name'].'</option>';
-    }
-    ?>
+						while ($rowSelect = $resultSelect->fetch()) {
+							$selected = '';
+							if ($row['value'] == $rowSelect['gibbonRubricID']) {
+								$selected = 'selected';
+							}
+							echo "<option $selected value='".$rowSelect['gibbonRubricID']."'>".$rowSelect['name'].'</option>';
+						}
+						?>
 					</select>
 				</td>
 			</tr>

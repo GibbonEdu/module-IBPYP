@@ -40,8 +40,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/staff_manage_edit.p
 
     //Check if school year specified
     $ibPYPStaffTeachingID = $_GET['ibPYPStaffTeachingID'];
-    if ($ibPYPStaffTeachingID == '') {
-        echo "<div class='error'>";
+    if ($ibPYPStaffTeachingID == '') { echo "<div class='error'>";
         echo 'You have not specified a member of staff.';
         echo '</div>';
     } else {
@@ -85,18 +84,9 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/staff_manage_edit.p
 						<td class="right">
 							<select name="role" id="role" style="width: 302px">
 								<option value="Please select...">Please select...</option>
-								<option <?php if ($row['role'] == 'Coordinator') {
-    echo 'selected ';
-}
-            ?>value="Coordinator">Coordinator</option>
-								<option <?php if ($row['role'] == 'Teacher (Curriculum)') {
-    echo 'selected ';
-}
-            ?>value="Teacher (Curriculum)">Teacher (Curriculum)</option>
-								<option <?php if ($row['role'] == 'Teacher') {
-    echo 'selected ';
-}
-            ?>value="Teacher">Teacher</option>
+								<option <?php if ($row['role'] == 'Coordinator') { echo 'selected '; } ?>value="Coordinator">Coordinator</option>
+								<option <?php if ($row['role'] == 'Teacher (Curriculum)') { echo 'selected '; } ?>value="Teacher (Curriculum)">Teacher (Curriculum)</option>
+								<option <?php if ($row['role'] == 'Teacher') { echo 'selected '; } ?>value="Teacher">Teacher</option>
 							</select>
 							<script type="text/javascript">
 								var role=new LiveValidation('role');

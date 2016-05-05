@@ -40,8 +40,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_dele
 
     //Check if school year specified
     $ibPYPStudentID = $_GET['ibPYPStudentID'];
-    if ($ibPYPStudentID == '') {
-        echo "<div class='error'>";
+    if ($ibPYPStudentID == '') { echo "<div class='error'>";
         echo 'You have not specified a student member.';
         echo '</div>';
     } else {

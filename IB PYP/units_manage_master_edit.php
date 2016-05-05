@@ -39,8 +39,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
     }
 
     $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
-    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
-        echo "<div class='error'>";
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') { echo "<div class='error'>";
         echo 'You do not have access to this action.';
         echo '</div>';
     } else {
@@ -80,8 +79,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                     ?>
 					<form method="post" action="<?php echo $_SESSION[$guid]['absoluteURL']."/modules/IB PYP/units_manage_master_editProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID&gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
 						<table class='smallIntBorder' cellspacing='0' style="width: 100%;">
-							<?php $bg = '#EAEBEC';
-                    ?>
+							<?php $bg = '#EAEBEC'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -112,14 +110,8 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 								<td class="right">
 									<select name="active" id="active" style="width: 302px">
-										<option <?php if ($row['active'] == 'Y') {
-    echo 'selected';
-}
-                    ?> value="Y">Y</option>
-										<option <?php if ($row['active'] == 'N') {
-    echo 'selected';
-}
-                    ?> value="N">N</option>
+										<option <?php if ($row['active'] == 'Y') { echo 'selected'; } ?> value="Y">Y</option>
+										<option <?php if ($row['active'] == 'N') { echo 'selected'; } ?> value="N">N</option>
 									</select>
 								</td>
 							</tr>
@@ -138,13 +130,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                         $resultSelect->execute($dataSelect);
                                     } catch (PDOException $e) {
                                     }
-                    if ($resultSelect->rowCount() == 1) {
-                        $rowSelect = $resultSelect->fetch();
-                        $gibbonYearGroupIDList = $rowSelect['gibbonYearGroupIDList'];
-                        $gibbonDepartmentID = $rowSelect['gibbonDepartmentID'];
-                        echo '<input readonly name="unitname" id="unitname" value="'.htmlPrep($rowSelect['nameShort']).'" type="text" style="width: 300px">';
-                    }
-                    ?>
+									if ($resultSelect->rowCount() == 1) {
+										$rowSelect = $resultSelect->fetch();
+										$gibbonYearGroupIDList = $rowSelect['gibbonYearGroupIDList'];
+										$gibbonDepartmentID = $rowSelect['gibbonDepartmentID'];
+										echo '<input readonly name="unitname" id="unitname" value="'.htmlPrep($rowSelect['nameShort']).'" type="text" style="width: 300px">';
+									}
+									?>
 								</td>
 							</tr>
 							<tr>
@@ -161,8 +153,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#EDC951';
-                    ?>
+							<?php $bg = '#EDC951'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -193,10 +184,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							</tr>
 							<?php
                             $type = 'outcome';
-                    $allowOutcomeEditing = getSettingByScope($connection2, 'Planner', 'allowOutcomeEditing');
-                    $categories = array();
-                    $categoryCount = 0;
-                    ?>
+							$allowOutcomeEditing = getSettingByScope($connection2, 'Planner', 'allowOutcomeEditing');
+							$categories = array();
+							$categoryCount = 0;
+							?>
 							<style>
 								#<?php echo $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 								#<?php echo $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
@@ -219,27 +210,27 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 									<div class="outcome" id="outcome" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<?php
                                         $usedArrayFill = '';
-                    try {
-                        $dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
-                        $sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, scope, name, category FROM ibPYPUnitMasterBlock JOIN gibbonOutcome ON (ibPYPUnitMasterBlock.gibbonOutcomeID=gibbonOutcome.gibbonOutcomeID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND active='Y' ORDER BY sequenceNumber";
-                        $resultBlocks = $connection2->prepare($sqlBlocks);
-                        $resultBlocks->execute($dataBlocks);
-                    } catch (PDOException $e) {
-                        echo "<div class='error'>".$e->getMessage().'</div>';
-                    }
-                    if ($resultBlocks->rowCount() < 1) {
-                        echo "<div id='outcomeOuter0'>";
-                        echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Outcomes listed here...</div>";
-                        echo '</div>';
-                    } else {
-                        $i = 1;
-                        while ($rowBlocks = $resultBlocks->fetch()) {
-                            pypMakeBlock($guid, $i, 'outcome', $rowBlocks['gibbonOutcomeID'],  $rowBlocks['name'],  $rowBlocks['category'], $rowBlocks['content'], '', true, $allowOutcomeEditing);
-                            $usedArrayFill .= '"'.$rowBlocks['gibbonOutcomeID'].'",';
-                            ++$i;
-                        }
-                    }
-                    ?>
+										try {
+											$dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
+											$sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, scope, name, category FROM ibPYPUnitMasterBlock JOIN gibbonOutcome ON (ibPYPUnitMasterBlock.gibbonOutcomeID=gibbonOutcome.gibbonOutcomeID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND active='Y' ORDER BY sequenceNumber";
+											$resultBlocks = $connection2->prepare($sqlBlocks);
+											$resultBlocks->execute($dataBlocks);
+										} catch (PDOException $e) {
+											echo "<div class='error'>".$e->getMessage().'</div>';
+										}
+										if ($resultBlocks->rowCount() < 1) {
+											echo "<div id='outcomeOuter0'>";
+											echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Outcomes listed here...</div>";
+											echo '</div>';
+										} else {
+											$i = 1;
+											while ($rowBlocks = $resultBlocks->fetch()) {
+												pypMakeBlock($guid, $i, 'outcome', $rowBlocks['gibbonOutcomeID'],  $rowBlocks['name'],  $rowBlocks['category'], $rowBlocks['content'], '', true, $allowOutcomeEditing);
+												$usedArrayFill .= '"'.$rowBlocks['gibbonOutcomeID'].'",';
+												++$i;
+											}
+										}
+										?>
 									</div>
 									<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 										<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
@@ -247,14 +238,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 												<tr>
 													<td style='width: 50%'>
 														<script type="text/javascript">
-															<?php if (isset($i)) {
-    if (is_numeric($i) == false) {
-        $i = 0;
-    }
-} else {
-    $i = 0;
-}
-                    ?>
+															<?php if (isset($i)) { if (is_numeric($i) == false) {
+																$i = 0;
+															}
+															} else {
+																$i = 0;
+															}
+															?>
 															var outcomeCount=<?php echo $i ?> ;
 															/* Unit type control */
 															$(document).ready(function(){
@@ -267,86 +257,86 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 															<option class='all' value='0'>Choose an outcome to add it to this unit</option>
 															<?php
                                                             $currentCategory = '';
-                    $lastCategory = '';
-                    $switchContents = '';
-                    try {
-                        $countClause = 0;
-                        $years = explode(',', $gibbonYearGroupIDList);
-                        $dataSelect = array();
-                        $sqlSelect = '';
-                        foreach ($years as $year) {
-                            $dataSelect['clause'.$countClause] = '%'.$year.'%';
-                            $sqlSelect .= "(SELECT * FROM gibbonOutcome WHERE active='Y' AND scope='School' AND gibbonYearGroupIDList LIKE :clause".$countClause.') UNION ';
-                            ++$countClause;
-                        }
-                        $resultSelect = $connection2->prepare(substr($sqlSelect, 0, -6).'ORDER BY category, name');
-                        $resultSelect->execute($dataSelect);
-                    } catch (PDOException $e) {
-                        echo "<div class='error'>".$e->getMessage().'</div>';
-                    }
-                    echo "<optgroup label='--SCHOOL OUTCOMES--'>";
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        $currentCategory = $rowSelect['category'];
-                        if (($currentCategory != $lastCategory) and $currentCategory != '') {
-                            echo "<optgroup label='--".$currentCategory."--'>";
-                            echo "<option class='$currentCategory' value='0'>Choose an outcome to add it to this unit</option>";
-                            $categories[$categoryCount] = $currentCategory;
-                            ++$categoryCount;
-                        }
-                        echo "<option class='all ".$rowSelect['category']."' value='".$rowSelect['gibbonOutcomeID']."'>".$rowSelect['name'].'</option>';
+															$lastCategory = '';
+															$switchContents = '';
+															try {
+																$countClause = 0;
+																$years = explode(',', $gibbonYearGroupIDList);
+																$dataSelect = array();
+																$sqlSelect = '';
+																foreach ($years as $year) {
+																	$dataSelect['clause'.$countClause] = '%'.$year.'%';
+																	$sqlSelect .= "(SELECT * FROM gibbonOutcome WHERE active='Y' AND scope='School' AND gibbonYearGroupIDList LIKE :clause".$countClause.') UNION ';
+																	++$countClause;
+																}
+																$resultSelect = $connection2->prepare(substr($sqlSelect, 0, -6).'ORDER BY category, name');
+																$resultSelect->execute($dataSelect);
+															} catch (PDOException $e) {
+																echo "<div class='error'>".$e->getMessage().'</div>';
+															}
+															echo "<optgroup label='--SCHOOL OUTCOMES--'>";
+															while ($rowSelect = $resultSelect->fetch()) {
+																$currentCategory = $rowSelect['category'];
+																if (($currentCategory != $lastCategory) and $currentCategory != '') {
+																	echo "<optgroup label='--".$currentCategory."--'>";
+																	echo "<option class='$currentCategory' value='0'>Choose an outcome to add it to this unit</option>";
+																	$categories[$categoryCount] = $currentCategory;
+																	++$categoryCount;
+																}
+																echo "<option class='all ".$rowSelect['category']."' value='".$rowSelect['gibbonOutcomeID']."'>".$rowSelect['name'].'</option>';
 
-                        $switchContents .= 'case "'.$rowSelect['gibbonOutcomeID'].'": ';
-                        $switchContents .= "$(\"#outcome\").append('<div id=\'outcomeBlockOuter' + outcomeCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
-                        $switchContents .= '$("#outcomeBlockOuter" + outcomeCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=outcome&id=" + outcomeCount + "&title='.urlencode($rowSelect['name'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['gibbonOutcomeID']).'&contents='.urlencode($rowSelect['description']).'&allowOutcomeEditing='.urlencode($allowOutcomeEditing).'") ;';
-                        $switchContents .= 'outcomeCount++ ;';
-                        $switchContents .= "$('#newOutcome').val('0');";
-                        $switchContents .= 'break;';
-                        $lastCategory = $rowSelect['category'];
-                    }
+																$switchContents .= 'case "'.$rowSelect['gibbonOutcomeID'].'": ';
+																$switchContents .= "$(\"#outcome\").append('<div id=\'outcomeBlockOuter' + outcomeCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
+																$switchContents .= '$("#outcomeBlockOuter" + outcomeCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=outcome&id=" + outcomeCount + "&title='.urlencode($rowSelect['name'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['gibbonOutcomeID']).'&contents='.urlencode($rowSelect['description']).'&allowOutcomeEditing='.urlencode($allowOutcomeEditing).'") ;';
+																$switchContents .= 'outcomeCount++ ;';
+																$switchContents .= "$('#newOutcome').val('0');";
+																$switchContents .= 'break;';
+																$lastCategory = $rowSelect['category'];
+															}
 
-                    $currentCategory = '';
-                    $lastCategory = '';
-                    $currentLA = '';
-                    $lastLA = '';
-                    try {
-                        $countClause = 0;
-                        $years = explode(',', $gibbonYearGroupIDList);
-                        $dataSelect = array('gibbonDepartmentID' => $gibbonDepartmentID);
-                        $sqlSelect = '';
-                        foreach ($years as $year) {
-                            $dataSelect['clause'.$countClause] = '%'.$year.'%';
-                            $sqlSelect .= "(SELECT gibbonOutcome.*, gibbonDepartment.name AS learningArea FROM gibbonOutcome JOIN gibbonDepartment ON (gibbonOutcome.gibbonDepartmentID=gibbonDepartment.gibbonDepartmentID) WHERE active='Y' AND scope='Learning Area' AND gibbonDepartment.gibbonDepartmentID=:gibbonDepartmentID AND gibbonYearGroupIDList LIKE :clause".$countClause.') UNION ';
-                            ++$countClause;
-                        }
-                        $resultSelect = $connection2->prepare(substr($sqlSelect, 0, -6).'ORDER BY learningArea, category, name');
-                        $resultSelect->execute($dataSelect);
-                    } catch (PDOException $e) {
-                        echo "<div class='error'>".$e->getMessage().'</div>';
-                    }
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        $currentCategory = $rowSelect['category'];
-                        $currentLA = $rowSelect['learningArea'];
-                        if (($currentLA != $lastLA) and $currentLA != '') {
-                            echo "<optgroup label='--".strToUpper($currentLA)." OUTCOMES--'>";
-                        }
-                        if (($currentCategory != $lastCategory) and $currentCategory != '') {
-                            echo "<optgroup label='--".$currentCategory."--'>";
-                            echo "<option class='$currentCategory' value='0'>Choose an outcome to add it to this unit</option>";
-                            $categories[$categoryCount] = $currentCategory;
-                            ++$categoryCount;
-                        }
-                        echo "<option class='all ".$rowSelect['category']."' value='".$rowSelect['gibbonOutcomeID']."'>".$rowSelect['name'].'</option>';
-                        $switchContents .= 'case "'.$rowSelect['gibbonOutcomeID'].'": ';
-                        $switchContents .= "$(\"#outcome\").append('<div id=\'outcomeBlockOuter' + outcomeCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
-                        $switchContents .= '$("#outcomeBlockOuter" + outcomeCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=outcome&id=" + outcomeCount + "&title='.urlencode($rowSelect['name'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['gibbonOutcomeID']).'&contents='.urlencode($rowSelect['description']).'&allowOutcomeEditing='.urlencode($allowOutcomeEditing).'") ;';
-                        $switchContents .= 'outcomeCount++ ;';
-                        $switchContents .= "$('#newOutcome').val('0');";
-                        $switchContents .= 'break;';
-                        $lastCategory = $rowSelect['category'];
-                        $lastLA = $rowSelect['learningArea'];
-                    }
+															$currentCategory = '';
+															$lastCategory = '';
+															$currentLA = '';
+															$lastLA = '';
+															try {
+																$countClause = 0;
+																$years = explode(',', $gibbonYearGroupIDList);
+																$dataSelect = array('gibbonDepartmentID' => $gibbonDepartmentID);
+																$sqlSelect = '';
+																foreach ($years as $year) {
+																	$dataSelect['clause'.$countClause] = '%'.$year.'%';
+																	$sqlSelect .= "(SELECT gibbonOutcome.*, gibbonDepartment.name AS learningArea FROM gibbonOutcome JOIN gibbonDepartment ON (gibbonOutcome.gibbonDepartmentID=gibbonDepartment.gibbonDepartmentID) WHERE active='Y' AND scope='Learning Area' AND gibbonDepartment.gibbonDepartmentID=:gibbonDepartmentID AND gibbonYearGroupIDList LIKE :clause".$countClause.') UNION ';
+																	++$countClause;
+																}
+																$resultSelect = $connection2->prepare(substr($sqlSelect, 0, -6).'ORDER BY learningArea, category, name');
+																$resultSelect->execute($dataSelect);
+															} catch (PDOException $e) {
+																echo "<div class='error'>".$e->getMessage().'</div>';
+															}
+															while ($rowSelect = $resultSelect->fetch()) {
+																$currentCategory = $rowSelect['category'];
+																$currentLA = $rowSelect['learningArea'];
+																if (($currentLA != $lastLA) and $currentLA != '') {
+																	echo "<optgroup label='--".strToUpper($currentLA)." OUTCOMES--'>";
+																}
+																if (($currentCategory != $lastCategory) and $currentCategory != '') {
+																	echo "<optgroup label='--".$currentCategory."--'>";
+																	echo "<option class='$currentCategory' value='0'>Choose an outcome to add it to this unit</option>";
+																	$categories[$categoryCount] = $currentCategory;
+																	++$categoryCount;
+																}
+																echo "<option class='all ".$rowSelect['category']."' value='".$rowSelect['gibbonOutcomeID']."'>".$rowSelect['name'].'</option>';
+																$switchContents .= 'case "'.$rowSelect['gibbonOutcomeID'].'": ';
+																$switchContents .= "$(\"#outcome\").append('<div id=\'outcomeBlockOuter' + outcomeCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
+																$switchContents .= '$("#outcomeBlockOuter" + outcomeCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=outcome&id=" + outcomeCount + "&title='.urlencode($rowSelect['name'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['gibbonOutcomeID']).'&contents='.urlencode($rowSelect['description']).'&allowOutcomeEditing='.urlencode($allowOutcomeEditing).'") ;';
+																$switchContents .= 'outcomeCount++ ;';
+																$switchContents .= "$('#newOutcome').val('0');";
+																$switchContents .= 'break;';
+																$lastCategory = $rowSelect['category'];
+																$lastLA = $rowSelect['learningArea'];
+															}
 
-                    ?>
+															?>
 														</select><br/>
 														<?php
                                                         if (count($categories) > 0) {
@@ -367,7 +357,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 															<?php
 
                                                         }
-                    ?>
+                    									?>
 														<script type='text/javascript'>
 															var <?php echo $type ?>Used=new Array(<?php echo substr($usedArrayFill, 0, -1) ?>);
 															var <?php echo $type ?>UsedCount=0 ;
@@ -403,8 +393,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#6A4A3C';
-                    ?>
+							<?php $bg = '#6A4A3C'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -420,8 +409,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $type = 'concept';
-                    ?>
+							<?php $type = 'concept'; ?>
 							<style>
 								#<?php echo $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 								#<?php echo $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
@@ -444,27 +432,27 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 									<div class="concept" id="concept" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<?php
                                         $usedArrayFill = '';
-                    try {
-                        $dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
-                        $sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, type, title, category FROM ibPYPUnitMasterBlock JOIN ibPYPGlossary ON (ibPYPUnitMasterBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND type='Concept' ORDER BY sequenceNumber";
-                        $resultBlocks = $connection2->prepare($sqlBlocks);
-                        $resultBlocks->execute($dataBlocks);
-                    } catch (PDOException $e) {
-                        echo "<div class='error'>".$e->getMessage().'</div>';
-                    }
-                    if ($resultBlocks->rowCount() < 1) {
-                        echo "<div id='conceptOuter0'>";
-                        echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Key concepts listed here...</div>";
-                        echo '</div>';
-                    } else {
-                        $i = 1;
-                        while ($rowBlocks = $resultBlocks->fetch()) {
-                            pypMakeBlock($guid, $i, 'concept', $rowBlocks['ibPYPGlossaryID'],  $rowBlocks['title'],  $rowBlocks['category'], $rowBlocks['content']);
-                            $usedArrayFill .= '"'.$rowBlocks['ibPYPGlossaryID'].'",';
-                            ++$i;
-                        }
-                    }
-                    ?>
+										try {
+											$dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
+											$sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, type, title, category FROM ibPYPUnitMasterBlock JOIN ibPYPGlossary ON (ibPYPUnitMasterBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND type='Concept' ORDER BY sequenceNumber";
+											$resultBlocks = $connection2->prepare($sqlBlocks);
+											$resultBlocks->execute($dataBlocks);
+										} catch (PDOException $e) {
+											echo "<div class='error'>".$e->getMessage().'</div>';
+										}
+										if ($resultBlocks->rowCount() < 1) {
+											echo "<div id='conceptOuter0'>";
+											echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Key concepts listed here...</div>";
+											echo '</div>';
+										} else {
+											$i = 1;
+											while ($rowBlocks = $resultBlocks->fetch()) {
+												pypMakeBlock($guid, $i, 'concept', $rowBlocks['ibPYPGlossaryID'],  $rowBlocks['title'],  $rowBlocks['category'], $rowBlocks['content']);
+												$usedArrayFill .= '"'.$rowBlocks['ibPYPGlossaryID'].'",';
+												++$i;
+											}
+										}
+										?>
 									</div>
 									<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 										<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
@@ -472,14 +460,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 												<tr style='height: 60px'>
 													<td style='width: 50%'>
 														<script type="text/javascript">
-															<?php if (isset($i)) {
-    if (is_numeric($i) == false) {
-        $i = 0;
-    }
-} else {
-    $i = 0;
-}
-                    ?>
+															<?php if (isset($i)) { if (is_numeric($i) == false) {
+																$i = 0;
+															}
+															} else {
+																$i = 0;
+															}
+															?>
 															var conceptCount=<?php echo $i ?> ;
 															/* Unit type control */
 															$(document).ready(function(){
@@ -492,30 +479,30 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 															<option value='0'>Choose a concept to add it to this unit</option>
 															<?php
                                                             $currentCategory = '';
-                    $lastCategory = '';
-                    $switchContents = '';
-                    try {
-                        $dataSelect = array();
-                        $sqlSelect = "SELECT * FROM ibPYPGlossary WHERE type='Concept' ORDER BY category, title";
-                        $resultSelect = $connection2->prepare($sqlSelect);
-                        $resultSelect->execute($dataSelect);
-                    } catch (PDOException $e) {
-                    }
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        $currentCategory = $rowSelect['category'];
-                        if (($currentCategory != $lastCategory) and $currentCategory != '') {
-                            echo "<optgroup label='--".$currentCategory."--'>";
-                        }
-                        echo "<option value='".$rowSelect['ibPYPGlossaryID']."'>".$rowSelect['title'].'</option>';
-                        $switchContents .= 'case "'.$rowSelect['ibPYPGlossaryID'].'": ';
-                        $switchContents .= "$(\"#concept\").append('<div id=\'conceptBlockOuter' + conceptCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
-                        $switchContents .= '$("#conceptBlockOuter" + conceptCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=concept&id=" + conceptCount + "&title='.urlencode($rowSelect['title'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['ibPYPGlossaryID']).'&contents='.urlencode($rowSelect['content']).'") ;';
-                        $switchContents .= 'conceptCount++ ;';
-                        $switchContents .= "$('#newConcept').val('0');";
-                        $switchContents .= 'break;';
-                        $lastCategory = $rowSelect['category'];
-                    }
-                    ?>
+															$lastCategory = '';
+															$switchContents = '';
+															try {
+																$dataSelect = array();
+																$sqlSelect = "SELECT * FROM ibPYPGlossary WHERE type='Concept' ORDER BY category, title";
+																$resultSelect = $connection2->prepare($sqlSelect);
+																$resultSelect->execute($dataSelect);
+															} catch (PDOException $e) {
+															}
+															while ($rowSelect = $resultSelect->fetch()) {
+																$currentCategory = $rowSelect['category'];
+																if (($currentCategory != $lastCategory) and $currentCategory != '') {
+																	echo "<optgroup label='--".$currentCategory."--'>";
+																}
+																echo "<option value='".$rowSelect['ibPYPGlossaryID']."'>".$rowSelect['title'].'</option>';
+																$switchContents .= 'case "'.$rowSelect['ibPYPGlossaryID'].'": ';
+																$switchContents .= "$(\"#concept\").append('<div id=\'conceptBlockOuter' + conceptCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
+																$switchContents .= '$("#conceptBlockOuter" + conceptCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=concept&id=" + conceptCount + "&title='.urlencode($rowSelect['title'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['ibPYPGlossaryID']).'&contents='.urlencode($rowSelect['content']).'") ;';
+																$switchContents .= 'conceptCount++ ;';
+																$switchContents .= "$('#newConcept').val('0');";
+																$switchContents .= 'break;';
+																$lastCategory = $rowSelect['category'];
+															}
+															?>
 														</select>
 														<script type='text/javascript'>
 															var <?php echo $type ?>Used=new Array(<?php echo substr($usedArrayFill, 0, -1) ?>);
@@ -579,8 +566,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#00A0B0';
-                    ?>
+							<?php $bg = '#00A0B0'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -605,8 +591,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#C44D58';
-                    ?>
+							<?php $bg = '#C44D58'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -651,12 +636,12 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                         } catch (PDOException $e) {
                                             echo "<div class='error'>".$e->getMessage().'</div>';
                                         }
-                    $i = 1;
-                    while ($rowBlocks = $resultBlocks->fetch()) {
-                        makeBlock($guid, $connection2, $i, 'masterEdit', $rowBlocks['title'], $rowBlocks['type'], $rowBlocks['length'], $rowBlocks['contents'], 'N', $rowBlocks['ibPYPUnitMasterSmartBlockID'], '', $rowBlocks['teachersNotes']);
-                        ++$i;
-                    }
-                    ?>
+										$i = 1;
+										while ($rowBlocks = $resultBlocks->fetch()) {
+											makeBlock($guid, $connection2, $i, 'masterEdit', $rowBlocks['title'], $rowBlocks['type'], $rowBlocks['length'], $rowBlocks['contents'], 'N', $rowBlocks['ibPYPUnitMasterSmartBlockID'], '', $rowBlocks['teachersNotes']);
+											++$i;
+										}
+										?>
 									</div>
 									<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 										<div class="ui-state-default_dud odd" style='padding: 0px;'>
@@ -691,8 +676,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							</tr>
 							<tr>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
-								<?php $type = 'skills';
-                    ?>
+								<?php $type = 'skills'; ?>
 								<style>
 									#<?php echo $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 									#<?php echo $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
@@ -713,27 +697,27 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 									<div class="skills" id="skills" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<?php
                                         $usedArrayFill = '';
-                    try {
-                        $dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
-                        $sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, type, title, category FROM ibPYPUnitMasterBlock JOIN ibPYPGlossary ON (ibPYPUnitMasterBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND type='Transdisciplinary Skill' ORDER BY sequenceNumber";
-                        $resultBlocks = $connection2->prepare($sqlBlocks);
-                        $resultBlocks->execute($dataBlocks);
-                    } catch (PDOException $e) {
-                        echo "<div class='error'>".$e->getMessage().'</div>';
-                    }
-                    if ($resultBlocks->rowCount() < 1) {
-                        echo "<div id='skillsOuter0'>";
-                        echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Transdisciplinary Skills listed here...</div>";
-                        echo '</div>';
-                    } else {
-                        $i = 1;
-                        while ($rowBlocks = $resultBlocks->fetch()) {
-                            pypMakeBlock($guid, $i, 'skills', $rowBlocks['ibPYPGlossaryID'],  $rowBlocks['title'],  $rowBlocks['category'], $rowBlocks['content']);
-                            $usedArrayFill .= '"'.$rowBlocks['ibPYPGlossaryID'].'",';
-                            ++$i;
-                        }
-                    }
-                    ?>
+										try {
+											$dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
+											$sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, type, title, category FROM ibPYPUnitMasterBlock JOIN ibPYPGlossary ON (ibPYPUnitMasterBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND type='Transdisciplinary Skill' ORDER BY sequenceNumber";
+											$resultBlocks = $connection2->prepare($sqlBlocks);
+											$resultBlocks->execute($dataBlocks);
+										} catch (PDOException $e) {
+											echo "<div class='error'>".$e->getMessage().'</div>';
+										}
+										if ($resultBlocks->rowCount() < 1) {
+											echo "<div id='skillsOuter0'>";
+											echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Transdisciplinary Skills listed here...</div>";
+											echo '</div>';
+										} else {
+											$i = 1;
+											while ($rowBlocks = $resultBlocks->fetch()) {
+												pypMakeBlock($guid, $i, 'skills', $rowBlocks['ibPYPGlossaryID'],  $rowBlocks['title'],  $rowBlocks['category'], $rowBlocks['content']);
+												$usedArrayFill .= '"'.$rowBlocks['ibPYPGlossaryID'].'",';
+												++$i;
+											}
+										}
+										?>
 									</div>
 									<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 										<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
@@ -741,14 +725,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 												<tr style='height: 60px'>
 													<td style='width: 50%'>
 														<script type="text/javascript">
-															<?php if (isset($i)) {
-    if (is_numeric($i) == false) {
-        $i = 0;
-    }
-} else {
-    $i = 0;
-}
-                    ?>
+															<?php if (isset($i)) { if (is_numeric($i) == false) {
+																$i = 0;
+															}
+															} else {
+																$i = 0;
+															}
+															?>
 															var skillsCount=<?php echo $i ?> ;
 															/* Unit type control */
 															$(document).ready(function(){
@@ -761,30 +744,30 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 															<option value='0'>Choose a skill to add it to this unit</option>
 															<?php
                                                             $currentCategory = '';
-                    $lastCategory = '';
-                    $switchContents = '';
-                    try {
-                        $dataSelect = array();
-                        $sqlSelect = "SELECT * FROM ibPYPGlossary WHERE type='Transdisciplinary Skill' ORDER BY category, title";
-                        $resultSelect = $connection2->prepare($sqlSelect);
-                        $resultSelect->execute($dataSelect);
-                    } catch (PDOException $e) {
-                    }
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        $currentCategory = $rowSelect['category'];
-                        if (($currentCategory != $lastCategory) and $currentCategory != '') {
-                            echo "<optgroup label='--".$currentCategory."--'>";
-                        }
-                        echo "<option value='".$rowSelect['ibPYPGlossaryID']."'>".$rowSelect['title'].'</option>';
-                        $switchContents .= 'case "'.$rowSelect['ibPYPGlossaryID'].'": ';
-                        $switchContents .= "$(\"#skills\").append('<div id=\'skillsBlockOuter' + skillsCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
-                        $switchContents .= '$("#skillsBlockOuter" + skillsCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=skills&id=" + skillsCount + "&title='.urlencode($rowSelect['title'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['ibPYPGlossaryID']).'&contents='.urlencode($rowSelect['content']).'") ;';
-                        $switchContents .= 'skillsCount++ ;';
-                        $switchContents .= "$('#newSkill').val('0');";
-                        $switchContents .= 'break;';
-                        $lastCategory = $rowSelect['category'];
-                    }
-                    ?>
+															$lastCategory = '';
+															$switchContents = '';
+															try {
+																$dataSelect = array();
+																$sqlSelect = "SELECT * FROM ibPYPGlossary WHERE type='Transdisciplinary Skill' ORDER BY category, title";
+																$resultSelect = $connection2->prepare($sqlSelect);
+																$resultSelect->execute($dataSelect);
+															} catch (PDOException $e) {
+															}
+															while ($rowSelect = $resultSelect->fetch()) {
+																$currentCategory = $rowSelect['category'];
+																if (($currentCategory != $lastCategory) and $currentCategory != '') {
+																	echo "<optgroup label='--".$currentCategory."--'>";
+																}
+																echo "<option value='".$rowSelect['ibPYPGlossaryID']."'>".$rowSelect['title'].'</option>';
+																$switchContents .= 'case "'.$rowSelect['ibPYPGlossaryID'].'": ';
+																$switchContents .= "$(\"#skills\").append('<div id=\'skillsBlockOuter' + skillsCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
+																$switchContents .= '$("#skillsBlockOuter" + skillsCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=skills&id=" + skillsCount + "&title='.urlencode($rowSelect['title'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['ibPYPGlossaryID']).'&contents='.urlencode($rowSelect['content']).'") ;';
+																$switchContents .= 'skillsCount++ ;';
+																$switchContents .= "$('#newSkill').val('0');";
+																$switchContents .= 'break;';
+																$lastCategory = $rowSelect['category'];
+															}
+															?>
 														</select>
 														<script type='text/javascript'>
 															var <?php echo $type ?>Used=new Array(<?php echo substr($usedArrayFill, 0, -1) ?>);
@@ -821,8 +804,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 							</tr>
 							<tr>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
-								<?php $type = 'learnerProfile';
-                    ?>
+								<?php $type = 'learnerProfile'; ?>
 								<style>
 									#<?php echo $type ?> { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 									#<?php echo $type ?> div.ui-state-default { margin: 0 0px 5px 0px; padding: 5px; font-size: 100%; min-height: 72px; }
@@ -843,27 +825,27 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 									<div class="learnerProfile" id="learnerProfile" style='width: 100%; padding: 5px 0px 0px 0px; min-height: 72px'>
 										<?php
                                         $usedArrayFill = '';
-                    try {
-                        $dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
-                        $sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, type, title, category FROM ibPYPUnitMasterBlock JOIN ibPYPGlossary ON (ibPYPUnitMasterBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND (type='Attitude' OR type='Learner Profile') ORDER BY sequenceNumber";
-                        $resultBlocks = $connection2->prepare($sqlBlocks);
-                        $resultBlocks->execute($dataBlocks);
-                    } catch (PDOException $e) {
-                        echo "<div class='error'>".$e->getMessage().'</div>';
-                    }
-                    if ($resultBlocks->rowCount() < 1) {
-                        echo "<div id='learnerProfileOuter0'>";
-                        echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Learner Profile & Attitudes listed here...</div>";
-                        echo '</div>';
-                    } else {
-                        $i = 1;
-                        while ($rowBlocks = $resultBlocks->fetch()) {
-                            pypMakeBlock($guid, $i, 'learnerProfile', $rowBlocks['ibPYPGlossaryID'],  $rowBlocks['title'],  $rowBlocks['category'], $rowBlocks['content']);
-                            $usedArrayFill .= '"'.$rowBlocks['ibPYPGlossaryID'].'",';
-                            ++$i;
-                        }
-                    }
-                    ?>
+										try {
+											$dataBlocks = array('ibPYPUnitMasterID' => $ibPYPUnitMasterID);
+											$sqlBlocks = "SELECT ibPYPUnitMasterBlock.*, type, title, category FROM ibPYPUnitMasterBlock JOIN ibPYPGlossary ON (ibPYPUnitMasterBlock.ibPYPGlossaryID=ibPYPGlossary.ibPYPGlossaryID) WHERE ibPYPUnitMasterID=:ibPYPUnitMasterID AND (type='Attitude' OR type='Learner Profile') ORDER BY sequenceNumber";
+											$resultBlocks = $connection2->prepare($sqlBlocks);
+											$resultBlocks->execute($dataBlocks);
+										} catch (PDOException $e) {
+											echo "<div class='error'>".$e->getMessage().'</div>';
+										}
+										if ($resultBlocks->rowCount() < 1) {
+											echo "<div id='learnerProfileOuter0'>";
+											echo "<div style='color: #ddd; font-size: 230%; margin: 15px 0 0 6px'>Learner Profile & Attitudes listed here...</div>";
+											echo '</div>';
+										} else {
+											$i = 1;
+											while ($rowBlocks = $resultBlocks->fetch()) {
+												pypMakeBlock($guid, $i, 'learnerProfile', $rowBlocks['ibPYPGlossaryID'],  $rowBlocks['title'],  $rowBlocks['category'], $rowBlocks['content']);
+												$usedArrayFill .= '"'.$rowBlocks['ibPYPGlossaryID'].'",';
+												++$i;
+											}
+										}
+										?>
 									</div>
 									<div style='width: 100%; padding: 0px 0px 0px 0px; border-bottom: 1px solid #333'>
 										<div class="ui-state-default_dud" style='padding: 0px; height: 60px'>
@@ -871,14 +853,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 												<tr style='height: 60px'>
 													<td style='width: 50%'>
 														<script type="text/javascript">
-															<?php if (isset($i)) {
-    if (is_numeric($i) == false) {
-        $i = 0;
-    }
-} else {
-    $i = 0;
-}
-                    ?>
+															<?php if (isset($i)) { if (is_numeric($i) == false) {
+																$i = 0;
+															}
+															} else {
+																$i = 0;
+															}
+															?>
 															var learnerProfileCount=<?php echo $i ?> ;
 															/* Unit type control */
 															$(document).ready(function(){
@@ -891,30 +872,30 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 															<option value='0'>Choose a learner profile or attitude to add it to this unit</option>
 															<?php
                                                             $currentType = '';
-                    $lastType = '';
-                    $switchContents = '';
-                    try {
-                        $dataSelect = array();
-                        $sqlSelect = "SELECT * FROM ibPYPGlossary WHERE type='Learner Profile' OR type='Attitude' ORDER BY type, category, title";
-                        $resultSelect = $connection2->prepare($sqlSelect);
-                        $resultSelect->execute($dataSelect);
-                    } catch (PDOException $e) {
-                    }
-                    while ($rowSelect = $resultSelect->fetch()) {
-                        $currentType = $rowSelect['type'];
-                        if (($currentType != $lastType) and $currentType != '') {
-                            echo "<optgroup label='--".$currentType."--'>";
-                        }
-                        echo "<option value='".$rowSelect['ibPYPGlossaryID']."'>".$rowSelect['title'].'</option>';
-                        $switchContents .= 'case "'.$rowSelect['ibPYPGlossaryID'].'": ';
-                        $switchContents .= "$(\"#learnerProfile\").append('<div id=\'learnerProfileBlockOuter' + learnerProfileCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
-                        $switchContents .= '$("#learnerProfileBlockOuter" + learnerProfileCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=learnerProfile&id=" + learnerProfileCount + "&title='.urlencode($rowSelect['title'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['ibPYPGlossaryID']).'&contents='.urlencode($rowSelect['content']).'") ;';
-                        $switchContents .= 'learnerProfileCount++ ;';
-                        $switchContents .= "$('#newLearnerProfile').val('0');";
-                        $switchContents .= 'break;';
-                        $lastType = $rowSelect['type'];
-                    }
-                    ?>
+															$lastType = '';
+															$switchContents = '';
+															try {
+																$dataSelect = array();
+																$sqlSelect = "SELECT * FROM ibPYPGlossary WHERE type='Learner Profile' OR type='Attitude' ORDER BY type, category, title";
+																$resultSelect = $connection2->prepare($sqlSelect);
+																$resultSelect->execute($dataSelect);
+															} catch (PDOException $e) {
+															}
+															while ($rowSelect = $resultSelect->fetch()) {
+																$currentType = $rowSelect['type'];
+																if (($currentType != $lastType) and $currentType != '') {
+																	echo "<optgroup label='--".$currentType."--'>";
+																}
+																echo "<option value='".$rowSelect['ibPYPGlossaryID']."'>".$rowSelect['title'].'</option>';
+																$switchContents .= 'case "'.$rowSelect['ibPYPGlossaryID'].'": ';
+																$switchContents .= "$(\"#learnerProfile\").append('<div id=\'learnerProfileBlockOuter' + learnerProfileCount + '\'><img style=\'margin: 10px 0 5px 0\' src=\'".$_SESSION[$guid]['absoluteURL']."/themes/Default/img/loading.gif\' alt=\'Loading\' onclick=\'return false;\' /><br/>Loading</div>');";
+																$switchContents .= '$("#learnerProfileBlockOuter" + learnerProfileCount).load("'.$_SESSION[$guid]['absoluteURL'].'/modules/IB%20PYP/units_manage_add_blockAjax.php","type=learnerProfile&id=" + learnerProfileCount + "&title='.urlencode($rowSelect['title'])."\&category=".urlencode($rowSelect['category']).'&ibPYPGlossaryID='.urlencode($rowSelect['ibPYPGlossaryID']).'&contents='.urlencode($rowSelect['content']).'") ;';
+																$switchContents .= 'learnerProfileCount++ ;';
+																$switchContents .= "$('#newLearnerProfile').val('0');";
+																$switchContents .= 'break;';
+																$lastType = $rowSelect['type'];
+															}
+															?>
 														</select>
 														<script type='text/javascript'>
 															var <?php echo $type ?>Used=new Array(<?php echo substr($usedArrayFill, 0, -1) ?>);
@@ -944,8 +925,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#EB6841';
-                    ?>
+							<?php $bg = '#EB6841'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -996,8 +976,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                     ?>
 					<form method="post" action="<?php echo $_SESSION[$guid]['absoluteURL']."/modules/IB PYP/units_manage_master_editProcess.php?ibPYPUnitMasterID=$ibPYPUnitMasterID&gibbonSchoolYearID=$gibbonSchoolYearID" ?>">
 						<table class='smallIntBorder' cellspacing='0' style="width: 100%;">
-							<?php $bg = '#EAEBEC';
-                    ?>
+							<?php $bg = '#EAEBEC'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -1032,13 +1011,13 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
                                         $resultSelect->execute($dataSelect);
                                     } catch (PDOException $e) {
                                     }
-                    if ($resultSelect->rowCount() == 1) {
-                        $rowSelect = $resultSelect->fetch();
-                        $gibbonYearGroupIDList = $rowSelect['gibbonYearGroupIDList'];
-                        $gibbonDepartmentID = $rowSelect['gibbonDepartmentID'];
-                        echo '<input readonly name="unitname" id="unitname" value="'.htmlPrep($rowSelect['nameShort']).'" type="text" style="width: 300px">';
-                    }
-                    ?>
+									if ($resultSelect->rowCount() == 1) {
+										$rowSelect = $resultSelect->fetch();
+										$gibbonYearGroupIDList = $rowSelect['gibbonYearGroupIDList'];
+										$gibbonDepartmentID = $rowSelect['gibbonDepartmentID'];
+										echo '<input readonly name="unitname" id="unitname" value="'.htmlPrep($rowSelect['nameShort']).'" type="text" style="width: 300px">';
+									}
+									?>
 								</td>
 							</tr>
 							<tr>
@@ -1052,8 +1031,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#EDC951';
-                    ?>
+							<?php $bg = '#EDC951'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -1086,8 +1064,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#6A4A3C';
-                    ?>
+							<?php $bg = '#6A4A3C'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -1120,8 +1097,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#00A0B0';
-                    ?>
+							<?php $bg = '#00A0B0'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>
@@ -1154,8 +1130,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/units_manage_master
 								</td>
 							</tr>
 
-							<?php $bg = '#C44D58';
-                    ?>
+							<?php $bg = '#C44D58'; ?>
 							<tr class='break'>
 								<td style='background: none!important; background-color: <?php echo $bg ?>!important'></td>
 								<td colspan=2>

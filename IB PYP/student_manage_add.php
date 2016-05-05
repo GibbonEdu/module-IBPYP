@@ -54,10 +54,9 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_add.
                             $resultSelect->execute($dataSelect);
                         } catch (PDOException $e) {
                         }
-    while ($rowSelect = $resultSelect->fetch()) {
-        echo "<option value='".$rowSelect['gibbonPersonID']."'>".htmlPrep($rowSelect['name']).' - '.formatName('', $rowSelect['preferredName'], $rowSelect['surname'], 'Student', true, true).'</option>';
-    }
-    ?>
+						while ($rowSelect = $resultSelect->fetch()) { echo "<option value='".$rowSelect['gibbonPersonID']."'>".htmlPrep($rowSelect['name']).' - '.formatName('', $rowSelect['preferredName'], $rowSelect['surname'], 'Student', true, true).'</option>';
+						}
+						?>
 					</select>
 				</td>
 			</tr>
@@ -77,10 +76,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_add.
                                 $resultSelect->execute($dataSelect);
                             } catch (PDOException $e) {
                             }
-    while ($rowSelect = $resultSelect->fetch()) {
-        echo '<option value='.$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
-    }
-    ?>
+							while ($rowSelect = $resultSelect->fetch()) {
+								echo '<option value='.$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
+							}
+							?>
 					</select>
 					<script type="text/javascript">
 						var gibbonSchoolYearIDStart=new LiveValidation('gibbonSchoolYearIDStart');
@@ -104,10 +103,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_add.
                                 $resultSelect->execute($dataSelect);
                             } catch (PDOException $e) {
                             }
-    while ($rowSelect = $resultSelect->fetch()) {
-        echo '<option value='.$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
-    }
-    ?>
+							while ($rowSelect = $resultSelect->fetch()) {
+								echo '<option value='.$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
+							}
+							?>
 					</select>
 					<script type="text/javascript">
 						var gibbonSchoolYearIDEnd=new LiveValidation('gibbonSchoolYearIDEnd');

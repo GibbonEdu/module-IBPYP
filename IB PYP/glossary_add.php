@@ -43,8 +43,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_add.php') 
     }
 
     $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
-    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
-        echo "<div class='error'>";
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') { echo "<div class='error'>";
         echo 'You do not have access to this action.';
         echo '</div>';
     } else {
@@ -100,10 +99,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_add.php') 
                                     } catch (PDOException $e) {
                                     }
 
-        while ($rowAuto = $resultAuto->fetch()) {
-            echo '"'.$rowAuto['category'].'", ';
-        }
-        ?>
+									while ($rowAuto = $resultAuto->fetch()) {
+										echo '"'.$rowAuto['category'].'", ';
+									}
+									?>
 								];
 								$( "#category" ).autocomplete({source: availableTags});
 							});

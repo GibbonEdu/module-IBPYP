@@ -39,8 +39,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_edit
 
     //Check if school year specified
     $ibPYPStudentID = $_GET['ibPYPStudentID'];
-    if ($ibPYPStudentID == 'Y') {
-        echo "<div class='error'>";
+    if ($ibPYPStudentID == 'Y') { echo "<div class='error'>";
         echo 'You have not specified an activity.';
         echo '</div>';
     } else {
@@ -92,14 +91,14 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_edit
                                         $resultSelect->execute($dataSelect);
                                     } catch (PDOException $e) {
                                     }
-            while ($rowSelect = $resultSelect->fetch()) {
-                $selected = '';
-                if ($row['gibbonSchoolYearIDStart'] == $rowSelect['gibbonSchoolYearID']) {
-                    $selected = 'selected';
-                }
-                echo "<option $selected value=".$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
-            }
-            ?>
+									while ($rowSelect = $resultSelect->fetch()) {
+										$selected = '';
+										if ($row['gibbonSchoolYearIDStart'] == $rowSelect['gibbonSchoolYearID']) {
+											$selected = 'selected';
+										}
+										echo "<option $selected value=".$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
+									}
+									?>
 							</select>
 							<script type="text/javascript">
 								var gibbonSchoolYearIDStart=new LiveValidation('gibbonSchoolYearIDStart');
@@ -123,14 +122,14 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/student_manage_edit
                                         $resultSelect->execute($dataSelect);
                                     } catch (PDOException $e) {
                                     }
-            while ($rowSelect = $resultSelect->fetch()) {
-                $selected = '';
-                if ($row['gibbonSchoolYearIDEnd'] == $rowSelect['gibbonSchoolYearID']) {
-                    $selected = 'selected';
-                }
-                echo "<option $selected value=".$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
-            }
-            ?>
+									while ($rowSelect = $resultSelect->fetch()) {
+										$selected = '';
+										if ($row['gibbonSchoolYearIDEnd'] == $rowSelect['gibbonSchoolYearID']) {
+											$selected = 'selected';
+										}
+										echo "<option $selected value=".$rowSelect['gibbonSchoolYearID'].'>'.$rowSelect['name'].'</option>';
+									}
+									?>
 							</select>
 							<script type="text/javascript">
 								var gibbonSchoolYearIDEnd=new LiveValidation('gibbonSchoolYearIDEnd');

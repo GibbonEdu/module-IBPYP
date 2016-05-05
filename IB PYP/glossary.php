@@ -39,8 +39,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary.php') == f
     $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
 
     echo '<p>';
-    if ($role == 'Coordinator') {
-        echo "Essential Elements allows users to view and edit the school's stock of concepts, transdisciplinary skills, learner profiles and attitudes.";
+    if ($role == 'Coordinator') { echo "Essential Elements allows users to view and edit the school's stock of concepts, transdisciplinary skills, learner profiles and attitudes.";
     } else {
         echo "Essential Elements allows users to view the school's stock of concepts, transdisciplinary skills, learner profiles and attitudes.";
     }
@@ -94,8 +93,8 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary.php') == f
                 }
                 ++$count;
 
-                    //COLOR ROW BY STATUS!
-                    echo "<tr class=$rowNum>";
+				//COLOR ROW BY STATUS!
+				echo "<tr class=$rowNum>";
                 echo '<td>';
                 echo '<b>'.$row['type'].'</b><br/>';
                 echo '<i>'.$row['category'].'</i>';

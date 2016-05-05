@@ -39,8 +39,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_edit.php')
     }
 
     $role = getRole($_SESSION[$guid]['gibbonPersonID'], $connection2);
-    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') {
-        echo "<div class='error'>";
+    if ($role != 'Coordinator' and $role != 'Teacher (Curriculum)') { echo "<div class='error'>";
         echo 'You do not have access to this action.';
         echo '</div>';
     } else {
@@ -78,22 +77,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_edit.php')
 							<td class="right">
 								<select name="type" id="type" style="width: 302px">
 									<option value="Please select...">Please select...</option>
-									<option <?php if ($row['type'] == 'Attitude') {
-    echo 'selected ';
-}
-                ?>value="Attitude">Attitude</option>
-									<option <?php if ($row['type'] == 'Concept') {
-    echo 'selected ';
-}
-                ?>value="Concept">Concept</option>
-									<option <?php if ($row['type'] == 'Learner Profile') {
-    echo 'selected ';
-}
-                ?>value="Learner Profile">Learner Profile</option>
-									<option <?php if ($row['type'] == 'Transdisciplinary Skill') {
-    echo 'selected ';
-}
-                ?>value="Transdisciplinary Skill">Transdisciplinary Skill</option>
+									<option <?php if ($row['type'] == 'Attitude') { echo 'selected '; } ?>value="Attitude">Attitude</option>
+									<option <?php if ($row['type'] == 'Concept') { echo 'selected '; } ?>value="Concept">Concept</option>
+									<option <?php if ($row['type'] == 'Learner Profile') { echo 'selected '; } ?>value="Learner Profile">Learner Profile</option>
+									<option <?php if ($row['type'] == 'Transdisciplinary Skill') { echo 'selected '; } ?>value="Transdisciplinary Skill">Transdisciplinary Skill</option>
 								</select>
 								<script type="text/javascript">
 									var type=new LiveValidation('type');
@@ -131,10 +118,10 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/glossary_edit.php')
                                             } catch (PDOException $e) {
                                             }
 
-                while ($rowAuto = $resultAuto->fetch()) {
-                    echo '"'.$rowAuto['category'].'", ';
-                }
-                ?>
+											while ($rowAuto = $resultAuto->fetch()) {
+												echo '"'.$rowAuto['category'].'", ';
+											}
+											?>
 										];
 										$( "#category" ).autocomplete({source: availableTags});
 									});

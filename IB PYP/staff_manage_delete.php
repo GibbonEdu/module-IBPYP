@@ -40,8 +40,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/staff_manage_delete
 
     //Check if school year specified
     $ibPYPStaffTeachingID = $_GET['ibPYPStaffTeachingID'];
-    if ($ibPYPStaffTeachingID == '') {
-        echo "<div class='error'>";
+    if ($ibPYPStaffTeachingID == '') { echo "<div class='error'>";
         echo 'You have not specified a staff member.';
         echo '</div>';
     } else {
@@ -66,8 +65,7 @@ if (isActionAccessible($guid, $connection2, '/modules/IB PYP/staff_manage_delete
 				<table class='smallIntBorder' cellspacing='0' style="width: 100%">
 					<tr>
 						<td>
-							<b>Are you sure you want to delete "<?php echo formatName('', $row['preferredName'], $row['surname'], 'Staff', false, true);
-            ?>" from the PYP programme?</b><br/>
+							<b>Are you sure you want to delete "<?php echo formatName('', $row['preferredName'], $row['surname'], 'Staff', false, true); ?>" from the PYP programme?</b><br/>
 							<span style="font-size: 90%; color: #cc0000"><i>This operation cannot be undone, and may lead to loss of vital data in your system.<br/>PROCEED WITH CAUTION!</i></span>
 						</td>
 						<td class="right">
