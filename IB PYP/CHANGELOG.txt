@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+v1.2.10
+-------
+Gibbon Core v13 setting compatibility
+
 v1.2.09
 -------
 Fixed indentation in beautified PHP code

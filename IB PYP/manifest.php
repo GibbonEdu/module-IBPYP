@@ -25,7 +25,7 @@ $description = 'A module to facilitate schools to run the IB Primary Years Progr
 $entryURL = 'index.php';
 $type = 'Additional';
 $category = 'IB';
-$version = '1.2.09';
+$version = '1.2.10';
 $author = 'Ross Parker';
 $url = 'http://rossparker.org';
 
@@ -178,7 +178,7 @@ $moduleTables[9] = "CREATE TABLE `ibPYPUnitWorkingSmartBlock` (
   PRIMARY KEY (`ibPYPUnitWorkingSmartBlockID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;";
 
-$moduleTables[10] = "INSERT INTO `gibbonSetting` (`gibbonSystemSettingsID` ,`scope` ,`name` ,`nameDisplay` ,`description` ,`value`) VALUES (NULL , 'IB PYP', 'defaultRubric', 'Default Rubric', 'This is the default rubric associated with al new working units.', '');";
+$moduleTables[10] = "INSERT INTO `gibbonSetting` (`gibbonSettingID` ,`scope` ,`name` ,`nameDisplay` ,`description` ,`value`) VALUES (NULL , 'IB PYP', 'defaultRubric', 'Default Rubric', 'This is the default rubric associated with al new working units.', '');";
 
 //Action rows
 $actionRows[0]['name'] = 'Manage Staff - Teaching';
